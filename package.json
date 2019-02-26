@@ -15,7 +15,8 @@
     "postinstall": "lerna bootstrap",
     "bootstrap": "lerna bootstrap",
     "ganache": "ganache-cli --networkId 17101710 --mnemonic \"flight cute ski coffee decide milk bitter table speed orchard bag meadow\"",
-    "solc:version": "solcjs --version"
+    "solc:version": "solcjs --version",
+    "truffle:version": "truffle version"
   },
   "prettier": {
     "singleQuote": true

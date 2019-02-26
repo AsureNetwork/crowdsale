@@ -1,6 +1,12 @@
 Asure.Network Crowdsale
 ======================
 
+
+``sh
+npm i
+npm install -g truffle
+``
+
 ## Ethereum Testnet
 
 All demos are deployed to the rinkeby testnet by the 
