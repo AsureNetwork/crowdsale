@@ -1,0 +1,435 @@
+{
+  "contractName": "Greeter",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "greetCounter",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0x696a8613"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "greet",
+      "outputs": [
+        {
+          "name": "message",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0xcfae3217"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b5061018c806100206000396000f30060806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063696a861314610051578063cfae32171461007c575b600080fd5b34801561005d57600080fd5b5061006661010c565b6040518082815260200191505060405180910390f35b34801561008857600080fd5b50610091610112565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100d15780820151818401526020810190506100b6565b50505050905090810190601f1680156100fe5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b60005481565b606060008081548092919060010191905055506040805190810160405280600f81526020017f48656c6c6f2c204554482e5255485200000000000000000000000000000000008152509050905600a165627a7a72305820be3500cc3ebbeb2522b2a7835351b2b661e0c66d2beb79d0a7f62db56bdaab7e0029",
+  "deployedBytecode": "0x60806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063696a861314610051578063cfae32171461007c575b600080fd5b34801561005d57600080fd5b5061006661010c565b6040518082815260200191505060405180910390f35b34801561008857600080fd5b50610091610112565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100d15780820151818401526020810190506100b6565b50505050905090810190601f1680156100fe5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b60005481565b606060008081548092919060010191905055506040805190810160405280600f81526020017f48656c6c6f2c204554482e5255485200000000000000000000000000000000008152509050905600a165627a7a72305820be3500cc3ebbeb2522b2a7835351b2b661e0c66d2beb79d0a7f62db56bdaab7e0029",
+  "sourceMap": "28:180:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;28:180:0;;;;;;;",
+  "deployedSourceMap": "28:180:0:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;52:27;;8:9:-1;5:2;;;30:1;27;20:12;5:2;52:27:0;;;;;;;;;;;;;;;;;;;;;;;88:117;;8:9:-1;5:2;;;30:1;27;20:12;5:2;88:117:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;88:117:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;52:27;;;;:::o;88:117::-;121:14;148:12;;:14;;;;;;;;;;;;;173:24;;;;;;;;;;;;;;;;;;;;88:117;:::o",
+  "source": "pragma solidity ^0.4.23;\r\n\r\ncontract Greeter {\r\n    uint256 public greetCounter;\r\n\r\n    function greet() public returns (string message) {\r\n        greetCounter++;\r\n        return \"Hello, ETH.RUHR\";\r\n    }\r\n}",
+  "sourcePath": "C:/Users/fabia/projects/ethruhr/crowdsale/packages/greeter/contracts/Greeter.sol",
+  "ast": {
+    "absolutePath": "/C/Users/fabia/projects/ethruhr/crowdsale/packages/greeter/contracts/Greeter.sol",
+    "exportedSymbols": {
+      "Greeter": [
+        15
+      ]
+    },
+    "id": 16,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".23"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:0"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 15,
+        "linearizedBaseContracts": [
+          15
+        ],
+        "name": "Greeter",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 3,
+            "name": "greetCounter",
+            "nodeType": "VariableDeclaration",
+            "scope": 15,
+            "src": "52:27:0",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 2,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "52:7:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 13,
+              "nodeType": "Block",
+              "src": "137:68:0",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 9,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "UnaryOperation",
+                    "operator": "++",
+                    "prefix": false,
+                    "src": "148:14:0",
+                    "subExpression": {
+                      "argumentTypes": null,
+                      "id": 8,
+                      "name": "greetCounter",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 3,
+                      "src": "148:12:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 10,
+                  "nodeType": "ExpressionStatement",
+                  "src": "148:14:0"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "48656c6c6f2c204554482e52554852",
+                    "id": 11,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "string",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "180:17:0",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_stringliteral_9a659c9b44d15195c131522b3b1e9882f85f2c6e25d4ba34074493c8a060be88",
+                      "typeString": "literal_string \"Hello, ETH.RUHR\""
+                    },
+                    "value": "Hello, ETH.RUHR"
+                  },
+                  "functionReturnParameters": 7,
+                  "id": 12,
+                  "nodeType": "Return",
+                  "src": "173:24:0"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 14,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "greet",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "102:2:0"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 7,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6,
+                  "name": "message",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 14,
+                  "src": "121:14:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 5,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "121:6:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "120:16:0"
+            },
+            "scope": 15,
+            "src": "88:117:0",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 16,
+        "src": "28:180:0"
+      }
+    ],
+    "src": "0:208:0"
+  },
+  "legacyAST": {
+    "absolutePath": "/C/Users/fabia/projects/ethruhr/crowdsale/packages/greeter/contracts/Greeter.sol",
+    "exportedSymbols": {
+      "Greeter": [
+        15
+      ]
+    },
+    "id": 16,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".23"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:0"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 15,
+        "linearizedBaseContracts": [
+          15
+        ],
+        "name": "Greeter",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 3,
+            "name": "greetCounter",
+            "nodeType": "VariableDeclaration",
+            "scope": 15,
+            "src": "52:27:0",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 2,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "52:7:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 13,
+              "nodeType": "Block",
+              "src": "137:68:0",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 9,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "UnaryOperation",
+                    "operator": "++",
+                    "prefix": false,
+                    "src": "148:14:0",
+                    "subExpression": {
+                      "argumentTypes": null,
+                      "id": 8,
+                      "name": "greetCounter",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 3,
+                      "src": "148:12:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 10,
+                  "nodeType": "ExpressionStatement",
+                  "src": "148:14:0"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "48656c6c6f2c204554482e52554852",
+                    "id": 11,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "string",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "180:17:0",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_stringliteral_9a659c9b44d15195c131522b3b1e9882f85f2c6e25d4ba34074493c8a060be88",
+                      "typeString": "literal_string \"Hello, ETH.RUHR\""
+                    },
+                    "value": "Hello, ETH.RUHR"
+                  },
+                  "functionReturnParameters": 7,
+                  "id": 12,
+                  "nodeType": "Return",
+                  "src": "173:24:0"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 14,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "greet",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "102:2:0"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 7,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6,
+                  "name": "message",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 14,
+                  "src": "121:14:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 5,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "121:6:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "120:16:0"
+            },
+            "scope": 15,
+            "src": "88:117:0",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 16,
+        "src": "28:180:0"
+      }
+    ],
+    "src": "0:208:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.25+commit.59dbf8f1.Emscripten.clang"
+  },
+  "networks": {
+    "4": {
+      "events": {},
+      "links": {},
+      "address": "0xB91A3777701a8fbCBD93171FF1AeD77a972a1Ae8",
+      "transactionHash": "0x99e4ee0ea0d16bc388905b9e62493d9515bc9487a4b45205a99be6c5f579ab12"
+    },
+    "17101710": {
+      "events": {},
+      "links": {},
+      "address": "0x2fE0F77A400076d00CA76388D5d157710D0CdcF5",
+      "transactionHash": "0xb26b69de2c24980167119630a7794fff47aa020b76f4b37addd7b7facb649ba8"
+    }
+  },
+  "schemaVersion": "3.0.0-beta.1",
+  "updatedAt": "2018-10-16T11:02:17.183Z"
+}

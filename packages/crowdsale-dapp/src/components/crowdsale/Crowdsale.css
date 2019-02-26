@@ -1,0 +1,28 @@
+.Crowdsale {
+  display: flex;
+  flex-direction: column;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.Crowdsale > .column {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.Crowdsale > .column.column-2 {
+  width: 400px;
+}
+
+.Crowdsale .Box {
+  height: 300px;
+  padding: 30px;
+  margin: 30px 0;
+  background-color: aquamarine;
+}
+
+.countdown {
+  display: flex;
+  justify-content: space-around;
+}

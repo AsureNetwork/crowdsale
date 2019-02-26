@@ -1,0 +1,27 @@
+{
+  "name": "crowdsale",
+  "version": "0.1.0",
+  "private": true,
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "compile": "truffle compile",
+    "test": "truffle test",
+    "migrate:development": "truffle migrate --network development --reset",
+    "migrate:rinkeby": "truffle migrate --network rinkeby --reset"
+  },
+  "keywords": [],
+  "author": "Fabian Raetz <fabian.raetz@gmail.com>",
+  "license": "Unlicense",
+  "dependencies": {
+    "openzeppelin-solidity": "^2.1.2",
+    "truffle-hdwallet-provider": "^1.0.0-web3one.0"
+  },
+  "devDependencies": {
+    "moment": "^2.22.2",
+    "web3": "^1.0.0-beta.36"
+  }
+}

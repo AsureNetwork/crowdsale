@@ -1,0 +1,19 @@
+{
+  "name": "greeter",
+  "version": "0.1.0",
+  "private": true,
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "compile": "truffle compile",
+    "test": "truffle test",
+    "migrate:development": "truffle migrate --network development --reset",
+    "migrate:rinkeby": "truffle migrate --network rinkeby"
+  },
+  "keywords": [],
+  "author": "Fabian Raetz <fabian.raetz@gmail.com>",
+  "license": "Unlicense"
+}

@@ -1,0 +1,13 @@
+{
+  "main.css": "/crowdsale/static/css/main.0dfb7a0b.chunk.css",
+  "main.js": "/crowdsale/static/js/main.f986eb52.chunk.js",
+  "main.js.map": "/crowdsale/static/js/main.f986eb52.chunk.js.map",
+  "static/js/1.05486c1b.chunk.js": "/crowdsale/static/js/1.05486c1b.chunk.js",
+  "static/js/1.05486c1b.chunk.js.map": "/crowdsale/static/js/1.05486c1b.chunk.js.map",
+  "runtime~main.js": "/crowdsale/static/js/runtime~main.ccaccbcd.js",
+  "runtime~main.js.map": "/crowdsale/static/js/runtime~main.ccaccbcd.js.map",
+  "static/css/main.0dfb7a0b.chunk.css.map": "/crowdsale/static/css/main.0dfb7a0b.chunk.css.map",
+  "index.html": "/crowdsale/index.html",
+  "precache-manifest.9c041c1d0451f88a06196e71b74ebcd8.js": "/crowdsale/precache-manifest.9c041c1d0451f88a06196e71b74ebcd8.js",
+  "service-worker.js": "/crowdsale/service-worker.js"
+}
