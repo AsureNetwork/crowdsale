@@ -1,11 +1,11 @@
 const moment = require('moment');
 const Web3 = require('web3');
 
-const RuhrToken = artifacts.require('RuhrToken');
-const RuhrCrowdsale = artifacts.require('RuhrCrowdsale');
-const RuhrCrowdsaleDeployer = artifacts.require('RuhrCrowdsaleDeployer');
+const AsureToken = artifacts.require('AsureToken');
+const AsureCrowdsale = artifacts.require('AsureCrowdsale');
+const AsureCrowdsaleDeployer = artifacts.require('AsureCrowdsaleDeployer');
 
-contract('RuhrCrowdsaleDeployer', async accounts => {
+contract('AsureCrowdsaleDeployer', async accounts => {
   const owner = accounts[0];
   const wallet = accounts[0];
   const maxCap = String(40 * 10 ** 6);
@@ -14,8 +14,8 @@ contract('RuhrCrowdsaleDeployer', async accounts => {
 
   let token, crowdsale;
 
-  it('should instantiate RuhrToken and RuhrCrowdsale', async () => {
-    const deployer = await RuhrCrowdsaleDeployer.new(
+  it('should instantiate AsureToken and AsureCrowdsale', async () => {
+    const deployer = await AsureCrowdsaleDeployer.new(
       wallet,
       openingTime.unix(),
       closingTime.unix()
@@ -24,28 +24,28 @@ contract('RuhrCrowdsaleDeployer', async accounts => {
     const tokenAddress = await deployer.token.call();
     const crowdsaleAddress = await deployer.crowdsale.call();
 
-    token = await RuhrToken.at(tokenAddress);
-    crowdsale = await RuhrCrowdsale.at(crowdsaleAddress);
+    token = await AsureToken.at(tokenAddress);
+    crowdsale = await AsureCrowdsale.at(crowdsaleAddress);
 
-    expect(token).to.be.an.instanceof(RuhrToken);
-    expect(crowdsale).to.be.an.instanceof(RuhrCrowdsale);
+    expect(token).to.be.an.instanceof(AsureToken);
+    expect(crowdsale).to.be.an.instanceof(AsureCrowdsale);
   });
 
-  it('should instantiate RuhrToken correctly', async () => {
+  it('should instantiate AsureToken correctly', async () => {
     const tokenName = await token.name.call();
     const tokenSymbol = await token.symbol.call();
     const tokenDecimals = await token.decimals.call();
     const tokenTotalSupply = await token.totalSupply.call();
     const balanceOfCrowdsale = await token.balanceOf.call(crowdsale.address);
 
-    expect(tokenName).to.eq('RuhrToken');
-    expect(tokenSymbol).to.eq('RUHR');
+    expect(tokenName).to.eq('AsureToken');
+    expect(tokenSymbol).to.eq('ASR');
     expect(tokenDecimals.toNumber()).to.eq(18);
     expect(Web3.utils.fromWei(tokenTotalSupply)).to.eq(maxCap);
     expect(Web3.utils.fromWei(balanceOfCrowdsale)).to.eq(maxCap);
   });
 
-  it('should instantiate RuhrCrowdsale correctly', async () => {
+  it('should instantiate AsureCrowdsale correctly', async () => {
     const crowdsaleRate = await crowdsale.rate.call();
     const crowdsaleWallet = await crowdsale.wallet.call();
     const crowdsaleCap = await crowdsale.cap.call();
@@ -59,7 +59,7 @@ contract('RuhrCrowdsaleDeployer', async accounts => {
     expect(crowdsaleClosingTime.toNumber()).to.eq(closingTime.unix());
   });
 
-  it('should buy RUHR tokens for 1 ETH', async () => {
+  it('should buy Asure tokens for 1 ETH', async () => {
     const beneficiary = accounts[2];
     const ethValue = Web3.utils.toWei('1');
 
@@ -67,8 +67,8 @@ contract('RuhrCrowdsaleDeployer', async accounts => {
       .buyTokens
       .sendTransaction(beneficiary, { value: ethValue, from: beneficiary });
 
-    const ruhrBalance = await token.balanceOf.call(beneficiary);
+    const AsureBalance = await token.balanceOf.call(beneficiary);
 
-    expect(Web3.utils.fromWei(ruhrBalance)).to.eq('1000');
+    expect(Web3.utils.fromWei(AsureBalance)).to.eq('1000');
   });
 });

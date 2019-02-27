@@ -1,11 +1,11 @@
 pragma solidity ^0.5.0;
 
-import "./RuhrToken.sol";
-import "./RuhrCrowdsale.sol";
+import "./AsureToken.sol";
+import "./AsureCrowdsale.sol";
 
-contract RuhrCrowdsaleDeployer {
-    RuhrToken public token;
-    RuhrCrowdsale public crowdsale;
+contract AsureCrowdsaleDeployer {
+    AsureToken public token;
+    AsureCrowdsale public crowdsale;
 
     constructor(
         address payable wallet,
@@ -14,9 +14,9 @@ contract RuhrCrowdsaleDeployer {
     )
     public
     {
-        token = new RuhrToken("RuhrToken", "RUHR", 18);
+        token = new AsureToken("AsureToken", "ASR", 18);
 
-        crowdsale = new RuhrCrowdsale(
+        crowdsale = new AsureCrowdsale(
             1000,        // rate, in RUHRbits - 1 ETH == 1000 RUHR
             wallet,      // wallet to send Ether
             token,       // the token

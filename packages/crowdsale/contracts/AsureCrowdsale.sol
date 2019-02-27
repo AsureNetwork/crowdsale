@@ -5,7 +5,9 @@ import "openzeppelin-solidity/contracts/crowdsale/validation/CappedCrowdsale.sol
 import "openzeppelin-solidity/contracts/crowdsale/validation/TimedCrowdsale.sol";
 import "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol";
 
-contract RuhrCrowdsale is Crowdsale, CappedCrowdsale, TimedCrowdsale {
+
+
+contract AsureCrowdsale is Crowdsale, CappedCrowdsale, TimedCrowdsale {
 
     constructor(
         uint256 rate,         // rate, in RUHRbits
