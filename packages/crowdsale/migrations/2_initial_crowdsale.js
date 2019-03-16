@@ -15,14 +15,14 @@ module.exports = async function (deployer, network) {
     const mainSaleOpeningTime = moment(crowdsale.mainSale.opening, crowdsale.dateFormat).unix();
     const mainSaleClosingTime = moment(crowdsale.mainSale.closing, crowdsale.dateFormat).unix();
 
-    const twoyears = 63072000; // ~2 yr = 60*60*24*365*2
+    const twoYearsInSeconds = 63072000; // ~2 yr = 60*60*24*365*2
 
     for (let i = 0; i < crowdsale.team.length; i++) {
-        await createVestingContract(crowdsale.team[i], mainSaleOpeningTime, twoyears);
+        await createVestingContract(crowdsale.team[i], mainSaleOpeningTime, twoYearsInSeconds);
     }
 
     for (let i = 0; i < crowdsale.advisor.length; i++) {
-        await createVestingContract(crowdsale.advisor[i], mainSaleOpeningTime, twoyears);
+        await createVestingContract(crowdsale.advisor[i], mainSaleOpeningTime, twoYearsInSeconds);
     }
 
     const crowdsaleDeployer = await AsureCrowdsaleDeployer.new(
