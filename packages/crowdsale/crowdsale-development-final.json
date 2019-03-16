@@ -1,45 +1,58 @@
 {
   "dateFormat": "YYYY-MM-DD HH:mm",
   "owner": "0xd7da996cc3c3186b87c5ea23599dec97153bcc21",
-  "wallet": "0xd7da996cc3c3186b87c5ea23599dec97153bcc21",
+  "crowdsaleWallet": "0xd7da996cc3c3186b87c5ea23599dec97153bcc21",
+  "foundationWallet": "0xd7da996cc3c3186b87c5ea23599dec97153bcc21",
+  "bountyWallet": "0xd7da996cc3c3186b87c5ea23599dec97153bcc21",
+  "familyFriendsWallet": "0xd7da996cc3c3186b87c5ea23599dec97153bcc21",
   "token": {
     "name": "AsureToken",
     "symbol": "ASR",
     "decimals": "18",
-    "addr": "0xF1F4d283eE0de07055F0F6cd4A582f72c5AfB05F"
+    "addr": "0xA09336737a0a2672ea68d61645e214eaC524129F"
   },
   "preSale": {
     "opening": "2019-08-01 00:00",
     "closing": "2019-08-15 00:00",
-    "addr": "0x1F58c058366cb642a38d90Db72C2A23adcB5033f"
+    "addr": "0xd3B4543eEAD492e4EAadF25814D276D6435C3Ea4"
   },
   "mainSale": {
     "opening": "2019-12-1 00:00",
     "closing": "2019-12-31 00:00",
-    "addr": "0xF2DA2D7269F268bFC1000268e60e3D11D8346c94"
+    "addr": "0x0fD79b9B38f6a010875f5216147924c00A8f36c6"
   },
   "team": [
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
-      "amount": 1,
-      "addr": "0x6C527E1133cc332160D945fdCD8f65d8c24f83Bf"
+      "amount": 4000000,
+      "addr": "0x47e11f9DE1b2201233e873451e59e443657ac49B"
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
-      "amount": 1,
-      "addr": "0xfF092d77B5f268BAF9F6Ecf7faB77b79168100f4"
+      "amount": 4000000,
+      "addr": "0x02e5EE9e3731F035fb2cA64bcc0f936B8fd55111"
     }
   ],
   "advisor": [
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
-      "amount": 1,
-      "addr": "0x79ed958d2662565Fb8E1Bd0786C7cb07864E6aF8"
+      "amount": 500000,
+      "addr": "0xFb1641caC05947384eA69b7bd02294919492DC4d"
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
-      "amount": 1,
-      "addr": "0x76c33b3367AaE0F513c09C2378E2833319Df958a"
+      "amount": 500000,
+      "addr": "0x44F335e65b191A13812aE735cb29569Ad821169a"
+    },
+    {
+      "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
+      "amount": 500000,
+      "addr": "0x3D024FA129d8eB3a6C7D06d3ae8F307b878A4569"
+    },
+    {
+      "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
+      "amount": 500000,
+      "addr": "0x6784a8e55D013E652E076Cfddc2774cd2047bcc3"
     }
   ]
 }
