@@ -15,14 +15,13 @@ module.exports = async function (deployer, network) {
     const mainSaleOpeningTime = moment(crowdsale.mainSale.opening, crowdsale.dateFormat).unix();
     const mainSaleClosingTime = moment(crowdsale.mainSale.closing, crowdsale.dateFormat).unix();
 
-    const twoYearsInSeconds = 63072000; // ~2 yr = 60*60*24*365*2
 
     for (let i = 0; i < crowdsale.team.length; i++) {
-        await createVestingContract(crowdsale.team[i], mainSaleOpeningTime, twoYearsInSeconds);
+        await createVestingContract(crowdsale.team[i], mainSaleOpeningTime);
     }
 
     for (let i = 0; i < crowdsale.advisor.length; i++) {
-        await createVestingContract(crowdsale.advisor[i], mainSaleOpeningTime, twoYearsInSeconds);
+        await createVestingContract(crowdsale.advisor[i], mainSaleOpeningTime);
     }
 
     const crowdsaleDeployer = await AsureCrowdsaleDeployer.new(
@@ -45,14 +44,17 @@ module.exports = async function (deployer, network) {
 };
 
 
-async function createVestingContract(beneficiary, mainSaleOpeningTime, twoyears) {
+async function createVestingContract(beneficiary, mainSaleOpeningTime) {
+    const twoYearsInSeconds = 63072000; // ~2 yr = 60*60*24*365*2
+
     const instance = await TokenVesting.new(
-        beneficiary.owner, //address
-        mainSaleOpeningTime, //unix timestemp
-        0, //cliffDuration
-        twoyears, // duration in sec ~2 yr = 60*60*24*365*2
-        false // bool revocable
+        beneficiary.owner,   // address
+        mainSaleOpeningTime, // unix timestemp
+        0,                   // cliffDuration
+        twoYearsInSeconds,   // duration in sec ~2 yr = 60*60*24*365*2
+        false                // bool revocable
     );
+
     beneficiary.addr = instance.address;
 }
 
