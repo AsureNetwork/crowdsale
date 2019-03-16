@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "crowdsale": "0.1.0",
+    "moment": "^2.24.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-scripts": "2.0.5",
-    "moment": "^2.22.2",
-    "web3": "^1.0.0-beta.36",
-    "crowdsale": "0.1.0"
+    "web3": "^1.0.0-beta.36"
   },
   "scripts": {
     "start": "react-scripts start",
