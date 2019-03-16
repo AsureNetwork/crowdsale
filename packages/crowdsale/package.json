@@ -18,7 +18,8 @@
   "license": "Unlicense",
   "dependencies": {
     "openzeppelin-solidity": "^2.1.2",
-    "truffle-hdwallet-provider": "^1.0.0-web3one.0"
+    "truffle-hdwallet-provider": "^1.0.0-web3one.0",
+    "truffle": "^5.0.5"
   },
   "devDependencies": {
     "moment": "^2.24.0",

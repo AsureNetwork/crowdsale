@@ -1,0 +1,43 @@
+{
+  "dateFormat": "YYYY-MM-DD HH:mm",
+  "token": {
+    "name": "AsureToken",
+    "symbol": "ASR",
+    "decimals": "18",
+    "addr": "0x2cA2e54b940AC511c052035531A6ee707091674f"
+  },
+  "preSale": {
+    "opening": "2019-08-01 00:00",
+    "closing": "2019-08-15 00:00",
+    "addr": "0xf570dd12398BFC6Df038e2B0EB491905a8F1760d"
+  },
+  "mainSale": {
+    "opening": "2019-12-1 00:00",
+    "closing": "2019-12-31 00:00",
+    "addr": "0x3360170E22Fd7dd29fdCd2D23bA5a9478cC10C9b"
+  },
+  "team": [
+    {
+      "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
+      "amount": 1,
+      "addr": "0x138E3fbEBc73659f20342deBCa2ce9F7E557eDA9"
+    },
+    {
+      "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
+      "amount": 1,
+      "addr": "0x0b22a103fC70f12FEd2Af04f8Ad7661849769F6c"
+    }
+  ],
+  "advisor": [
+    {
+      "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
+      "amount": 1,
+      "addr": "0xC5dBDc4141B4c0799426a289840c31bf798052E1"
+    },
+    {
+      "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
+      "amount": 1,
+      "addr": "0xd1Ac5Fd0Ae5D78E545EF73149D6EF204883aa709"
+    }
+  ]
+}

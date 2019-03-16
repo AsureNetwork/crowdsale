@@ -4,9 +4,6 @@ import "./AsureToken.sol";
 import "./AsureCrowdsale.sol";
 import "openzeppelin-solidity/contracts/drafts/TokenVesting.sol";
 
-
-
-
 contract AsureCrowdsaleDeployer {
   AsureToken public token;
   AsureCrowdsale public presale;
