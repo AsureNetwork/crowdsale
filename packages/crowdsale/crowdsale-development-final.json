@@ -4,34 +4,41 @@
   "token": {
     "name": "AsureToken",
     "symbol": "ASR",
-    "decimals": "18"
+    "decimals": "18",
+    "addr": "0xA2f491b025c425E045d7e371d9e4E90c00c560f0"
   },
   "preSale": {
     "opening": "2019-08-01 00:00",
-    "closing": "2019-08-15 00:00"
+    "closing": "2019-08-15 00:00",
+    "addr": "0xFa2522019f66da7cfe90A720E5b8916F8CE4A892"
   },
   "mainSale": {
     "opening": "2019-12-1 00:00",
-    "closing": "2019-12-31 00:00"
+    "closing": "2019-12-31 00:00",
+    "addr": "0xcC649A4143c0a4DeCa08EE1505340Bb475dA4C4D"
   },
   "team": [
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
-      "amount": 1
+      "amount": 1,
+      "addr": "0x30D2F17E8aed76Bc30Ba06c46944904D1f9fbC04"
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
-      "amount": 1
+      "amount": 1,
+      "addr": "0xd6c1FAa97F847E1660BF219275Aa54Da6430112d"
     }
   ],
   "advisor": [
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
-      "amount": 1
+      "amount": 1,
+      "addr": "0x525212e3eB6A038aa69CaA9596c203d91fcD66B7"
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
-      "amount": 1
+      "amount": 1,
+      "addr": "0xD225c6c2DF07E36cf4E1d684A6a012A81Cf1777A"
     }
   ]
 }
