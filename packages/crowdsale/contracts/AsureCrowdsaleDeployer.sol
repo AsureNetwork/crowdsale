@@ -11,10 +11,11 @@ contract AsureCrowdsaleDeployer {
 
   constructor(
     address payable owner,
-    uint256 preSaleOpeningTime, // opening time in unix epoch seconds
-    uint256 preSaleClosingTime, // closing time in unix epoch seconds
+    address payable wallet,
+    uint256 preSaleOpeningTime,  // opening time in unix epoch seconds
+    uint256 preSaleClosingTime,  // closing time in unix epoch seconds
     uint256 mainSaleOpeningTime, // mainSale start
-    uint256 mainSaleClosingTime,   // mainSale end
+    uint256 mainSaleClosingTime, // mainSale end
     address[] memory teamAddr,
     uint256[] memory teamAmounts,
     address[] memory advisorAddr,
@@ -25,28 +26,28 @@ contract AsureCrowdsaleDeployer {
     require(teamAddr.length == teamAmounts.length);
     require(advisorAddr.length == advisorAmounts.length);
 
-    token = new AsureToken("AsureToken", "ASR", 18);
+    token = new AsureToken(owner, "AsureToken", "ASR", 18);
 
     presale = new AsureCrowdsale(
       1000, // rate, in AsureTokens - 1 ETH == 1000 RUHR
-      owner, // wallet to send Ether
+      owner, // owner
+      wallet, // wallet to send Ether
       token, // the token
       10 * 10 ** 24, // total cap, in wei - 20 Millionen
       preSaleOpeningTime, // opening time in unix epoch seconds
       preSaleClosingTime  // closing time in unix epoch seconds
     );
 
-
     token.mint(address(presale), 10 * 10 ** 24);
-
-    token.mint(0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5, 5 * 10 ** 24);
     //bounty
     token.mint(0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5, 5 * 10 ** 24);
     //family & friends
+    token.mint(0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5, 5 * 10 ** 24);
 
     mainsale = new AsureCrowdsale(
       1000, // rate, in AsureTokens - 1 ETH == 1000
-      owner, // wallet to send Ether
+      owner, // owner
+      wallet, // wallet to send Ether
       token, // the token
       35 * 10 ** 24, // total cap, in wei - 40 Millionen
       mainSaleOpeningTime, // opening time in unix epoch seconds

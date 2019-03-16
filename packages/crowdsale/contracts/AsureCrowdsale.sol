@@ -12,6 +12,7 @@ contract AsureCrowdsale is Crowdsale, CappedCrowdsale, TimedCrowdsale, Whitelist
   //
   constructor(
     uint256 rate, // rate, in Asure Tokens
+    address payable owner, // owner
     address payable wallet, // wallet to send Ether
     IERC20 token, // the token
     uint256 cap, // total cap, in wei
@@ -22,13 +23,12 @@ contract AsureCrowdsale is Crowdsale, CappedCrowdsale, TimedCrowdsale, Whitelist
   Crowdsale(rate, wallet, token)
   CappedCrowdsale(cap)
   TimedCrowdsale(openingTime, closingTime)
-  AsureBonusesCrowdsale(rate, wallet)
+  AsureBonusesCrowdsale(rate, owner)
   {
     // nice, we just created a crowdsale that's only open
     // for a certain amount of time
     // and stops accepting contributions once it reaches `cap`
-    addWhitelistAdmin(wallet);
-    addWhitelistAdmin(0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5);
+    addWhitelistAdmin(owner);
   }
 
   function addWhitelistedAccounts(address[] memory accounts) public onlyWhitelistAdmin {

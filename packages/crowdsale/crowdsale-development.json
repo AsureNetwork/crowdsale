@@ -1,6 +1,7 @@
 {
   "dateFormat": "YYYY-MM-DD HH:mm",
   "owner": "0xd7da996cc3c3186b87c5ea23599dec97153bcc21",
+  "wallet": "0xd7da996cc3c3186b87c5ea23599dec97153bcc21",
   "token": {
     "name": "AsureToken",
     "symbol": "ASR",

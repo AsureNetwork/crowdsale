@@ -27,6 +27,7 @@ module.exports = async function (deployer, network) {
 
     const crowdsaleDeployer = await AsureCrowdsaleDeployer.new(
         crowdsale.owner,
+        crowdsale.wallet, //wallet
         preSaleOpeningTime,
         preSaleClosingTime,
         mainSaleOpeningTime,
