@@ -9,17 +9,14 @@ module.exports = async function (deployer, network) {
     await deployer;
 
     const crowdsale = loadCrowdsaleConfig(network);
-
     const preSaleOpeningTime = moment(crowdsale.preSale.opening, crowdsale.dateFormat).unix();
     const preSaleClosingTime = moment(crowdsale.preSale.closing, crowdsale.dateFormat).unix();
     const mainSaleOpeningTime = moment(crowdsale.mainSale.opening, crowdsale.dateFormat).unix();
     const mainSaleClosingTime = moment(crowdsale.mainSale.closing, crowdsale.dateFormat).unix();
 
-
     for (let i = 0; i < crowdsale.team.length; i++) {
         await createVestingContract(crowdsale.team[i], mainSaleOpeningTime);
     }
-
     for (let i = 0; i < crowdsale.advisor.length; i++) {
         await createVestingContract(crowdsale.advisor[i], mainSaleOpeningTime);
     }
