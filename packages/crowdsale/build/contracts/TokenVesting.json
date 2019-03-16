@@ -10026,7 +10026,7 @@
     }
   },
   "schemaVersion": "3.0.3",
-  "updatedAt": "2019-03-16T13:07:49.608Z",
+  "updatedAt": "2019-03-16T13:51:46.682Z",
   "devdoc": {
     "details": "A token holder contract that can release its token balance gradually like a typical vesting scheme, with a cliff and vesting period. Optionally revocable by the owner.",
     "methods": {
