@@ -6,8 +6,9 @@ import "openzeppelin-solidity/contracts/crowdsale/validation/CappedCrowdsale.sol
 import "openzeppelin-solidity/contracts/crowdsale/validation/TimedCrowdsale.sol";
 import "openzeppelin-solidity/contracts/crowdsale/validation/WhitelistCrowdsale.sol";
 import "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol";
+import "./AsureBonusesCrowdsale.sol";
 
-contract AsureCrowdsale is Crowdsale, CappedCrowdsale, TimedCrowdsale, WhitelistCrowdsale {
+contract AsureCrowdsale is Crowdsale, CappedCrowdsale, TimedCrowdsale, WhitelistCrowdsale, AsureBonusesCrowdsale {
   //
   constructor(
     uint256 rate, // rate, in Asure Tokens
@@ -18,9 +19,10 @@ contract AsureCrowdsale is Crowdsale, CappedCrowdsale, TimedCrowdsale, Whitelist
     uint256 closingTime    // closing time in unix epoch seconds
   )
   public
+  Crowdsale(rate, wallet, token)
   CappedCrowdsale(cap)
   TimedCrowdsale(openingTime, closingTime)
-  Crowdsale(rate, wallet, token)
+  AsureBonusesCrowdsale(rate, wallet)
   {
     // nice, we just created a crowdsale that's only open
     // for a certain amount of time
