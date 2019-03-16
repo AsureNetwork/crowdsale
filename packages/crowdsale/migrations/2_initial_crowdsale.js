@@ -22,15 +22,15 @@ module.exports = async function (deployer, network) {
   }
 
   const crowdsaleDeployer = await AsureCrowdsaleDeployer.new(
-    200 * (1 / 0.5), // ETH = 200 USD + 50% bonus
+    200 * (1 / 0.5), // initial rate: ETH = 200 USD + 50% bonus
     config.owner,
     config.crowdsaleWallet, //wallet
     config.foundationWallet, //foundationWallet
     config.bountyWallet, //bountyWallet
     config.familyFriendsWallet, //familyFriendsWallet
-    preSaleOpeningTime,
+    preSaleOpeningTime,  //august 2019
     preSaleClosingTime,
-    mainSaleOpeningTime,
+    mainSaleOpeningTime, //december 2019
     mainSaleClosingTime,
     config.team.map(b => b.addr),
     config.team.map(b => b.amount),

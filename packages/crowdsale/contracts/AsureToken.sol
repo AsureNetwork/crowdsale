@@ -26,7 +26,7 @@ contract AsureToken is ERC20, ERC20Detailed, ERC20Mintable, ERC20Burnable, Ownab
   }
 
   // ERC223 alternative
-  function transferERC223(address erc20tokenAddr, address to, uint256 value) onlyOwner
+  function emergencyTokenExtraction(address erc20tokenAddr, address to, uint256 value) onlyOwner
     public returns (bool) {
     IERC20 erc20token = IERC20(erc20tokenAddr);
     return erc20token.transfer(to, value);
