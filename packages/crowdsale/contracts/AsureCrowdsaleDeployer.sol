@@ -4,23 +4,7 @@ import "./AsureToken.sol";
 import "./AsureCrowdsale.sol";
 import "openzeppelin-solidity/contracts/drafts/TokenVesting.sol";
 
-contract VestingUser {
-  address payable public _addr;
-  uint256 public _amount;
-  address payable public _tokenVestingAddr;
 
-  function addr() public view returns (address) {
-    return _addr;
-  }
-
-  function amount() public view returns (uint256) {
-    return _amount;
-  }
-
-  function tokenVestingAddr() public view returns (address) {
-    return _tokenVestingAddr;
-  }
-}
 
 
 contract AsureCrowdsaleDeployer {
@@ -33,12 +17,17 @@ contract AsureCrowdsaleDeployer {
     uint256 preSaleOpeningTime, // opening time in unix epoch seconds
     uint256 preSaleClosingTime, // closing time in unix epoch seconds
     uint256 mainSaleOpeningTime, // mainSale start
-    uint256 mainSaleClosingTime//,   // mainSale end
-    //VestingUser[] memory teamUsers,
-    //VestingUser[] memory advisorUsers
+    uint256 mainSaleClosingTime,   // mainSale end
+    address[] memory teamAddr,
+    uint256[] memory teamAmounts,
+    address[] memory advisorAddr,
+    uint256[] memory advisorAmounts
   )
   public
   {
+    require(teamAddr.length == teamAmounts.length);
+    require(advisorAddr.length == advisorAmounts.length);
+
     token = new AsureToken("AsureToken", "ASR", 18);
 
     presale = new AsureCrowdsale(
@@ -72,41 +61,15 @@ contract AsureCrowdsaleDeployer {
     token.mint(0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5, 35 * 10 ** 24);
 
 
-//    for (uint i = 0; i < teamUsers.length; i++) {
-//        token.mint(teamUsers[i].tokenVestingAddr(), teamUsers[i].amount());
-//    }
-//
-//    for (uint i = 0; i < advisorUsers.length; i++) {
-//      token.mint(advisorUsers[i].tokenVestingAddr(), advisorUsers[i].amount());
-//    }
+    for (uint i = 0; i < teamAddr.length; i++) {
+        token.mint(teamAddr[i], teamAmounts[i]);
+    }
 
-    /*
-          //team
-          TokenVesting team = new TokenVesting(0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5,
-          mainSaleOpeningTime, //unix timestemp
-          0, //cliffDuration
-          63072000, // duration in sec
-          false // bool revocable
-          );
-          token.mint(address(team), 8*10**24);
+    for (uint i = 0; i < advisorAddr.length; i++) {
+      token.mint(advisorAddr[i], advisorAmounts[i]);
+    }
 
-
-    //advisor
-    TokenVesting advisor = new TokenVesting(owner,
-      mainSaleOpeningTime, //unix timestemp
-      0, //cliffDuration
-      63072000, // duration in s
-      false // bool revocable
-    );
-
-    token.mint(address(advisor), 2 * 10 ** 24);
-    */
   }
 }
 
-/*
-const year1 = 31536000 // ~1 yr = 60*60*24*365
-const year2 = 63072000 // ~2 yr = 60*60*24*365*2
-const year3 = 94608000 // ~3 yr = 60*60*24*365*3
-const year4 = 126144000 // ~4yrs =60*60*24*365*4
-*/
+

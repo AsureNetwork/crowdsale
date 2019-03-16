@@ -412,7 +412,7 @@
         "id": 2,
         "nodeType": "ImportDirective",
         "scope": 81,
-        "sourceUnit": 2270,
+        "sourceUnit": 2291,
         "src": "25:63:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -423,7 +423,7 @@
         "id": 3,
         "nodeType": "ImportDirective",
         "scope": 81,
-        "sourceUnit": 2456,
+        "sourceUnit": 2477,
         "src": "89:64:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -434,7 +434,7 @@
         "id": 4,
         "nodeType": "ImportDirective",
         "scope": 81,
-        "sourceUnit": 1083,
+        "sourceUnit": 1104,
         "src": "154:82:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -445,7 +445,7 @@
         "id": 5,
         "nodeType": "ImportDirective",
         "scope": 81,
-        "sourceUnit": 1197,
+        "sourceUnit": 1218,
         "src": "237:81:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -456,7 +456,7 @@
         "id": 6,
         "nodeType": "ImportDirective",
         "scope": 81,
-        "sourceUnit": 1227,
+        "sourceUnit": 1248,
         "src": "319:85:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -467,7 +467,7 @@
         "id": 7,
         "nodeType": "ImportDirective",
         "scope": 81,
-        "sourceUnit": 1010,
+        "sourceUnit": 1031,
         "src": "405:65:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -481,10 +481,10 @@
               "id": 8,
               "name": "Crowdsale",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1009,
+              "referencedDeclaration": 1030,
               "src": "499:9:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Crowdsale_$1009",
+                "typeIdentifier": "t_contract$_Crowdsale_$1030",
                 "typeString": "contract Crowdsale"
               }
             },
@@ -499,10 +499,10 @@
               "id": 10,
               "name": "CappedCrowdsale",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1082,
+              "referencedDeclaration": 1103,
               "src": "510:15:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_CappedCrowdsale_$1082",
+                "typeIdentifier": "t_contract$_CappedCrowdsale_$1103",
                 "typeString": "contract CappedCrowdsale"
               }
             },
@@ -517,10 +517,10 @@
               "id": 12,
               "name": "TimedCrowdsale",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1196,
+              "referencedDeclaration": 1217,
               "src": "527:14:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_TimedCrowdsale_$1196",
+                "typeIdentifier": "t_contract$_TimedCrowdsale_$1217",
                 "typeString": "contract TimedCrowdsale"
               }
             },
@@ -535,10 +535,10 @@
               "id": 14,
               "name": "WhitelistCrowdsale",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1226,
+              "referencedDeclaration": 1247,
               "src": "543:18:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_WhitelistCrowdsale_$1226",
+                "typeIdentifier": "t_contract$_WhitelistCrowdsale_$1247",
                 "typeString": "contract WhitelistCrowdsale"
               }
             },
@@ -548,13 +548,13 @@
           }
         ],
         "contractDependencies": [
-          630,
-          739,
-          1009,
-          1082,
-          1196,
-          1226,
-          2630
+          651,
+          760,
+          1030,
+          1103,
+          1217,
+          1247,
+          2651
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -562,13 +562,13 @@
         "id": 80,
         "linearizedBaseContracts": [
           80,
-          1226,
-          1196,
-          1082,
-          1009,
-          2630,
-          739,
-          630
+          1247,
+          1217,
+          1103,
+          1030,
+          2651,
+          760,
+          651
         ],
         "name": "AsureCrowdsale",
         "nodeType": "ContractDefinition",
@@ -608,7 +608,7 @@
                       "name": "addWhitelistAdmin",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 588,
+                      "referencedDeclaration": 609,
                       "src": "1153:17:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
@@ -667,7 +667,7 @@
                       "name": "addWhitelistAdmin",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 588,
+                      "referencedDeclaration": 609,
                       "src": "1184:17:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
@@ -722,10 +722,10 @@
                   "name": "CappedCrowdsale",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 1082,
+                  "referencedDeclaration": 1103,
                   "src": "891:15:0",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_contract$_CappedCrowdsale_$1082_$",
+                    "typeIdentifier": "t_type$_t_contract$_CappedCrowdsale_$1103_$",
                     "typeString": "type(contract CappedCrowdsale)"
                   }
                 },
@@ -768,10 +768,10 @@
                   "name": "TimedCrowdsale",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 1196,
+                  "referencedDeclaration": 1217,
                   "src": "914:14:0",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_contract$_TimedCrowdsale_$1196_$",
+                    "typeIdentifier": "t_type$_t_contract$_TimedCrowdsale_$1217_$",
                     "typeString": "type(contract TimedCrowdsale)"
                   }
                 },
@@ -815,7 +815,7 @@
                     "referencedDeclaration": 21,
                     "src": "981:5:0",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IERC20_$2455",
+                      "typeIdentifier": "t_contract$_IERC20_$2476",
                       "typeString": "contract IERC20"
                     }
                   }
@@ -827,10 +827,10 @@
                   "name": "Crowdsale",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 1009,
+                  "referencedDeclaration": 1030,
                   "src": "957:9:0",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_contract$_Crowdsale_$1009_$",
+                    "typeIdentifier": "t_type$_t_contract$_Crowdsale_$1030_$",
                     "typeString": "type(contract Crowdsale)"
                   }
                 },
@@ -907,7 +907,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IERC20_$2455",
+                    "typeIdentifier": "t_contract$_IERC20_$2476",
                     "typeString": "contract IERC20"
                   },
                   "typeName": {
@@ -915,10 +915,10 @@
                     "id": 20,
                     "name": "IERC20",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 2455,
+                    "referencedDeclaration": 2476,
                     "src": "683:6:0",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IERC20_$2455",
+                      "typeIdentifier": "t_contract$_IERC20_$2476",
                       "typeString": "contract IERC20"
                     }
                   },
@@ -1086,7 +1086,7 @@
                             "name": "_addWhitelisted",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 722,
+                            "referencedDeclaration": 743,
                             "src": "1396:15:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
@@ -1282,7 +1282,7 @@
                   "name": "onlyWhitelistAdmin",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 563,
+                  "referencedDeclaration": 584,
                   "src": "1320:18:0",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -1385,7 +1385,7 @@
         "id": 2,
         "nodeType": "ImportDirective",
         "scope": 81,
-        "sourceUnit": 2270,
+        "sourceUnit": 2291,
         "src": "25:63:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -1396,7 +1396,7 @@
         "id": 3,
         "nodeType": "ImportDirective",
         "scope": 81,
-        "sourceUnit": 2456,
+        "sourceUnit": 2477,
         "src": "89:64:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -1407,7 +1407,7 @@
         "id": 4,
         "nodeType": "ImportDirective",
         "scope": 81,
-        "sourceUnit": 1083,
+        "sourceUnit": 1104,
         "src": "154:82:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -1418,7 +1418,7 @@
         "id": 5,
         "nodeType": "ImportDirective",
         "scope": 81,
-        "sourceUnit": 1197,
+        "sourceUnit": 1218,
         "src": "237:81:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -1429,7 +1429,7 @@
         "id": 6,
         "nodeType": "ImportDirective",
         "scope": 81,
-        "sourceUnit": 1227,
+        "sourceUnit": 1248,
         "src": "319:85:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -1440,7 +1440,7 @@
         "id": 7,
         "nodeType": "ImportDirective",
         "scope": 81,
-        "sourceUnit": 1010,
+        "sourceUnit": 1031,
         "src": "405:65:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -1454,10 +1454,10 @@
               "id": 8,
               "name": "Crowdsale",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1009,
+              "referencedDeclaration": 1030,
               "src": "499:9:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Crowdsale_$1009",
+                "typeIdentifier": "t_contract$_Crowdsale_$1030",
                 "typeString": "contract Crowdsale"
               }
             },
@@ -1472,10 +1472,10 @@
               "id": 10,
               "name": "CappedCrowdsale",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1082,
+              "referencedDeclaration": 1103,
               "src": "510:15:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_CappedCrowdsale_$1082",
+                "typeIdentifier": "t_contract$_CappedCrowdsale_$1103",
                 "typeString": "contract CappedCrowdsale"
               }
             },
@@ -1490,10 +1490,10 @@
               "id": 12,
               "name": "TimedCrowdsale",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1196,
+              "referencedDeclaration": 1217,
               "src": "527:14:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_TimedCrowdsale_$1196",
+                "typeIdentifier": "t_contract$_TimedCrowdsale_$1217",
                 "typeString": "contract TimedCrowdsale"
               }
             },
@@ -1508,10 +1508,10 @@
               "id": 14,
               "name": "WhitelistCrowdsale",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1226,
+              "referencedDeclaration": 1247,
               "src": "543:18:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_WhitelistCrowdsale_$1226",
+                "typeIdentifier": "t_contract$_WhitelistCrowdsale_$1247",
                 "typeString": "contract WhitelistCrowdsale"
               }
             },
@@ -1521,13 +1521,13 @@
           }
         ],
         "contractDependencies": [
-          630,
-          739,
-          1009,
-          1082,
-          1196,
-          1226,
-          2630
+          651,
+          760,
+          1030,
+          1103,
+          1217,
+          1247,
+          2651
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -1535,13 +1535,13 @@
         "id": 80,
         "linearizedBaseContracts": [
           80,
-          1226,
-          1196,
-          1082,
-          1009,
-          2630,
-          739,
-          630
+          1247,
+          1217,
+          1103,
+          1030,
+          2651,
+          760,
+          651
         ],
         "name": "AsureCrowdsale",
         "nodeType": "ContractDefinition",
@@ -1581,7 +1581,7 @@
                       "name": "addWhitelistAdmin",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 588,
+                      "referencedDeclaration": 609,
                       "src": "1153:17:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
@@ -1640,7 +1640,7 @@
                       "name": "addWhitelistAdmin",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 588,
+                      "referencedDeclaration": 609,
                       "src": "1184:17:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
@@ -1695,10 +1695,10 @@
                   "name": "CappedCrowdsale",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 1082,
+                  "referencedDeclaration": 1103,
                   "src": "891:15:0",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_contract$_CappedCrowdsale_$1082_$",
+                    "typeIdentifier": "t_type$_t_contract$_CappedCrowdsale_$1103_$",
                     "typeString": "type(contract CappedCrowdsale)"
                   }
                 },
@@ -1741,10 +1741,10 @@
                   "name": "TimedCrowdsale",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 1196,
+                  "referencedDeclaration": 1217,
                   "src": "914:14:0",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_contract$_TimedCrowdsale_$1196_$",
+                    "typeIdentifier": "t_type$_t_contract$_TimedCrowdsale_$1217_$",
                     "typeString": "type(contract TimedCrowdsale)"
                   }
                 },
@@ -1788,7 +1788,7 @@
                     "referencedDeclaration": 21,
                     "src": "981:5:0",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IERC20_$2455",
+                      "typeIdentifier": "t_contract$_IERC20_$2476",
                       "typeString": "contract IERC20"
                     }
                   }
@@ -1800,10 +1800,10 @@
                   "name": "Crowdsale",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 1009,
+                  "referencedDeclaration": 1030,
                   "src": "957:9:0",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_contract$_Crowdsale_$1009_$",
+                    "typeIdentifier": "t_type$_t_contract$_Crowdsale_$1030_$",
                     "typeString": "type(contract Crowdsale)"
                   }
                 },
@@ -1880,7 +1880,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IERC20_$2455",
+                    "typeIdentifier": "t_contract$_IERC20_$2476",
                     "typeString": "contract IERC20"
                   },
                   "typeName": {
@@ -1888,10 +1888,10 @@
                     "id": 20,
                     "name": "IERC20",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 2455,
+                    "referencedDeclaration": 2476,
                     "src": "683:6:0",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IERC20_$2455",
+                      "typeIdentifier": "t_contract$_IERC20_$2476",
                       "typeString": "contract IERC20"
                     }
                   },
@@ -2059,7 +2059,7 @@
                             "name": "_addWhitelisted",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 722,
+                            "referencedDeclaration": 743,
                             "src": "1396:15:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
@@ -2255,7 +2255,7 @@
                   "name": "onlyWhitelistAdmin",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 563,
+                  "referencedDeclaration": 584,
                   "src": "1320:18:0",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -2337,7 +2337,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.2",
-  "updatedAt": "2019-03-16T01:52:30.394Z",
+  "updatedAt": "2019-03-16T12:09:51.634Z",
   "devdoc": {
     "methods": {
       "buyTokens(address)": {
