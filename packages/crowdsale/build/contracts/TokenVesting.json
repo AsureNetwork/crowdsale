@@ -10197,12 +10197,12 @@
         }
       },
       "links": {},
-      "address": "0xF0A2a02affC0A05143e96B2724C2f62016562644",
-      "transactionHash": "0x7dab6a9ab0c40b5499960ebdceb8fbcce229f6b7498a560ca0afef5562db8623"
+      "address": "0xfb6750A7645504fe946A00BCBE53B234CF11c717",
+      "transactionHash": "0x6f3e361514fa648834e3efb8105f3f62a9126efc093c3d7839f159451a737b4a"
     }
   },
   "schemaVersion": "3.0.2",
-  "updatedAt": "2019-03-16T18:30:16.175Z",
+  "updatedAt": "2019-03-19T11:37:32.748Z",
   "devdoc": {
     "details": "A token holder contract that can release its token balance gradually like a typical vesting scheme, with a cliff and vesting period. Optionally revocable by the owner.",
     "methods": {
