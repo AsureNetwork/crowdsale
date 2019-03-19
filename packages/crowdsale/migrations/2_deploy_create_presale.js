@@ -1,6 +1,6 @@
 const fs = require('fs');
-const path = require('path');
 const moment = require('moment');
+const {loadCrowdsaleConfig, saveCrowdsaleConfig} = require('../utils/migrations');
 
 const AsureCrowdsaleDeployer = artifacts.require("AsureCrowdsaleDeployer");
 const TokenVesting = artifacts.require("TokenVesting");
@@ -8,11 +8,10 @@ const TokenVesting = artifacts.require("TokenVesting");
 module.exports = async function (deployer, network) {
   await deployer;
 
-  const config = loadCrowdsaleConfig(network);
+  const config = loadCrowdsaleConfig(__filename, network);
   const preSaleOpeningTime = moment(config.preSale.opening, config.dateFormat).unix();
   const preSaleClosingTime = moment(config.preSale.closing, config.dateFormat).unix();
   const mainSaleOpeningTime = moment(config.mainSale.opening, config.dateFormat).unix();
-  const mainSaleClosingTime = moment(config.mainSale.closing, config.dateFormat).unix();
 
   for (let i = 0; i < config.team.length; i++) {
     await createVestingContract(deployer, config.team[i], mainSaleOpeningTime);
@@ -23,33 +22,35 @@ module.exports = async function (deployer, network) {
 
   await deployer.deploy(
     AsureCrowdsaleDeployer,
-    200 * (1 / 0.5),         // initial rate: ETH = 200 USD + 50% bonus
-    config.owner,
-    config.crowdsaleWallet,     // wallet
-    config.foundationWallet,    // foundationWallet
-    config.bountyWallet,        // bountyWallet
-    config.familyFriendsWallet, // familyFriendsWallet
-    preSaleOpeningTime,         // august 2019
-    preSaleClosingTime,
-    mainSaleOpeningTime,        // december 2019
-    mainSaleClosingTime,
-    config.team.map(b => b.addr),
-    config.team.map(b => b.amount),
-    config.advisor.map(b => b.addr),
-    config.advisor.map(b => b.amount),
+    config.owner
   );
   const crowdsaleDeployer = await AsureCrowdsaleDeployer.at(AsureCrowdsaleDeployer.address);
 
+  const mintTx = await crowdsaleDeployer.mint(
+    config.foundationWallet,    // foundationWallet
+    config.bountyWallet,        // bountyWallet
+    config.familyFriendsWallet, // familyFriendsWallet
+    config.team.map(b => b.addr),
+    config.team.map(b => b.amount),
+    config.advisor.map(b => b.addr),
+    config.advisor.map(b => b.amount)
+  );
+
+  const preSaleTx = await crowdsaleDeployer.createPreSale(
+    200 * (1 / 0.5),         // initial rate: ETH = 200 USD + 50% bonus
+    config.owner,
+    config.crowdsaleWallet,     // wallet
+    preSaleOpeningTime,         // august 2019
+    preSaleClosingTime
+  );
+
   config.token.addr = await crowdsaleDeployer.token.call();
   config.preSale.addr = await crowdsaleDeployer.presale.call();
-  config.mainSale.addr = await crowdsaleDeployer.mainsale.call();
+  saveCrowdsaleConfig(__filename, network, config);
 
-  console.log(`config.token.addr               : ${config.token.addr}`);
-  console.log(`config.preSale.addr             : ${config.preSale.addr}`);
-  console.log(`config.mainSale.addr            : ${config.mainSale.addr}`);
-
-  console.log(`AsureCrowdsale deployment successful.`);
-  fs.writeFileSync(`crowdsale-${network}-final.json`, JSON.stringify(config, null, 2));
+  console.log('Tx mint gas used', mintTx.receipt.gasUsed);
+  console.log('Tx preSale gas used', preSaleTx.receipt.gasUsed);
+  console.log(`Asure PreSale deployment successful.`);
 };
 
 
@@ -67,16 +68,4 @@ async function createVestingContract(deployer, beneficiary, mainSaleOpeningTime)
 
   beneficiary.addr = TokenVesting.address;
   console.log(`token-vesting > owner (amount)  : ${beneficiary.addr} > ${beneficiary.owner} (${beneficiary.amount})`);
-}
-
-function loadCrowdsaleConfig(network) {
-  const fileName = `crowdsale-${network}.json`;
-
-  if (!fs.existsSync(path.join(process.cwd(), fileName))) {
-    throw Error(
-      `No crowdsale configuration file (${path.join(process.cwd(), fileName)}) for network "${network}" found.`
-    )
-  }
-
-  return require(`../${fileName}`);
 }

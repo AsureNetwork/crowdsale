@@ -10,7 +10,8 @@
   "scripts": {
     "compile": "truffle compile",
     "test": "truffle test",
-    "migrate:development": "truffle migrate --network development --reset",
+    "migrate:development:presale": "truffle migrate -f 2 --network development --reset",
+    "migrate:development:mainsale": "truffle migrate -f 3 --network development --reset",
     "migrate:rinkeby": "truffle migrate --network rinkeby --reset"
   },
   "keywords": [],
