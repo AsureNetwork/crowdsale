@@ -4,21 +4,20 @@ import "./AsureToken.sol";
 import "./AsureCrowdsale.sol";
 import "openzeppelin-solidity/contracts/drafts/TokenVesting.sol";
 
-contract AsureCrowdsaleDeployer is Ownable{
+contract AsureCrowdsaleDeployer is Ownable {
   AsureToken public token;
   AsureCrowdsale public presale;
   AsureCrowdsale public mainsale;
 
-  uint256 private constant decimalFactor = 10**uint256(18);
-  uint256 private constant AVAILABLE_TOTAL_SUPPLY         = 100000000 * decimalFactor;
-  uint256 private constant AVAILABLE_PRESALE_SUPPLY       =  10000000 * decimalFactor; // 10% Released at Token Distribution (TD)
-  uint256 private constant AVAILABLE_MAINSALE_SUPPLY      =  35000000 * decimalFactor; // 35% Released at Token Distribution (TD)
-  uint256 private constant AVAILABLE_FOUNDATION_SUPPLY    =  35000000 * decimalFactor; // 35% Released at Token Distribution (TD)
-  uint256 private constant AVAILABLE_BOUNTY_SUPPLY        =   5000000 * decimalFactor; // 5% Released at TD
-  uint256 private constant AVAILABLE_FAMILYFRIENDS_SUPPLY =   5000000 * decimalFactor; // 5% Released at TD
-  uint256 private constant AVAILABLE_TEAM_SUPPLY          =   8000000 * decimalFactor; // 8% Released at TD +2 years
-  uint256 private constant AVAILABLE_ADVISOR_SUPPLY       =   2000000 * decimalFactor; // 2% Released at TD +2 years
-
+  uint256 private constant decimalFactor = 10 ** uint256(18);
+  uint256 private constant AVAILABLE_TOTAL_SUPPLY = 100000000 * decimalFactor;
+  uint256 private constant AVAILABLE_PRESALE_SUPPLY = 10000000 * decimalFactor; // 10% Released at Token Distribution (TD)
+  uint256 private constant AVAILABLE_MAINSALE_SUPPLY = 35000000 * decimalFactor; // 35% Released at Token Distribution (TD)
+  uint256 private constant AVAILABLE_FOUNDATION_SUPPLY = 35000000 * decimalFactor; // 35% Released at Token Distribution (TD)
+  uint256 private constant AVAILABLE_BOUNTY_SUPPLY = 5000000 * decimalFactor; // 5% Released at TD
+  uint256 private constant AVAILABLE_FAMILYFRIENDS_SUPPLY = 5000000 * decimalFactor; // 5% Released at TD
+  uint256 private constant AVAILABLE_TEAM_SUPPLY = 8000000 * decimalFactor; // 8% Released at TD +2 years
+  uint256 private constant AVAILABLE_ADVISOR_SUPPLY = 2000000 * decimalFactor; // 2% Released at TD +2 years
 
   constructor(
     uint256 rate,
@@ -27,10 +26,10 @@ contract AsureCrowdsaleDeployer is Ownable{
     address payable foundationWallet,
     address payable bountyWallet,
     address payable familyFriendsWallet,
-    uint256 preSaleOpeningTime, // opening time in unix epoch seconds
-    uint256 preSaleClosingTime,  // closing time in unix epoch seconds
-    uint256 mainSaleOpeningTime, // mainSale start
-    uint256 mainSaleClosingTime, // mainSale end
+    uint256 preSaleOpeningTime, // preSale opening time in unix epoch seconds
+    uint256 preSaleClosingTime, // preSale closing time in unix epoch seconds
+    uint256 mainSaleOpeningTime, // mainSale opening time in unix epoch seconds
+    uint256 mainSaleClosingTime, // mainSale closing time in unix epoch seconds
     address[] memory teamAddr,
     uint256[] memory teamAmounts,
     address[] memory advisorAddr,
@@ -39,6 +38,7 @@ contract AsureCrowdsaleDeployer is Ownable{
   public
   {
     transferOwnership(owner);
+
     token = new AsureToken(owner, "AsureToken", "ASR", 18);
     presale = new AsureCrowdsale(
       rate, // rate, in AsureTokens - 1 ETH == 1000 RUHR
@@ -56,29 +56,21 @@ contract AsureCrowdsaleDeployer is Ownable{
       mainSaleOpeningTime, // opening time in unix epoch seconds
       mainSaleClosingTime  // closing time in unix epoch seconds
     );
-    //presale
-    token.mint(address(presale), AVAILABLE_PRESALE_SUPPLY);
-    //mainsale
-    token.mint(address(mainsale), AVAILABLE_MAINSALE_SUPPLY);
-    //foundation
-    token.mint(foundationWallet, AVAILABLE_FOUNDATION_SUPPLY);
-    //bounty
-    token.mint(bountyWallet, AVAILABLE_BOUNTY_SUPPLY);
-    //family and friends
-    token.mint(familyFriendsWallet, AVAILABLE_FAMILYFRIENDS_SUPPLY);
 
-    //team
+    token.mint(address(presale), AVAILABLE_PRESALE_SUPPLY);
+    token.mint(address(mainsale), AVAILABLE_MAINSALE_SUPPLY);
+    token.mint(foundationWallet, AVAILABLE_FOUNDATION_SUPPLY);
+    token.mint(bountyWallet, AVAILABLE_BOUNTY_SUPPLY);
+    token.mint(familyFriendsWallet, AVAILABLE_FAMILYFRIENDS_SUPPLY);
     for (uint i = 0; i < teamAddr.length; i++) {
-      token.mint(teamAddr[i], teamAmounts[i]*decimalFactor);
+      token.mint(teamAddr[i], teamAmounts[i] * decimalFactor);
     }
-    //advisors
     for (uint i = 0; i < advisorAddr.length; i++) {
-      token.mint(advisorAddr[i], advisorAmounts[i]*decimalFactor);
+      token.mint(advisorAddr[i], advisorAmounts[i] * decimalFactor);
     }
 
     require(token.totalSupply() == AVAILABLE_TOTAL_SUPPLY, "AVAILABLE_TOTAL_SUPPLY");
   }
-
 }
 
 

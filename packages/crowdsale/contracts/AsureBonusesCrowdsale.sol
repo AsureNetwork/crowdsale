@@ -11,7 +11,7 @@ import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 
 /**
  * @title AsureBonusesCrowdsale,
-   with changeble rate
+ * with changeble rate
  */
 contract AsureBonusesCrowdsale is TimedCrowdsale, Ownable {
   using SafeMath for uint256;
@@ -53,15 +53,15 @@ contract AsureBonusesCrowdsale is TimedCrowdsale, Ownable {
   }
 
   /**
- * @return the next Timeslot of the crowdsale.
- */
+   * @return the next Timeslot of the crowdsale.
+   */
   function nextBonusTimeslot() public view returns (uint256) {
     return _nextBonusTimeslot;
   }
 
   /**
-  * @return the next Rate of the crowdsale.
-  */
+   * @return the next Rate of the crowdsale.
+   */
   function nextBonusRate() public view returns (uint256) {
     return _nextBonusRate;
   }
@@ -80,10 +80,10 @@ contract AsureBonusesCrowdsale is TimedCrowdsale, Ownable {
   }
 
   /**
-  * @dev Update timeslot and rate for the next Timeslot
-  * @param bonusTimeslot next time slot
-  * @param bonusRate rate for the timeslot
-  */
+   * @dev Update timeslot and rate for the next Timeslot
+   * @param bonusTimeslot next time slot
+   * @param bonusRate rate for the timeslot
+   */
   function updateBonusTimeslotRate(uint256 bonusTimeslot, uint256 bonusRate) public onlyOwner {
     _updateBonusTimeslotRate(bonusTimeslot, bonusRate);
   }

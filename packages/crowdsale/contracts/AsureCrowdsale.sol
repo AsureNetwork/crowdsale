@@ -10,12 +10,12 @@ import "./AsureBonusesCrowdsale.sol";
 contract AsureCrowdsale is Crowdsale, TimedCrowdsale, WhitelistCrowdsale, AsureBonusesCrowdsale {
   //
   constructor(
-    uint256 rate, // rate, in Asure Tokens
-    address payable owner, // owner
-    address payable crowdsaleWallet, // wallet to send Ether
-    IERC20 token, // the token
-    uint256 openingTime, // opening time in unix epoch seconds
-    uint256 closingTime    // closing time in unix epoch seconds
+    uint256 rate,                     // rate, in Asure Tokens
+    address payable owner,            // owner
+    address payable crowdsaleWallet,  // wallet to send Ether
+    IERC20 token,                     // the token
+    uint256 openingTime,              // opening time in unix epoch seconds
+    uint256 closingTime               // closing time in unix epoch seconds
   )
   public
   Crowdsale(rate, crowdsaleWallet, token)
@@ -33,5 +33,4 @@ contract AsureCrowdsale is Crowdsale, TimedCrowdsale, WhitelistCrowdsale, AsureB
       _addWhitelisted(accounts[i]);
     }
   }
-
 }
