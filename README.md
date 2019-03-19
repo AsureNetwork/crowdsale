@@ -4,7 +4,7 @@ Here be smart contracts for the [Asure token][asure token].
 
 ![Asure Token](asure.network.png)
 
-Asure is a utility token built on top of the [Ethereum][ethereum] blockchain.
+Asure Token is a utility token built on top of the [Ethereum][ethereum] blockchain.
 Asure provides a scalable blockchain network for decentralized social security 
 built around openness, privacy, and fairness, and brings together individuals, 
 companies and governments in a digital world.
