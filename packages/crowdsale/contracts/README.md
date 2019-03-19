@@ -1,3 +1,26 @@
 # Contracts requirements 
 
-1. 
+|||
+|---|---|
+|Token name (Ticker)   | Asure Token (ASR)  |
+|Token issuer          | Asure Foundation, Zug, Switzerland  |
+|Token type            | ERC20 / ~ERC223   |
+|Total token supply    | 100.000.000 ASR  |
+|Token for sale        | 45.000.000 ASR  |
+|Accepted currencies   | ETH  |
+|Exchange Rate         | 1 ASR = $ 1.00 (ETH equivalent)  |
+|Minimum Contribution  | $ 100 (ETH equivalent)   |
+|||
+|Pre-Sale              | August 1, 2019 — August 15, 2019  |
+|Pre-Sale Cap          | $ 5.000.000 — 10 Million ASR  |
+|Pre-Sale Terms        | First week 50% bonus ($ 0.50) <br/> After first week 25% bonus ($ 0.75) |
+|||
+|Main-Sale             | December 1, 2019 — December 31, 2019|
+|Main-Sale Cap         | $ 35.000.000 — 35 Million ASR|
+|Main-Sale Terms       | First first week 15% bonus ($ 0.85) <br/> After first week 0% bonus ($ 1.00)|
+|||
+|Listings | ASR tokens will be listed on crypto exchanges  |
+|Hint  | All unsold tokens in public TGE will be burned   |
+|Hardcap    | $ 40.000.000  |
+
+ 
