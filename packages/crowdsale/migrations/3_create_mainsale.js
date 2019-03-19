@@ -19,7 +19,8 @@ module.exports = async function (deployer, network) {
     config.owner,
     config.crowdsaleWallet,     // wallet
     mainSaleOpeningTime,        // december 2019
-    mainSaleClosingTime
+    mainSaleClosingTime,
+    { from: config.owner }
   );
 
   config.mainSale.addr = await crowdsaleDeployer.mainsale.call();

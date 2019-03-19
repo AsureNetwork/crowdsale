@@ -57,8 +57,8 @@ module.exports = {
       host: "127.0.0.1",     // Localhost (default: none)
       port: 8545,            // Standard Ethereum port (default: none)
       network_id: "*",       // Any network (default: none)
-      confirmations: 2, // # of confs to wait between deployments. (default: 0)
-      skipDryRun: true
+      //confirmations: 2, // # of confs to wait between deployments. (default: 0)
+      //skipDryRun: true
     },
 
     // Another network with more advanced options...

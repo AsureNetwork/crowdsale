@@ -22,7 +22,7 @@ module.exports = async function (deployer, network) {
 
   await deployer.deploy(
     AsureCrowdsaleDeployer,
-    config.owner
+    config.owner,
   );
   const crowdsaleDeployer = await AsureCrowdsaleDeployer.at(AsureCrowdsaleDeployer.address);
 
@@ -33,7 +33,8 @@ module.exports = async function (deployer, network) {
     config.team.map(b => b.addr),
     config.team.map(b => b.amount),
     config.advisor.map(b => b.addr),
-    config.advisor.map(b => b.amount)
+    config.advisor.map(b => b.amount),
+    { from: config.owner }
   );
 
   const preSaleTx = await crowdsaleDeployer.createPreSale(
@@ -41,7 +42,8 @@ module.exports = async function (deployer, network) {
     config.owner,
     config.crowdsaleWallet,     // wallet
     preSaleOpeningTime,         // august 2019
-    preSaleClosingTime
+    preSaleClosingTime,
+    { from: config.owner }
   );
 
   config.token.addr = await crowdsaleDeployer.token.call();
