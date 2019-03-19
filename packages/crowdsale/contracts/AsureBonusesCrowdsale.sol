@@ -11,7 +11,7 @@ import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 
 /**
  * @title AsureBonusesCrowdsale,
- * with changeble rate
+ * with changeble rate before crowdsale start
  */
 contract AsureBonusesCrowdsale is TimedCrowdsale, Ownable {
   using SafeMath for uint256;
@@ -71,6 +71,7 @@ contract AsureBonusesCrowdsale is TimedCrowdsale, Ownable {
   * @param newInitialRate set new initial Rate
   */
   function updateInitialRate(uint256 newInitialRate) public onlyOwner {
+    require(!isOpen());
     _updateInitialRate(newInitialRate);
   }
 
@@ -85,6 +86,7 @@ contract AsureBonusesCrowdsale is TimedCrowdsale, Ownable {
    * @param bonusRate rate for the timeslot
    */
   function updateBonusTimeslotRate(uint256 bonusTimeslot, uint256 bonusRate) public onlyOwner {
+    require(!isOpen());
     _updateBonusTimeslotRate(bonusTimeslot, bonusRate);
   }
 
