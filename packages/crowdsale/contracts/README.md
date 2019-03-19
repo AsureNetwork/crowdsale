@@ -1,5 +1,6 @@
 # Contracts requirements 
 
+### Token Details
 |||
 |---|---|
 |Token name (Ticker)   | Asure Token (ASR)  |
@@ -21,6 +22,17 @@
 |||
 |Listings | ASR tokens will be listed on crypto exchanges  |
 |Hint  | All unsold tokens in public TGE will be burned   |
+|||
 |Hardcap    | $ 40.000.000  |
 
+### Token allocation
  
+||||
+|---:|---:|---|
+| 35% |  35.000.000 ASR | Public Main-Sale|
+| 35% |  35.000.000 ASR | Foundation|
+| 10% |  10.000.000 ASR | Public Pre-Sale |
+| 8%  |   8.000.000 ASR | Team |
+| 5%  |   5.000.000 ASR | Bounty |
+| 5%  |   5.000.000 ASR | Family & Friends |
+| 2%  |   2.000.000 ASR | Advisors |
