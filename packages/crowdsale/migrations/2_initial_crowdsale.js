@@ -15,28 +15,30 @@ module.exports = async function (deployer, network) {
   const mainSaleClosingTime = moment(config.mainSale.closing, config.dateFormat).unix();
 
   for (let i = 0; i < config.team.length; i++) {
-    await createVestingContract(config.team[i], mainSaleOpeningTime);
+    await createVestingContract(deployer, config.team[i], mainSaleOpeningTime);
   }
   for (let i = 0; i < config.advisor.length; i++) {
-    await createVestingContract(config.advisor[i], mainSaleOpeningTime);
+    await createVestingContract(deployer, config.advisor[i], mainSaleOpeningTime);
   }
 
-  const crowdsaleDeployer = await AsureCrowdsaleDeployer.new(
-    200 * (1 / 0.5), // initial rate: ETH = 200 USD + 50% bonus
+  await deployer.deploy(
+    AsureCrowdsaleDeployer,
+    200 * (1 / 0.5),         // initial rate: ETH = 200 USD + 50% bonus
     config.owner,
-    config.crowdsaleWallet, //wallet
-    config.foundationWallet, //foundationWallet
-    config.bountyWallet, //bountyWallet
-    config.familyFriendsWallet, //familyFriendsWallet
-    preSaleOpeningTime,  //august 2019
+    config.crowdsaleWallet,     // wallet
+    config.foundationWallet,    // foundationWallet
+    config.bountyWallet,        // bountyWallet
+    config.familyFriendsWallet, // familyFriendsWallet
+    preSaleOpeningTime,         // august 2019
     preSaleClosingTime,
-    mainSaleOpeningTime, //december 2019
+    mainSaleOpeningTime,        // december 2019
     mainSaleClosingTime,
     config.team.map(b => b.addr),
     config.team.map(b => b.amount),
     config.advisor.map(b => b.addr),
     config.advisor.map(b => b.amount),
   );
+  const crowdsaleDeployer = await AsureCrowdsaleDeployer.at(AsureCrowdsaleDeployer.address);
 
   config.token.addr = await crowdsaleDeployer.token.call();
   config.preSale.addr = await crowdsaleDeployer.presale.call();
@@ -51,17 +53,19 @@ module.exports = async function (deployer, network) {
 };
 
 
-async function createVestingContract(beneficiary, mainSaleOpeningTime) {
+async function createVestingContract(deployer, beneficiary, mainSaleOpeningTime) {
   const twoYearsInSeconds = 63072000; // ~2 yr = 60*60*24*365*2
 
-  const instance = await TokenVesting.new(
+  await deployer.deploy(
+    TokenVesting,
     beneficiary.owner,   // address
     mainSaleOpeningTime, // unix timestemp
     0,                   // cliffDuration
     twoYearsInSeconds,   // duration in sec ~2 yr = 60*60*24*365*2
     false                // bool revocable
   );
-  beneficiary.addr = instance.address;
+
+  beneficiary.addr = TokenVesting.address;
   console.log(`token-vesting > owner (amount)  : ${beneficiary.addr} > ${beneficiary.owner} (${beneficiary.amount})`);
 }
 
