@@ -2,6 +2,7 @@ pragma solidity ^0.5.0;
 
 import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/IERC20.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/ERC20Burnable.sol";
 import "openzeppelin-solidity/contracts/crowdsale/validation/TimedCrowdsale.sol";
 import "openzeppelin-solidity/contracts/crowdsale/validation/WhitelistCrowdsale.sol";
 import "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol";
@@ -28,5 +29,11 @@ contract AsureCrowdsale is Crowdsale, TimedCrowdsale, WhitelistCrowdsale, AsureB
     for (uint i = 0; i < accounts.length; i++) {
       _addWhitelisted(accounts[i]);
     }
+  }
+
+  function burn() public {
+    require(hasClosed());
+    ERC20Burnable burnableToken = ERC20Burnable(address(token()));
+    burnableToken.burn(burnableToken.balanceOf(address(this)));
   }
 }

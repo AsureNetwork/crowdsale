@@ -23,7 +23,7 @@ contract AsureCrowdsaleDeployer is Ownable {
   public
   {
     transferOwnership(owner);
-    token = new AsureToken(owner, "AsureToken", "ASR", 18, , AVAILABLE_TOTAL_SUPPLY);
+    token = new AsureToken(owner, "AsureToken", "ASR", 18, AVAILABLE_TOTAL_SUPPLY);
   }
 
   function mint(
