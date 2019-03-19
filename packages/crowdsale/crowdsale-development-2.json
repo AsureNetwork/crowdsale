@@ -1,0 +1,105 @@
+{
+  "dateFormat": "YYYY-MM-DD HH:mm",
+  "owner": "0xd7da996cc3c3186b87c5ea23599dec97153bcc21",
+  "crowdsaleWallet": "0xd7da996cc3c3186b87c5ea23599dec97153bcc21",
+  "foundationWallet": "0xd7da996cc3c3186b87c5ea23599dec97153bcc21",
+  "bountyWallet": "0xd7da996cc3c3186b87c5ea23599dec97153bcc21",
+  "familyFriendsWallet": "0xd7da996cc3c3186b87c5ea23599dec97153bcc21",
+  "token": {
+    "name": "AsureToken",
+    "symbol": "ASR",
+    "decimals": "18"
+  },
+  "preSale": {
+    "opening": "2019-08-01 00:00",
+    "closing": "2019-08-15 00:00"
+  },
+  "mainSale": {
+    "opening": "2019-12-1 00:00",
+    "closing": "2019-12-31 00:00"
+  },
+  "team": [
+    {
+      "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
+      "amount": 500000
+    },
+    {
+      "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
+      "amount": 500000
+    },
+    {
+      "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
+      "amount": 500000
+    },
+    {
+      "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
+      "amount": 500000
+    },
+    {
+      "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
+      "amount": 500000
+    },
+    {
+      "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
+      "amount": 500000
+    },
+    {
+      "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
+      "amount": 500000
+    },
+    {
+      "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
+      "amount": 500000
+    },
+    {
+      "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
+      "amount": 500000
+    },
+    {
+      "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
+      "amount": 500000
+    },
+    {
+      "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
+      "amount": 500000
+    },
+    {
+      "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
+      "amount": 500000
+    },
+    {
+      "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
+      "amount": 500000
+    },
+    {
+      "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
+      "amount": 500000
+    },
+    {
+      "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
+      "amount": 500000
+    },
+    {
+      "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
+      "amount": 500000
+    }
+  ],
+  "advisor": [
+    {
+      "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
+      "amount": 500000
+    },
+    {
+      "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
+      "amount": 500000
+    },
+    {
+      "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
+      "amount": 500000
+    },
+    {
+      "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
+      "amount": 500000
+    }
+  ]
+}
