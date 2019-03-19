@@ -39,7 +39,7 @@ contract AsureCrowdsaleDeployer is Ownable {
   {
     transferOwnership(owner);
 
-    token = new AsureToken(owner, "AsureToken", "ASR", 18);
+    token = new AsureToken(owner, "AsureToken", "ASR", 18, AVAILABLE_TOTAL_SUPPLY);
     presale = new AsureCrowdsale(
       rate, // rate, in AsureTokens - 1 ETH == 1000 RUHR
       owner, // owner
