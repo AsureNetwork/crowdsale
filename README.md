@@ -1,5 +1,4 @@
 # Asure.Network Token Generation Event Contracts
-======================
 
 Here be smart contracts for the [Asure token][asure token].
 
@@ -12,7 +11,7 @@ companies and governments in a digital world.
 
 ## Contracts
 
-Please see the [packages/crowdsale/contracts/](contracts) directory.
+Please see the [contracts](packages/crowdsale/contracts/) directory.
 
 ## Develop
 
