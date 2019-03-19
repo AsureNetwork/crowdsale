@@ -8,7 +8,6 @@ import "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol";
 import "./AsureBonusesCrowdsale.sol";
 
 contract AsureCrowdsale is Crowdsale, TimedCrowdsale, WhitelistCrowdsale, AsureBonusesCrowdsale {
-  //
   constructor(
     uint256 rate,                     // rate, in Asure Tokens
     address payable owner,            // owner
@@ -22,9 +21,6 @@ contract AsureCrowdsale is Crowdsale, TimedCrowdsale, WhitelistCrowdsale, AsureB
   TimedCrowdsale(openingTime, closingTime)
   AsureBonusesCrowdsale(rate, owner)
   {
-    // nice, we just created a crowdsale that's only open
-    // for a certain amount of time
-    // and stops accepting contributions once it reaches `cap`
     addWhitelistAdmin(owner);
   }
 
