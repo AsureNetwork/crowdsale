@@ -24,16 +24,15 @@ contract AsureBonusesCrowdsale is TimedCrowdsale, Ownable {
   event InitialRateUpdated(uint256 initialRate);
 
   /**
-   * @dev Constructor, takes initial and final rates of tokens received per wei contributed.
-   * @param owner of the crowdsale
-   * @param initialRate Number of tokens a buyer gets per wei at the start of the crowdsale
-   */
-  constructor (
-    uint256 initialRate,
-    address payable owner) public
+ * @dev Constructor, takes initial and final rates of tokens received per wei contributed.
+ * @param owner of the crowdsale
+ * @param initialRate Number of tokens a buyer gets per wei at the start of the crowdsale
+ */
+  constructor (uint256 initialRate, address payable owner) public
   {
     require(initialRate > 0);
     _initialRate = initialRate;
+    _nextBonusRate = initialRate;
     transferOwnership(owner);
   }
 

@@ -8,121 +8,98 @@
   "token": {
     "name": "AsureToken",
     "symbol": "ASR",
-    "decimals": "18",
-    "addr": "0x9Fe9135282D37911e011321efeC723a21E714E57"
+    "decimals": "18"
   },
   "preSale": {
     "opening": "2019-08-01 00:00",
-    "closing": "2019-08-15 00:00",
-    "addr": "0xCCEfD63698007E08704c2956a819B5864CaF4651"
+    "closing": "2019-08-15 00:00"
   },
   "mainSale": {
     "opening": "2019-12-1 00:00",
-    "closing": "2019-12-31 00:00",
-    "addr": "0xBfC853eB3570796f8d9a0D2627A86b58D7C0Cd48"
+    "closing": "2019-12-31 00:00"
   },
   "team": [
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
-      "amount": 500000,
-      "addr": "0xE7ED9354DAf59a70cE1565a1b2a84346937dDeFD"
+      "amount": 500000
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
-      "amount": 500000,
-      "addr": "0xE09515ebAc5370AebCe78a7beAAc02599Bf6E076"
+      "amount": 500000
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
-      "amount": 500000,
-      "addr": "0x18aDc6AFbF1d68605fC94844c4DDC844891b221a"
+      "amount": 500000
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
-      "amount": 500000,
-      "addr": "0x1B8Fc17a668f359869Ea886cCC3bE57771542904"
+      "amount": 500000
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
-      "amount": 500000,
-      "addr": "0x58f9E1D2Df54FEeA9a5a8D679f3CEeBaCE9ec582"
+      "amount": 500000
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
-      "amount": 500000,
-      "addr": "0x0532f712199428c7AE593ABE91E02b916bDD6EFd"
+      "amount": 500000
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
-      "amount": 500000,
-      "addr": "0x3fec67D56514AE5F9C5aBc1F0878Db2FFc233b0D"
+      "amount": 500000
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
-      "amount": 500000,
-      "addr": "0xdA4dF79b547E9f705b38Ee999200C4A1110174E6"
+      "amount": 500000
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
-      "amount": 500000,
-      "addr": "0x6B6E7630a4fe58DD62110185DAc37f2c36aAF5C8"
+      "amount": 500000
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
-      "amount": 500000,
-      "addr": "0xB7E109208e9E0AD43C1042EF1BA0E61C34373b36"
+      "amount": 500000
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
-      "amount": 500000,
-      "addr": "0xF1Ebd945e3D6Ae4bfa75a4345922C3aF643004cB"
+      "amount": 500000
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
-      "amount": 500000,
-      "addr": "0xa73954483d8d1F10f25FCC5a99454320cD06A740"
+      "amount": 500000
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
-      "amount": 500000,
-      "addr": "0x6b9555FC33a2b6af97b097f8A6498b1F175C98aD"
+      "amount": 500000
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
-      "amount": 500000,
-      "addr": "0xAa11C7e99265e5cD4Af1328266C6d85d4f6a0A3d"
+      "amount": 500000
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
-      "amount": 500000,
-      "addr": "0xA655FE4e3159f7aa11B0397319B2aBC9B91DA900"
+      "amount": 500000
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
-      "amount": 500000,
-      "addr": "0x3Fa8BCCDB9DEbC6F405810dAAd0914Fa25aD755c"
+      "amount": 500000
     }
   ],
   "advisor": [
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
-      "amount": 500000,
-      "addr": "0x2fE0F77A400076d00CA76388D5d157710D0CdcF5"
+      "amount": 500000
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
-      "amount": 500000,
-      "addr": "0x654Ad367C4D0fbC9AFfef8E3Ac2b19c8ACe268f6"
+      "amount": 500000
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
-      "amount": 500000,
-      "addr": "0x31fFFad09F06BAe4a270C20eCF66ac8E84aa266E"
+      "amount": 500000
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
-      "amount": 500000,
-      "addr": "0x695387507a706b8cE5898154b988A5E6b7D34463"
+      "amount": 500000
     }
   ]
 }

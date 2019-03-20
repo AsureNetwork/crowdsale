@@ -10,6 +10,8 @@
   "scripts": {
     "compile": "truffle compile",
     "test": "truffle test",
+    "test-coverage": "truffle test --network coverage",
+    "coverage": "solidity-coverage",
     "migrate:development:presale": "truffle migrate --to 2 --network development --reset",
     "migrate:development:mainsale": "truffle migrate --to 3 --network development --reset",
     "migrate:rinkeby": "truffle migrate --network rinkeby --reset"
@@ -23,7 +25,10 @@
     "truffle": "^5.0.5"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "moment": "^2.24.0",
+    "openzeppelin-test-helpers": "^0.3.0",
+    "solidity-coverage": "^0.5.11",
     "web3": "^1.0.0-beta.36"
   }
 }
