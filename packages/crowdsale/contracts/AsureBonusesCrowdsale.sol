@@ -20,8 +20,7 @@ contract AsureBonusesCrowdsale is TimedCrowdsale, Ownable {
   uint256 private _nextBonusTimeslot;
   uint256 private _nextBonusRate;
 
-  event BonusTimeslotRateUpdated(uint256 nextBonusTimeslot, uint256 nextBonusRate);
-  event InitialRateUpdated(uint256 initialRate);
+  event RatesUpdated(uint256 initialRate, uint256 nextBonusRate, uint256 nextBonusTimeslot);
 
   /**
  * @dev Constructor, takes initial and final rates of tokens received per wei contributed.
@@ -65,34 +64,18 @@ contract AsureBonusesCrowdsale is TimedCrowdsale, Ownable {
     return _nextBonusRate;
   }
 
-  /**
-  * @dev Update initial Rate
-  * @param newInitialRate set new initial Rate
-  */
-  function updateInitialRate(uint256 newInitialRate) public onlyOwner {
-    require(!isOpen());
-    _updateInitialRate(newInitialRate);
+  function updateRates(uint256 newInitialRate, uint256 newBonusRate, uint256 newBonusTimeslot) public onlyOwner {
+    require(!isOpen() && !hasClosed());
+    require(newInitialRate > 0);
+    require(newBonusRate > 0);
+    _updateRates(newInitialRate, newBonusRate, newBonusTimeslot);
   }
 
-  function _updateInitialRate(uint256 newInitialRate) internal {
+  function _updateRates(uint256 newInitialRate, uint256 newBonusRate, uint256 newBonusTimeslot) internal {
     _initialRate = newInitialRate;
-    emit InitialRateUpdated(newInitialRate);
-  }
-
-  /**
-   * @dev Update timeslot and rate for the next Timeslot
-   * @param bonusTimeslot next time slot
-   * @param bonusRate rate for the timeslot
-   */
-  function updateBonusTimeslotRate(uint256 bonusTimeslot, uint256 bonusRate) public onlyOwner {
-    require(!isOpen());
-    _updateBonusTimeslotRate(bonusTimeslot, bonusRate);
-  }
-
-  function _updateBonusTimeslotRate(uint256 bonusTimeslot, uint256 bonusRate) internal {
-    _nextBonusTimeslot = bonusTimeslot;
-    _nextBonusRate = bonusRate;
-    emit BonusTimeslotRateUpdated(bonusTimeslot, bonusRate);
+    _nextBonusRate = newBonusRate;
+    _nextBonusTimeslot = newBonusTimeslot;
+    emit RatesUpdated(newInitialRate, newBonusRate, newBonusTimeslot);
   }
 
   /**
@@ -104,9 +87,11 @@ contract AsureBonusesCrowdsale is TimedCrowdsale, Ownable {
     if (!isOpen()) {
       return 0;
     }
+
     if (block.timestamp >= _nextBonusTimeslot) {
       return _nextBonusRate;
     }
+
     return _initialRate;
   }
 
