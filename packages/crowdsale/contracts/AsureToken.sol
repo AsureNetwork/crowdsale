@@ -26,10 +26,6 @@ contract AsureToken is ERC20, ERC20Detailed, ERC20Mintable, ERC20Burnable, ERC20
     transferOwnership(owner);
   }
 
-  function sender() public returns (address) {
-    return msg.sender;
-  }
-
   /**
   * @dev ERC223 alternative emergency Token Extraction
   */

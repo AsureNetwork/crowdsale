@@ -8,69 +8,68 @@ const {expect} = require('chai');
 const AsureToken = artifacts.require('AsureToken');
 
 contract('AsureToken', async accounts => {
+  let owner, maxCap, token;
 
+  before(async () => {
+    owner = accounts[0];
+    maxCap = String(100 * 10 ** 6);
 
-  const owner = accounts[0];
-  const wallet = accounts[0];
-  const maxCap = String(100 * 10 ** 6);
-
-  const now = moment();
-  const openingTime = now.clone().add(1, 'days');
-  const closingTime = openingTime.clone().add(2, 'weeks');
-
-  const openingTimeUnix = openingTime.unix();
-  const closingTimeUnix = closingTime.unix();
-  let token, presale, mainsale;
-
-  it('should instantiate AsureToken', async () => {
     token = await AsureToken.new(owner,
       "AsureToken",
       "ASR",
       18,
       maxCap, {from: owner});
 
-    let sender = await token.sender.call();
-    console.log("sender", sender);
-    console.log("owner", owner);
     await token.mint.sendTransaction(owner, maxCap, {from: owner});
-    expect(token).to.be.an.instanceof(AsureToken);
   });
 
-  it('should instantiate AsureToken correctly', async () => {
-    const tokenName = await token.name.call();
-    const tokenSymbol = await token.symbol.call();
-    const tokenDecimals = await token.decimals.call();
-    const tokenTotalSupply = await token.totalSupply.call();
-
-    expect(tokenName).to.eq('AsureToken');
-    expect(tokenSymbol).to.eq('ASR');
-    expect(tokenDecimals.toNumber()).to.eq(18);
-    expect(Web3.utils.toWei(Web3.utils.fromWei(tokenTotalSupply))).to.eq(maxCap);
+  it('should verify test setup', async () => {
+    expect(await token.totalSupply()).to.be.bignumber.equal(maxCap);
   });
 
-  it('should emergency Token Extraction transfer tokens', async () => {
+  describe('constructor', () => {
+    it('should initialize "tokenName" and "tokenSymbol"', async () => {
+      const tokenName = await token.name.call();
+      const tokenSymbol = await token.symbol.call();
+      expect(tokenName).to.eq('AsureToken');
+      expect(tokenSymbol).to.eq('ASR');
+    });
 
-    let wrongToken = await AsureToken.new(owner,
-      "WrongToken",
-      "WRG",
-      18,
-      maxCap, {from: owner});
-    await wrongToken.mint.sendTransaction(token.address, String(1000), {from: owner});
+    it('should initialize "tokenDecimals" and "tokenTotalSupply"', async () => {
+      const tokenDecimals = await token.decimals.call();
+      const tokenTotalSupply = await token.totalSupply.call();
 
-    let balanceOfWrongTokenInToken = await wrongToken.balanceOf.call(token.address);
-    expect(Web3.utils.toWei(Web3.utils.fromWei(balanceOfWrongTokenInToken))).to.eq('1000');
+      expect(tokenDecimals.toNumber()).to.eq(18);
+      expect(Web3.utils.toWei(Web3.utils.fromWei(tokenTotalSupply))).to.eq(maxCap);
+    });
 
-    await token.emergencyTokenExtraction.sendTransaction(wrongToken.address, {from: owner});
-
-    let balanceOfWrongTokenInOwner = await wrongToken.balanceOf.call(owner);
-    expect(Web3.utils.toWei(Web3.utils.fromWei(balanceOfWrongTokenInOwner))).to.eq('1000');
-
-    balanceOfWrongTokenInToken = await wrongToken.balanceOf.call(token.address);
-    expect(Web3.utils.toWei(Web3.utils.fromWei(balanceOfWrongTokenInToken))).to.eq('0');
+    it('should transfer ownership to new owner', async () => {
+      expect(await token.owner()).to.be.equal(owner);
+    });
   });
 
+  describe('emergencyTokenExtraction', () => {
+    it('should transfer wrong tokens', async () => {
 
+      let wrongToken = await AsureToken.new(owner,
+        "WrongToken",
+        "WRG",
+        18,
+        maxCap, {from: owner});
+      await wrongToken.mint.sendTransaction(token.address, String(1000), {from: owner});
 
+      let balanceOfWrongTokenInToken = await wrongToken.balanceOf.call(token.address);
+      expect(Web3.utils.toWei(Web3.utils.fromWei(balanceOfWrongTokenInToken))).to.eq('1000');
+
+      await token.emergencyTokenExtraction.sendTransaction(wrongToken.address, {from: owner});
+
+      let balanceOfWrongTokenInOwner = await wrongToken.balanceOf.call(owner);
+      expect(Web3.utils.toWei(Web3.utils.fromWei(balanceOfWrongTokenInOwner))).to.eq('1000');
+
+      balanceOfWrongTokenInToken = await wrongToken.balanceOf.call(token.address);
+      expect(Web3.utils.toWei(Web3.utils.fromWei(balanceOfWrongTokenInToken))).to.eq('0');
+    });
+  });
 
 
 });

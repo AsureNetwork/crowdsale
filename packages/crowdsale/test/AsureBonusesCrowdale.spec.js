@@ -46,7 +46,7 @@ contract('AsureBonusesCrowdsale', async accounts => {
     expect(await crowdsale.wallet()).to.be.equal(crowdsaleWallet);
   });
 
-  describe('construtor', () => {
+  describe('constructor', () => {
     it('should initialize "initialRate" and "nextBonusRate"', async () => {
       expect(await crowdsale.initialRate()).to.be.bignumber.equal(rate);
       expect(await crowdsale.nextBonusRate()).to.be.bignumber.equal(rate);
