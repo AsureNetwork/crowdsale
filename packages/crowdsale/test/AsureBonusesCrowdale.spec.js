@@ -10,13 +10,11 @@ const TestAsureBonusesCrowdsale = artifacts.require('TestAsureBonusesCrowdsale')
 contract('AsureBonusesCrowdsale', async accounts => {
   let owner, token, crowdsale, initialRate, crowdsaleWallet, openingTime, closingTime;
   isolateTests(() => {
-
     before(async () => {
       owner = accounts[1];
       crowdsaleWallet = accounts[2];
 
       token = await TestToken.new();
-      await token.mint(owner, Web3.utils.toWei(new BN('9999')));
 
       const now = moment();
       openingTime = now.clone().add(1, 'days');
@@ -35,6 +33,7 @@ contract('AsureBonusesCrowdsale', async accounts => {
         openingTime.unix(),
         closingTime.unix()
       );
+      await token.mint(crowdsale.address, Web3.utils.toWei(new BN('9999')));
     });
 
     it('should verify test setup', async () => {
@@ -179,8 +178,25 @@ contract('AsureBonusesCrowdsale', async accounts => {
       });
     });
 
-    describe('_getTokenAmount', () => {
-      // TODO add test describing _getTokenAmount by testing buyTokens
+    describe('buyTokens', () => {
+      const beneficiary = accounts[4];
+      const value = new BN('1');
+
+      it('should buy in first week with "initialRate" conditions', async () => {
+        await time.increase(time.duration.days(3));
+        expect(await crowdsale.isOpen()).to.equal(true);
+
+        await crowdsale.buyTokens.sendTransaction(beneficiary, {value, from: beneficiary});
+        expect(await token.balanceOf(beneficiary)).to.be.bignumber.equal(value.mul(initialRate));
+      });
+
+      it('should buy in second week with "bonusRate" conditions', async () => {
+        await time.increase(time.duration.days(10));
+        expect(await crowdsale.isOpen()).to.equal(true);
+
+        await crowdsale.buyTokens.sendTransaction(beneficiary, {value, from: beneficiary});
+        expect(await token.balanceOf(beneficiary)).to.be.bignumber.equal(value.mul(bonusRate));
+      });
     });
 
     describe('initialRate', () => {
