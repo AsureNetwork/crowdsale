@@ -6,6 +6,7 @@ const {BN, time, constants, expectEvent, shouldFail} = require('openzeppelin-tes
 const {expect} = require('chai');
 
 const AsureToken = artifacts.require('AsureToken');
+const TestToken = artifacts.require('TestToken');
 
 contract('AsureToken', async accounts => {
   let owner, maxCap, token;
@@ -51,22 +52,18 @@ contract('AsureToken', async accounts => {
   describe('emergencyTokenExtraction', () => {
     it('should transfer wrong tokens', async () => {
 
-      let wrongToken = await AsureToken.new(owner,
-        "WrongToken",
-        "WRG",
-        18,
-        maxCap, {from: owner});
-      await wrongToken.mint.sendTransaction(token.address, String(1000), {from: owner});
+      let testToken = await TestToken.new();
+      await testToken.mint.sendTransaction(token.address, String(1000), {from: owner});
 
-      let balanceOfWrongTokenInToken = await wrongToken.balanceOf.call(token.address);
+      let balanceOfWrongTokenInToken = await testToken.balanceOf.call(token.address);
       expect(Web3.utils.toWei(Web3.utils.fromWei(balanceOfWrongTokenInToken))).to.eq('1000');
 
-      await token.emergencyTokenExtraction.sendTransaction(wrongToken.address, {from: owner});
+      await token.emergencyTokenExtraction.sendTransaction(testToken.address, {from: owner});
 
-      let balanceOfWrongTokenInOwner = await wrongToken.balanceOf.call(owner);
+      let balanceOfWrongTokenInOwner = await testToken.balanceOf.call(owner);
       expect(Web3.utils.toWei(Web3.utils.fromWei(balanceOfWrongTokenInOwner))).to.eq('1000');
 
-      balanceOfWrongTokenInToken = await wrongToken.balanceOf.call(token.address);
+      balanceOfWrongTokenInToken = await testToken.balanceOf.call(token.address);
       expect(Web3.utils.toWei(Web3.utils.fromWei(balanceOfWrongTokenInToken))).to.eq('0');
     });
   });
