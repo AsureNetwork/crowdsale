@@ -13,8 +13,8 @@ contract('AsureCrowdsale', async accounts => {
   let openingTime, bonusTime, closingTime;
 
   before(async () => {
-    owner = accounts[0];
-    wallet = accounts[1];
+    owner = accounts[1];
+    wallet = accounts[2];
     maxCap = String(100 * 10 ** 6);
     saleCap = String(10 * 10 ** 6);
     const now = moment();
@@ -28,6 +28,17 @@ contract('AsureCrowdsale', async accounts => {
       18,
       maxCap, {from: owner});
 
+    console.log(
+      1000,                     // rate, in Asure Tokens
+      500,                // bonusRate, in Asure Tokens
+      bonusTime.unix(),                // bonus time in unix epoch seconds
+      owner,            // owner
+      wallet,  // wallet to send Ether
+      token.address,                     // the token
+      openingTime.unix(),              // opening time in unix epoch seconds
+      closingTime.unix()
+    );
+
     crowdsale = await AsureCrowdsale.new(
       1000,                     // rate, in Asure Tokens
       500,                // bonusRate, in Asure Tokens
@@ -36,16 +47,16 @@ contract('AsureCrowdsale', async accounts => {
       wallet,  // wallet to send Ether
       token.address,                     // the token
       openingTime.unix(),              // opening time in unix epoch seconds
-      closingTime.unix(), {from: owner});
+      closingTime.unix());
 
-      await token.mint.sendTransaction(crowdsale.address, saleCap, {from: owner});
+      //await token.mint.sendTransaction(crowdsale.address, saleCap, {from: owner});
   });
 
   it('should verify test setup', async () => {
     expect(await crowdsale.openingTime()).to.be.bignumber.equal(new BN(openingTime.unix()));
     expect(await crowdsale.closingTime()).to.be.bignumber.equal(new BN(closingTime.unix()));
     expect(await crowdsale.token()).to.be.equal(token.address);
-    expect(await crowdsale.wallet()).to.be.equal(crowdsaleWallet);
+    expect(await crowdsale.wallet()).to.be.equal(wallet);
   });
 
   describe('constructor', () => {

@@ -10,13 +10,13 @@ import "./AsureBonusesCrowdsale.sol";
 
 contract AsureCrowdsale is Crowdsale, TimedCrowdsale, WhitelistCrowdsale, AsureBonusesCrowdsale {
   constructor(
-    uint256 rate,                     // rate, in Asure Tokens
-    uint256 bonusRate,                // bonusRate, in Asure Tokens
-    uint256 bonusTime,                // bonus time in unix epoch seconds
-    address payable owner,            // owner
-    address payable crowdsaleWallet,  // wallet to send Ether
-    IERC20 token,                     // the token
-    uint256 openingTime,              // opening time in unix epoch seconds
+    uint256 rate, // rate, in Asure Tokens
+    uint256 bonusRate, // bonusRate, in Asure Tokens
+    uint256 bonusTime, // bonus time in unix epoch seconds
+    address payable owner, // owner
+    address payable crowdsaleWallet, // wallet to send Ether
+    IERC20 token, // the token
+    uint256 openingTime, // opening time in unix epoch seconds
     uint256 closingTime               // closing time in unix epoch seconds
   )
   public
@@ -24,7 +24,9 @@ contract AsureCrowdsale is Crowdsale, TimedCrowdsale, WhitelistCrowdsale, AsureB
   TimedCrowdsale(openingTime, closingTime)
   AsureBonusesCrowdsale(rate, bonusRate, bonusTime, owner)
   {
-    addWhitelistAdmin(owner);
+    if (!isWhitelistAdmin(owner)) {
+      addWhitelistAdmin(owner);
+    }
   }
 
   function addWhitelistedAccounts(address[] memory accounts) public onlyWhitelistAdmin {
