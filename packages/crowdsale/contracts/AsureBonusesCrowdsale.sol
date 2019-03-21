@@ -65,13 +65,12 @@ contract AsureBonusesCrowdsale is TimedCrowdsale, Ownable {
     require(!isOpen() && !hasClosed());
     require(newInitialRate > 0);
     require(newBonusRate > 0);
-    _updateRates(newInitialRate, newBonusRate, newBonusTime);
-  }
+    require(newBonusTime >= openingTime() && newBonusTime < closingTime());
 
-  function _updateRates(uint256 newInitialRate, uint256 newBonusRate, uint256 newBonusTime) internal {
     _initialRate = newInitialRate;
     _bonusRate = newBonusRate;
     _bonusTime = newBonusTime;
+
     emit RatesUpdated(_initialRate, _bonusRate, _bonusTime);
   }
 

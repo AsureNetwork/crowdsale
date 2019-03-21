@@ -21,7 +21,7 @@ contract('AsureBonusesCrowdsale', async accounts => {
     closingTime = openingTime.clone().add(2, 'weeks');
     rate = new BN('2');
     bonusRate = new BN('3');
-    bonusTime = new BN('0');
+    bonusTime = openingTime.clone();
 
     if (Number((await time.latest()).toString()) >= openingTime.unix()) {
       console.error('===================================');
@@ -33,7 +33,7 @@ contract('AsureBonusesCrowdsale', async accounts => {
     crowdsale = await TestAsureBonusesCrowdsale.new(
       rate,
       bonusRate,
-      bonusTime,
+      bonusTime.unix(),
       owner,
       crowdsaleWallet,
       token.address,
@@ -54,7 +54,7 @@ contract('AsureBonusesCrowdsale', async accounts => {
     it('should initialize "initialRate", "bonusRate", and "bonusTime"', async () => {
       expect(await crowdsale.initialRate()).to.be.bignumber.equal(rate);
       expect(await crowdsale.bonusRate()).to.be.bignumber.equal(bonusRate);
-      expect(await crowdsale.bonusTime()).to.be.bignumber.equal(bonusTime);
+      expect(await crowdsale.bonusTime()).to.be.bignumber.equal(new BN(bonusTime.unix().toString()));
     });
 
     it('should transfer ownership to new owner', async () => {
@@ -74,7 +74,7 @@ contract('AsureBonusesCrowdsale', async accounts => {
     beforeEach(() => {
       newInitialRate = new BN('3');
       newBonusRate = new BN('6');
-      newBonusTime = new BN('7');
+      newBonusTime = openingTime.clone();
     });
 
     it('should not allow an initialRate of smaller or equal zero', async () => {
@@ -83,7 +83,7 @@ contract('AsureBonusesCrowdsale', async accounts => {
       expect(await crowdsale.isOpen()).to.equal(false);
       expect(await crowdsale.hasClosed()).to.equal(false);
 
-      await shouldFail.reverting(crowdsale.updateRates(newInitialRate, newBonusRate, newBonusTime));
+      await shouldFail.reverting(crowdsale.updateRates(newInitialRate, newBonusRate, newBonusTime.unix()));
     });
 
     it('should not allow a bonusRate of smaller or equal zero', async () => {
@@ -92,30 +92,30 @@ contract('AsureBonusesCrowdsale', async accounts => {
       expect(await crowdsale.isOpen()).to.equal(false);
       expect(await crowdsale.hasClosed()).to.equal(false);
 
-      await shouldFail.reverting(crowdsale.updateRates(newInitialRate, newBonusRate, newBonusTime));
+      await shouldFail.reverting(crowdsale.updateRates(newInitialRate, newBonusRate, newBonusTime.unix()));
     });
 
     it('should only be allowed by owner', async () => {
       expect(await crowdsale.isOpen()).to.equal(false);
       expect(await crowdsale.hasClosed()).to.equal(false);
 
-      await shouldFail.reverting(crowdsale.updateRates(newInitialRate, newBonusRate, newBonusTime));
+      await shouldFail.reverting(crowdsale.updateRates(newInitialRate, newBonusRate, newBonusTime.unix()));
     });
 
     it('should update rates and emit the "RatesUpdated" event', async () => {
       expect(await crowdsale.isOpen()).to.equal(false);
       expect(await crowdsale.hasClosed()).to.equal(false);
 
-      const { logs } = await crowdsale.updateRates(newInitialRate, newBonusRate, newBonusTime, { from: owner });
+      const { logs } = await crowdsale.updateRates(newInitialRate, newBonusRate, newBonusTime.unix(), { from: owner });
 
       expect(await crowdsale.initialRate()).to.be.bignumber.equal(newInitialRate);
       expect(await crowdsale.bonusRate()).to.be.bignumber.equal(newBonusRate);
-      expect(await crowdsale.bonusTime()).to.be.bignumber.equal(newBonusTime);
+      expect(await crowdsale.bonusTime()).to.be.bignumber.equal(new BN(newBonusTime.unix()).toString());
 
       expectEvent.inLogs(logs, 'RatesUpdated', {
         initialRate: newInitialRate,
         bonusRate: newBonusRate,
-        bonusTime: newBonusTime
+        bonusTime: new BN(newBonusTime.unix().toString())
       });
     });
 
@@ -123,14 +123,14 @@ contract('AsureBonusesCrowdsale', async accounts => {
       await time.increase(time.duration.days(2));
       expect(await crowdsale.isOpen()).to.equal(true);
 
-      await shouldFail.reverting(crowdsale.updateRates(newInitialRate, newBonusRate, newBonusTime));
+      await shouldFail.reverting(crowdsale.updateRates(newInitialRate, newBonusRate, newBonusTime.unix()));
     });
 
     it('should revert if the crowdsale is closed', async () => {
       await time.increase(time.duration.weeks(3));
       expect(await crowdsale.hasClosed()).to.equal(true);
 
-      await shouldFail.reverting(crowdsale.updateRates(newInitialRate, newBonusRate, newBonusTime));
+      await shouldFail.reverting(crowdsale.updateRates(newInitialRate, newBonusRate, newBonusTime.unix()));
     });
   });
 

@@ -17,7 +17,7 @@ module.exports = async function (deployer, network) {
   const mainSaleTx = await crowdsaleDeployer.createMainSale(
     200 * (1 / 0.5),         // initial rate: ETH = 200 USD + 50% bonus
     200 * (1 / 0.5),         // bonus rate: ETH = 200 USD + 50% bonus
-    0,                       // bonus time
+    mainSaleOpeningTime,     // bonus time
     config.owner,
     config.crowdsaleWallet,     // wallet
     mainSaleOpeningTime,        // december 2019
