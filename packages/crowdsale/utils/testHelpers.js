@@ -6,6 +6,7 @@ function send(method, params = []) {
 
   return new Promise((resolve, reject) => {
     web3.currentProvider.send({id, jsonrpc, method, params}, (err, result) => {
+      // TODO: Find correct usage of callback arguments
       if (result.error) {
         reject(result.data)
       } else {
