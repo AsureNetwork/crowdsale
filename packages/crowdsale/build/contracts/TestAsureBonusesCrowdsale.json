@@ -1,0 +1,1405 @@
+{
+  "contractName": "TestAsureBonusesCrowdsale",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "hasClosed",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "bonusTimeslot",
+          "type": "uint256"
+        },
+        {
+          "name": "bonusRate",
+          "type": "uint256"
+        }
+      ],
+      "name": "updateBonusTimeslotRate",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "rate",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "weiRaised",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "isOpen",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "closingTime",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "wallet",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "isOwner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "initialRate",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "nextBonusTimeslot",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "openingTime",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "nextBonusRate",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "newInitialRate",
+          "type": "uint256"
+        }
+      ],
+      "name": "updateInitialRate",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "beneficiary",
+          "type": "address"
+        }
+      ],
+      "name": "buyTokens",
+      "outputs": [],
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getCurrentRate",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "token",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "crowdsaleWallet",
+          "type": "address"
+        },
+        {
+          "name": "token",
+          "type": "address"
+        },
+        {
+          "name": "openingTime",
+          "type": "uint256"
+        },
+        {
+          "name": "closingTime",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "fallback"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "nextBonusTimeslot",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "nextBonusRate",
+          "type": "uint256"
+        }
+      ],
+      "name": "BonusTimeslotRateUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "initialRate",
+          "type": "uint256"
+        }
+      ],
+      "name": "InitialRateUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "purchaser",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "beneficiary",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "value",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "TokensPurchased",
+      "type": "event"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b50604051608080620011cc8339810180604052608081101561003157600080fd5b810190808051906020019092919080519060200190929190805190602001909291908051906020019092919050505060013383836001888860016000819055506000831161007e57600080fd5b600073ffffffffffffffffffffffffffffffffffffffff168273ffffffffffffffffffffffffffffffffffffffff1614156100b857600080fd5b600073ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff1614156100f257600080fd5b8260038190555081600260006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555080600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055505050504282101561018b57600080fd5b81811161019757600080fd5b8160058190555080600681905550505033600760006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550600760009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16600073ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a36000821161027257600080fd5b8160088190555081600a81905550610298816102a3640100000000026401000000009004565b505050505050610430565b6102ba6102de640100000000026401000000009004565b6102c357600080fd5b6102db81610336640100000000026401000000009004565b50565b6000600760009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614905090565b600073ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff16141561037057600080fd5b8073ffffffffffffffffffffffffffffffffffffffff16600760009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a380600760006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555050565b610d8c80620004406000396000f3fe608060405260043610610131576000357c0100000000000000000000000000000000000000000000000000000000900480638f32d59b116100bd578063d1c6f44811610081578063d1c6f44814610400578063ec8ac4d81461043b578063f2fde38b1461047f578063f7fb07b0146104d0578063fc0c546a146104fb57610131565b80638f32d59b146103255780639e51051f14610354578063a02d85631461037f578063b7a8807c146103aa578063c404c721146103d557610131565b806347535d7b1161010457806347535d7b146102065780634b6753bc14610235578063521eb27314610260578063715018a6146102b75780638da5cb5b146102ce57610131565b80631515bc2b1461013c5780632aa3ae9c1461016b5780632c4e722e146101b05780634042b66f146101db575b61013a33610552565b005b34801561014857600080fd5b50610151610646565b604051808215151515815260200191505060405180910390f35b34801561017757600080fd5b506101ae6004803603604081101561018e57600080fd5b810190808035906020019092919080359060200190929190505050610652565b005b3480156101bc57600080fd5b506101c5610694565b6040518082815260200191505060405180910390f35b3480156101e757600080fd5b506101f061069b565b6040518082815260200191505060405180910390f35b34801561021257600080fd5b5061021b6106a5565b604051808215151515815260200191505060405180910390f35b34801561024157600080fd5b5061024a6106c0565b6040518082815260200191505060405180910390f35b34801561026c57600080fd5b506102756106ca565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b3480156102c357600080fd5b506102cc6106f4565b005b3480156102da57600080fd5b506102e36107c6565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34801561033157600080fd5b5061033a6107f0565b604051808215151515815260200191505060405180910390f35b34801561036057600080fd5b50610369610848565b6040518082815260200191505060405180910390f35b34801561038b57600080fd5b50610394610852565b6040518082815260200191505060405180910390f35b3480156103b657600080fd5b506103bf61085c565b6040518082815260200191505060405180910390f35b3480156103e157600080fd5b506103ea610866565b6040518082815260200191505060405180910390f35b34801561040c57600080fd5b506104396004803603602081101561042357600080fd5b8101908080359060200190929190505050610870565b005b61047d6004803603602081101561045157600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610552565b005b34801561048b57600080fd5b506104ce600480360360208110156104a257600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291905050506108b0565b005b3480156104dc57600080fd5b506104e56108cd565b6040518082815260200191505060405180910390f35b34801561050757600080fd5b50610510610900565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b600160008082825401925050819055506000805490506000349050610577838261092a565b600061058282610949565b90506105998260045461097190919063ffffffff16565b6004819055506105a98482610990565b8373ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff167f6faf93231a456e552dbc9961f58d9713ee4f2e69d15f1975b050ef0911053a7b8484604051808381526020018281526020019250505060405180910390a3610620848361099e565b6106286109a2565b6106328483610a0d565b5050600054811461064257600080fd5b5050565b60006006544211905090565b61065a6107f0565b61066357600080fd5b61066b6106a5565b15801561067d575061067b610646565b155b61068657600080fd5b6106908282610a11565b5050565b6000806000fd5b6000600454905090565b600060055442101580156106bb57506006544211155b905090565b6000600654905090565b6000600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b6106fc6107f0565b61070557600080fd5b600073ffffffffffffffffffffffffffffffffffffffff16600760009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a36000600760006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550565b6000600760009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b6000600760009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614905090565b6000600854905090565b6000600954905090565b6000600554905090565b6000600a54905090565b6108786107f0565b61088157600080fd5b6108896106a5565b15801561089b5750610899610646565b155b6108a457600080fd5b6108ad81610a62565b50565b6108b86107f0565b6108c157600080fd5b6108ca81610aa3565b50565b60006108d76106a5565b6108e457600090506108fd565b60095442106108f757600a5490506108fd565b60085490505b90565b6000600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b6109326106a5565b61093b57600080fd5b6109458282610b9d565b5050565b6000806109546108cd565b90506109698382610be990919063ffffffff16565b915050919050565b60008082840190508381101561098657600080fd5b8091505092915050565b61099a8282610c23565b5050565b5050565b600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166108fc349081150290604051600060405180830381858888f19350505050158015610a0a573d6000803e3d6000fd5b50565b5050565b8160098190555080600a819055507f4e7e6d92843fbe2fd0f27456b98f02069ee4d44de6a198b7db55f5bfd76fe9248282604051808381526020018281526020019250505060405180910390a15050565b806008819055507f2d5f5ea15ed32044e5f601470ede06bf73cf3c8983ebcfd001fc563fcec0fc9d816040518082815260200191505060405180910390a150565b600073ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff161415610add57600080fd5b8073ffffffffffffffffffffffffffffffffffffffff16600760009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a380600760006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555050565b600073ffffffffffffffffffffffffffffffffffffffff168273ffffffffffffffffffffffffffffffffffffffff161415610bd757600080fd5b6000811415610be557600080fd5b5050565b600080831415610bfc5760009050610c1d565b6000828402905082848281610c0d57fe5b0414610c1857600080fd5b809150505b92915050565b610c708282600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16610c749092919063ffffffff16565b5050565b8273ffffffffffffffffffffffffffffffffffffffff1663a9059cbb83836040518363ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200182815260200192505050602060405180830381600087803b158015610d1757600080fd5b505af1158015610d2b573d6000803e3d6000fd5b505050506040513d6020811015610d4157600080fd5b8101908080519060200190929190505050610d5b57600080fd5b50505056fea165627a7a72305820eb6ab6405c2b82b2e126cac9fa6cf4f00217fd9a4464746d5a6f879189ff7c9a0029",
+  "deployedBytecode": "0x608060405260043610610131576000357c0100000000000000000000000000000000000000000000000000000000900480638f32d59b116100bd578063d1c6f44811610081578063d1c6f44814610400578063ec8ac4d81461043b578063f2fde38b1461047f578063f7fb07b0146104d0578063fc0c546a146104fb57610131565b80638f32d59b146103255780639e51051f14610354578063a02d85631461037f578063b7a8807c146103aa578063c404c721146103d557610131565b806347535d7b1161010457806347535d7b146102065780634b6753bc14610235578063521eb27314610260578063715018a6146102b75780638da5cb5b146102ce57610131565b80631515bc2b1461013c5780632aa3ae9c1461016b5780632c4e722e146101b05780634042b66f146101db575b61013a33610552565b005b34801561014857600080fd5b50610151610646565b604051808215151515815260200191505060405180910390f35b34801561017757600080fd5b506101ae6004803603604081101561018e57600080fd5b810190808035906020019092919080359060200190929190505050610652565b005b3480156101bc57600080fd5b506101c5610694565b6040518082815260200191505060405180910390f35b3480156101e757600080fd5b506101f061069b565b6040518082815260200191505060405180910390f35b34801561021257600080fd5b5061021b6106a5565b604051808215151515815260200191505060405180910390f35b34801561024157600080fd5b5061024a6106c0565b6040518082815260200191505060405180910390f35b34801561026c57600080fd5b506102756106ca565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b3480156102c357600080fd5b506102cc6106f4565b005b3480156102da57600080fd5b506102e36107c6565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34801561033157600080fd5b5061033a6107f0565b604051808215151515815260200191505060405180910390f35b34801561036057600080fd5b50610369610848565b6040518082815260200191505060405180910390f35b34801561038b57600080fd5b50610394610852565b6040518082815260200191505060405180910390f35b3480156103b657600080fd5b506103bf61085c565b6040518082815260200191505060405180910390f35b3480156103e157600080fd5b506103ea610866565b6040518082815260200191505060405180910390f35b34801561040c57600080fd5b506104396004803603602081101561042357600080fd5b8101908080359060200190929190505050610870565b005b61047d6004803603602081101561045157600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610552565b005b34801561048b57600080fd5b506104ce600480360360208110156104a257600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291905050506108b0565b005b3480156104dc57600080fd5b506104e56108cd565b6040518082815260200191505060405180910390f35b34801561050757600080fd5b50610510610900565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b600160008082825401925050819055506000805490506000349050610577838261092a565b600061058282610949565b90506105998260045461097190919063ffffffff16565b6004819055506105a98482610990565b8373ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff167f6faf93231a456e552dbc9961f58d9713ee4f2e69d15f1975b050ef0911053a7b8484604051808381526020018281526020019250505060405180910390a3610620848361099e565b6106286109a2565b6106328483610a0d565b5050600054811461064257600080fd5b5050565b60006006544211905090565b61065a6107f0565b61066357600080fd5b61066b6106a5565b15801561067d575061067b610646565b155b61068657600080fd5b6106908282610a11565b5050565b6000806000fd5b6000600454905090565b600060055442101580156106bb57506006544211155b905090565b6000600654905090565b6000600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b6106fc6107f0565b61070557600080fd5b600073ffffffffffffffffffffffffffffffffffffffff16600760009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a36000600760006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550565b6000600760009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b6000600760009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614905090565b6000600854905090565b6000600954905090565b6000600554905090565b6000600a54905090565b6108786107f0565b61088157600080fd5b6108896106a5565b15801561089b5750610899610646565b155b6108a457600080fd5b6108ad81610a62565b50565b6108b86107f0565b6108c157600080fd5b6108ca81610aa3565b50565b60006108d76106a5565b6108e457600090506108fd565b60095442106108f757600a5490506108fd565b60085490505b90565b6000600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b6109326106a5565b61093b57600080fd5b6109458282610b9d565b5050565b6000806109546108cd565b90506109698382610be990919063ffffffff16565b915050919050565b60008082840190508381101561098657600080fd5b8091505092915050565b61099a8282610c23565b5050565b5050565b600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166108fc349081150290604051600060405180830381858888f19350505050158015610a0a573d6000803e3d6000fd5b50565b5050565b8160098190555080600a819055507f4e7e6d92843fbe2fd0f27456b98f02069ee4d44de6a198b7db55f5bfd76fe9248282604051808381526020018281526020019250505060405180910390a15050565b806008819055507f2d5f5ea15ed32044e5f601470ede06bf73cf3c8983ebcfd001fc563fcec0fc9d816040518082815260200191505060405180910390a150565b600073ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff161415610add57600080fd5b8073ffffffffffffffffffffffffffffffffffffffff16600760009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a380600760006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555050565b600073ffffffffffffffffffffffffffffffffffffffff168273ffffffffffffffffffffffffffffffffffffffff161415610bd757600080fd5b6000811415610be557600080fd5b5050565b600080831415610bfc5760009050610c1d565b6000828402905082848281610c0d57fe5b0414610c1857600080fd5b809150505b92915050565b610c708282600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16610c749092919063ffffffff16565b5050565b8273ffffffffffffffffffffffffffffffffffffffff1663a9059cbb83836040518363ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200182815260200192505050602060405180830381600087803b158015610d1757600080fd5b505af1158015610d2b573d6000803e3d6000fd5b505050506040513d6020811015610d4157600080fd5b8101908080519060200190929190505050610d5b57600080fd5b50505056fea165627a7a72305820eb6ab6405c2b82b2e126cac9fa6cf4f00217fd9a4464746d5a6f879189ff7c9a0029",
+  "sourceMap": "278:348:5:-;;;369:255;8:9:-1;5:2;;;30:1;27;20:12;5:2;369:255:5;;;;;;;;;;;;;13:3:-1;8;5:12;2:2;;;30:1;27;20:12;2:2;369:255:5;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;605:1;608:10;555:11;568;511:1;514:15;531:5;576:1:25;560:13;:17;;;;2380:1:11;2373:4;:8;2365:17;;;;;;2418:1;2400:20;;:6;:20;;;;2392:29;;;;;;2465:1;2439:28;;2447:5;2439:28;;;;2431:37;;;;;;2487:4;2479:5;:12;;;;2511:6;2501:7;;:16;;;;;;;;;;;;;;;;;;2536:5;2527:6;;:14;;;;;;;;;;;;;;;;;;2283:265;;;806:15:13;791:11;:30;;783:39;;;;;;854:11;840;:25;832:34;;;;;;892:11;877:12;:26;;;;928:11;913:12;:26;;;;657:289;;524:10:17;515:6;;:19;;;;;;;;;;;;;;;;;;582:6;;;;;;;;;;;549:40;;578:1;549:40;;;;;;;;;;;;1333:1:0;1319:11;:15;1311:24;;;;;;1356:11;1341:12;:26;;;;1390:11;1373:14;:28;;;;1407:24;1425:5;1407:17;;;:24;;;:::i;:::-;1239:197;;369:255:5;;;;278:348;;1655:107:17;863:9;:7;;;:9;;;:::i;:::-;855:18;;;;;;1727:28;1746:8;1727:18;;;:28;;;:::i;:::-;1655:107;:::o;979:90::-;1019:4;1056:6;;;;;;;;;;;1042:20;;:10;:20;;;1035:27;;979:90;:::o;1906:183::-;1999:1;1979:22;;:8;:22;;;;1971:31;;;;;;2046:8;2017:38;;2038:6;;;;;;;;;;;2017:38;;;;;;;;;;;;2074:8;2065:6;;:17;;;;;;;;;;;;;;;;;;1906:183;:::o;278:348:5:-;;;;;;;",
+  "deployedSourceMap": "278:348:5:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2875:21:11;2885:10;2875:9;:21::i;:::-;278:348:5;1692:156:13;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1692:156:13;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;2654:193:0;;8:9:-1;5:2;;;30:1;27;20:12;5:2;2654:193:0;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;2654:193:0;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;1582:65;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1582:65:0;;;:::i;:::-;;;;;;;;;;;;;;;;;;;3424:85:11;;8:9:-1;5:2;;;30:1;27;20:12;5:2;3424:85:11;;;:::i;:::-;;;;;;;;;;;;;;;;;;;1339:189:13;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1339:189:13;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;1165:89;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1165:89:13;;;:::i;:::-;;;;;;;;;;;;;;;;;;;3114:87:11;;8:9:-1;5:2;;;30:1;27;20:12;5:2;3114:87:11;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;1347:137:17;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1347:137:17;;;:::i;:::-;;659:77;;8:9:-1;5:2;;;30:1;27;20:12;5:2;659:77:17;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;979:90;;8:9:-1;5:2;;;30:1;27;20:12;5:2;979:90:17;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;1711:83:0;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1711:83:0;;;:::i;:::-;;;;;;;;;;;;;;;;;;;1859:95;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1859:95:0;;;:::i;:::-;;;;;;;;;;;;;;;;;;;1011:89:13;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1011:89:13;;;:::i;:::-;;;;;;;;;;;;;;;;;;;2015:87:0;;8:9:-1;5:2;;;30:1;27;20:12;5:2;2015:87:0;;;:::i;:::-;;;;;;;;;;;;;;;;;;;2193:153;;8:9:-1;5:2;;;30:1;27;20:12;5:2;2193:153:0;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;2193:153:0;;;;;;;;;;;;;;;;;:::i;:::-;;3766:603:11;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;3766:603:11;;;;;;;;;;;;;;;;;;;:::i;:::-;;1655:107:17;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1655:107:17;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;1655:107:17;;;;;;;;;;;;;;;;;;;:::i;:::-;;3276:213:0;;8:9:-1;5:2;;;30:1;27;20:12;5:2;3276:213:0;;;:::i;:::-;;;;;;;;;;;;;;;;;;;2962:76:11;;8:9:-1;5:2;;;30:1;27;20:12;5:2;2962:76:11;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;3766:603;1010:1:25;993:13;;:18;;;;;;;;;;;1021:20;1044:13;;1021:36;;3844:17:11;3864:9;3844:29;;3883:44;3904:11;3917:9;3883:20;:44::i;:::-;3986:14;4003:26;4019:9;4003:15;:26::i;:::-;3986:43;;4077:25;4092:9;4077:10;;:14;;:25;;;;:::i;:::-;4064:10;:38;;;;4113:37;4130:11;4143:6;4113:16;:37::i;:::-;4193:11;4165:59;;4181:10;4165:59;;;4206:9;4217:6;4165:59;;;;;;;;;;;;;;;;;;;;;;;;4235:46;4258:11;4271:9;4235:22;:46::i;:::-;4292:15;:13;:15::i;:::-;4317:45;4339:11;4352:9;4317:21;:45::i;:::-;1067:1:25;;1102:13;;1086:12;:29;1078:38;;;;;;3766:603:11;;:::o;1692:156:13:-;1734:4;1829:12;;1811:15;:30;1804:37;;1692:156;:::o;2654:193:0:-;863:9:17;:7;:9::i;:::-;855:18;;;;;;2761:8:0;:6;:8::i;:::-;2760:9;:25;;;;;2774:11;:9;:11::i;:::-;2773:12;2760:25;2752:34;;;;;;2792:50;2817:13;2832:9;2792:24;:50::i;:::-;2654:193;;:::o;1582:65::-;1619:7;1634:8;;;3424:85:11;3466:7;3492:10;;3485:17;;3424:85;:::o;1339:189:13:-;1378:4;1474:12;;1455:15;:31;;:66;;;;;1509:12;;1490:15;:31;;1455:66;1448:73;;1339:189;:::o;1165:89::-;1209:7;1235:12;;1228:19;;1165:89;:::o;3114:87:11:-;3153:15;3187:7;;;;;;;;;;;3180:14;;3114:87;:::o;1347:137:17:-;863:9;:7;:9::i;:::-;855:18;;;;;;1445:1;1408:40;;1429:6;;;;;;;;;;;1408:40;;;;;;;;;;;;1475:1;1458:6;;:19;;;;;;;;;;;;;;;;;;1347:137::o;659:77::-;697:7;723:6;;;;;;;;;;;716:13;;659:77;:::o;979:90::-;1019:4;1056:6;;;;;;;;;;;1042:20;;:10;:20;;;1035:27;;979:90;:::o;1711:83:0:-;1755:7;1777:12;;1770:19;;1711:83;:::o;1859:95::-;1909:7;1931:18;;1924:25;;1859:95;:::o;1011:89:13:-;1055:7;1081:12;;1074:19;;1011:89;:::o;2015:87:0:-;2061:7;2083:14;;2076:21;;2015:87;:::o;2193:153::-;863:9:17;:7;:9::i;:::-;855:18;;;;;;2276:8:0;:6;:8::i;:::-;2275:9;:25;;;;;2289:11;:9;:11::i;:::-;2288:12;2275:25;2267:34;;;;;;2307;2326:14;2307:18;:34::i;:::-;2193:153;:::o;1655:107:17:-;863:9;:7;:9::i;:::-;855:18;;;;;;1727:28;1746:8;1727:18;:28::i;:::-;1655:107;:::o;3276:213:0:-;3323:7;3343:8;:6;:8::i;:::-;3338:38;;3368:1;3361:8;;;;3338:38;3404:18;;3385:15;:37;3381:79;;3439:14;;3432:21;;;;3381:79;3472:12;;3465:19;;3276:213;;:::o;2962:76:11:-;3000:6;3025;;;;;;;;;;;3018:13;;2962:76;:::o;2040:165:13:-;442:8;:6;:8::i;:::-;434:17;;;;;;2148:50;2175:11;2188:9;2148:26;:50::i;:::-;2040:165;;:::o;3715:164:0:-;3782:7;3797:19;3819:16;:14;:16::i;:::-;3797:38;;3848:26;3864:9;3848:11;:15;;:26;;;;:::i;:::-;3841:33;;;3715:164;;;:::o;1431:145:16:-;1489:7;1508:9;1524:1;1520;:5;1508:17;;1548:1;1543;:6;;1535:15;;;;;;1568:1;1561:8;;;1431:145;;;;:::o;6206:134:11:-;6293:40;6308:11;6321;6293:14;:40::i;:::-;6206:134;;:::o;6610:145::-;;;:::o;7211:78::-;7255:7;;;;;;;;;;;:16;;:27;7272:9;7255:27;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;7255:27:11;7211:78::o;5374:149::-;;;:::o;2851:223:0:-;2963:13;2942:18;:34;;;;2999:9;2982:14;:26;;;;3019:50;3044:13;3059:9;3019:50;;;;;;;;;;;;;;;;;;;;;;;;2851:223;;:::o;2350:146::-;2432:14;2417:12;:29;;;;2457:34;2476:14;2457:34;;;;;;;;;;;;;;;;;;2350:146;:::o;1906:183:17:-;1999:1;1979:22;;:8;:22;;;;1971:31;;;;;;2046:8;2017:38;;2038:6;;;;;;;;;;;2017:38;;;;;;;;;;;;2074:8;2065:6;;:17;;;;;;;;;;;;;;;;;;1906:183;:::o;4911:168:11:-;5036:1;5013:25;;:11;:25;;;;5005:34;;;;;;5070:1;5057:9;:14;;5049:23;;;;;;4911:168;;:::o;229:421:16:-;287:7;532:1;527;:6;523:45;;;556:1;549:8;;;;523:45;578:9;594:1;590;:5;578:17;;622:1;617;613;:5;;;;;;:10;605:19;;;;;;642:1;635:8;;;229:421;;;;;:::o;5803:137:11:-;5888:45;5908:11;5921;5888:6;;;;;;;;;;;:19;;;;:45;;;;;:::i;:::-;5803:137;;:::o;409:123:24:-;499:5;:14;;;514:2;518:5;499:25;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;499:25:24;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;499:25:24;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;499:25:24;;;;;;;;;;;;;;;;491:34;;;;;;409:123;;;:::o",
+  "source": "pragma solidity ^0.5.0;\n\nimport \"openzeppelin-solidity/contracts/token/ERC20/IERC20.sol\";\nimport \"openzeppelin-solidity/contracts/crowdsale/validation/TimedCrowdsale.sol\";\nimport \"openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol\";\nimport \"../AsureBonusesCrowdsale.sol\";\n\ncontract TestAsureBonusesCrowdsale is Crowdsale, TimedCrowdsale, AsureBonusesCrowdsale {\n  constructor(\n    address payable crowdsaleWallet,\n    IERC20 token,\n    uint256 openingTime,\n    uint256 closingTime\n  )\n  public\n  Crowdsale(1, crowdsaleWallet, token)\n  TimedCrowdsale(openingTime, closingTime)\n  AsureBonusesCrowdsale(1, msg.sender)\n  {}\n}\n",
+  "sourcePath": "/home/mischi/p/asurenetwork/crowdsale/packages/crowdsale/contracts/test/TestAsureBonusesCrowdsale.sol",
+  "ast": {
+    "absolutePath": "/home/mischi/p/asurenetwork/crowdsale/packages/crowdsale/contracts/test/TestAsureBonusesCrowdsale.sol",
+    "exportedSymbols": {
+      "TestAsureBonusesCrowdsale": [
+        821
+      ]
+    },
+    "id": 822,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 784,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:5"
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/token/ERC20/IERC20.sol",
+        "file": "openzeppelin-solidity/contracts/token/ERC20/IERC20.sol",
+        "id": 785,
+        "nodeType": "ImportDirective",
+        "scope": 822,
+        "sourceUnit": 3011,
+        "src": "25:64:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/crowdsale/validation/TimedCrowdsale.sol",
+        "file": "openzeppelin-solidity/contracts/crowdsale/validation/TimedCrowdsale.sol",
+        "id": 786,
+        "nodeType": "ImportDirective",
+        "scope": 822,
+        "sourceUnit": 1699,
+        "src": "90:81:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol",
+        "file": "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol",
+        "id": 787,
+        "nodeType": "ImportDirective",
+        "scope": 822,
+        "sourceUnit": 1515,
+        "src": "172:65:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/mischi/p/asurenetwork/crowdsale/packages/crowdsale/contracts/AsureBonusesCrowdsale.sol",
+        "file": "../AsureBonusesCrowdsale.sol",
+        "id": 788,
+        "nodeType": "ImportDirective",
+        "scope": 822,
+        "sourceUnit": 216,
+        "src": "238:38:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 789,
+              "name": "Crowdsale",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1514,
+              "src": "316:9:5",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Crowdsale_$1514",
+                "typeString": "contract Crowdsale"
+              }
+            },
+            "id": 790,
+            "nodeType": "InheritanceSpecifier",
+            "src": "316:9:5"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 791,
+              "name": "TimedCrowdsale",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1698,
+              "src": "327:14:5",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_TimedCrowdsale_$1698",
+                "typeString": "contract TimedCrowdsale"
+              }
+            },
+            "id": 792,
+            "nodeType": "InheritanceSpecifier",
+            "src": "327:14:5"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 793,
+              "name": "AsureBonusesCrowdsale",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 215,
+              "src": "343:21:5",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_AsureBonusesCrowdsale_$215",
+                "typeString": "contract AsureBonusesCrowdsale"
+              }
+            },
+            "id": 794,
+            "nodeType": "InheritanceSpecifier",
+            "src": "343:21:5"
+          }
+        ],
+        "contractDependencies": [
+          215,
+          1514,
+          1698,
+          2335,
+          3185
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 821,
+        "linearizedBaseContracts": [
+          821,
+          215,
+          2335,
+          1698,
+          1514,
+          3185
+        ],
+        "name": "TestAsureBonusesCrowdsale",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 819,
+              "nodeType": "Block",
+              "src": "622:2:5",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 820,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "hexValue": "31",
+                    "id": 805,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "number",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "511:1:5",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_rational_1_by_1",
+                      "typeString": "int_const 1"
+                    },
+                    "value": "1"
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 806,
+                    "name": "crowdsaleWallet",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 796,
+                    "src": "514:15:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 807,
+                    "name": "token",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 798,
+                    "src": "531:5:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$3010",
+                      "typeString": "contract IERC20"
+                    }
+                  }
+                ],
+                "id": 808,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 804,
+                  "name": "Crowdsale",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 1514,
+                  "src": "501:9:5",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_type$_t_contract$_Crowdsale_$1514_$",
+                    "typeString": "type(contract Crowdsale)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "501:36:5"
+              },
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "id": 810,
+                    "name": "openingTime",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 800,
+                    "src": "555:11:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 811,
+                    "name": "closingTime",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 802,
+                    "src": "568:11:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  }
+                ],
+                "id": 812,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 809,
+                  "name": "TimedCrowdsale",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 1698,
+                  "src": "540:14:5",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_type$_t_contract$_TimedCrowdsale_$1698_$",
+                    "typeString": "type(contract TimedCrowdsale)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "540:40:5"
+              },
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "hexValue": "31",
+                    "id": 814,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "number",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "605:1:5",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_rational_1_by_1",
+                      "typeString": "int_const 1"
+                    },
+                    "value": "1"
+                  },
+                  {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "id": 815,
+                      "name": "msg",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 3200,
+                      "src": "608:3:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_magic_message",
+                        "typeString": "msg"
+                      }
+                    },
+                    "id": 816,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "sender",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": null,
+                    "src": "608:10:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  }
+                ],
+                "id": 817,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 813,
+                  "name": "AsureBonusesCrowdsale",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 215,
+                  "src": "583:21:5",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_type$_t_contract$_AsureBonusesCrowdsale_$215_$",
+                    "typeString": "type(contract AsureBonusesCrowdsale)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "583:36:5"
+              }
+            ],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 803,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 796,
+                  "name": "crowdsaleWallet",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 820,
+                  "src": "386:31:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  },
+                  "typeName": {
+                    "id": 795,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "386:15:5",
+                    "stateMutability": "payable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 798,
+                  "name": "token",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 820,
+                  "src": "423:12:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IERC20_$3010",
+                    "typeString": "contract IERC20"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 797,
+                    "name": "IERC20",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 3010,
+                    "src": "423:6:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$3010",
+                      "typeString": "contract IERC20"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 800,
+                  "name": "openingTime",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 820,
+                  "src": "441:19:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 799,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "441:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 802,
+                  "name": "closingTime",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 820,
+                  "src": "466:19:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 801,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "466:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "380:109:5"
+            },
+            "returnParameters": {
+              "id": 818,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "622:0:5"
+            },
+            "scope": 821,
+            "src": "369:255:5",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 822,
+        "src": "278:348:5"
+      }
+    ],
+    "src": "0:627:5"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/mischi/p/asurenetwork/crowdsale/packages/crowdsale/contracts/test/TestAsureBonusesCrowdsale.sol",
+    "exportedSymbols": {
+      "TestAsureBonusesCrowdsale": [
+        821
+      ]
+    },
+    "id": 822,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 784,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:5"
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/token/ERC20/IERC20.sol",
+        "file": "openzeppelin-solidity/contracts/token/ERC20/IERC20.sol",
+        "id": 785,
+        "nodeType": "ImportDirective",
+        "scope": 822,
+        "sourceUnit": 3011,
+        "src": "25:64:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/crowdsale/validation/TimedCrowdsale.sol",
+        "file": "openzeppelin-solidity/contracts/crowdsale/validation/TimedCrowdsale.sol",
+        "id": 786,
+        "nodeType": "ImportDirective",
+        "scope": 822,
+        "sourceUnit": 1699,
+        "src": "90:81:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol",
+        "file": "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol",
+        "id": 787,
+        "nodeType": "ImportDirective",
+        "scope": 822,
+        "sourceUnit": 1515,
+        "src": "172:65:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/mischi/p/asurenetwork/crowdsale/packages/crowdsale/contracts/AsureBonusesCrowdsale.sol",
+        "file": "../AsureBonusesCrowdsale.sol",
+        "id": 788,
+        "nodeType": "ImportDirective",
+        "scope": 822,
+        "sourceUnit": 216,
+        "src": "238:38:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 789,
+              "name": "Crowdsale",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1514,
+              "src": "316:9:5",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Crowdsale_$1514",
+                "typeString": "contract Crowdsale"
+              }
+            },
+            "id": 790,
+            "nodeType": "InheritanceSpecifier",
+            "src": "316:9:5"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 791,
+              "name": "TimedCrowdsale",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1698,
+              "src": "327:14:5",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_TimedCrowdsale_$1698",
+                "typeString": "contract TimedCrowdsale"
+              }
+            },
+            "id": 792,
+            "nodeType": "InheritanceSpecifier",
+            "src": "327:14:5"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 793,
+              "name": "AsureBonusesCrowdsale",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 215,
+              "src": "343:21:5",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_AsureBonusesCrowdsale_$215",
+                "typeString": "contract AsureBonusesCrowdsale"
+              }
+            },
+            "id": 794,
+            "nodeType": "InheritanceSpecifier",
+            "src": "343:21:5"
+          }
+        ],
+        "contractDependencies": [
+          215,
+          1514,
+          1698,
+          2335,
+          3185
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 821,
+        "linearizedBaseContracts": [
+          821,
+          215,
+          2335,
+          1698,
+          1514,
+          3185
+        ],
+        "name": "TestAsureBonusesCrowdsale",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 819,
+              "nodeType": "Block",
+              "src": "622:2:5",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 820,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "hexValue": "31",
+                    "id": 805,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "number",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "511:1:5",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_rational_1_by_1",
+                      "typeString": "int_const 1"
+                    },
+                    "value": "1"
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 806,
+                    "name": "crowdsaleWallet",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 796,
+                    "src": "514:15:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 807,
+                    "name": "token",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 798,
+                    "src": "531:5:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$3010",
+                      "typeString": "contract IERC20"
+                    }
+                  }
+                ],
+                "id": 808,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 804,
+                  "name": "Crowdsale",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 1514,
+                  "src": "501:9:5",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_type$_t_contract$_Crowdsale_$1514_$",
+                    "typeString": "type(contract Crowdsale)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "501:36:5"
+              },
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "id": 810,
+                    "name": "openingTime",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 800,
+                    "src": "555:11:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 811,
+                    "name": "closingTime",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 802,
+                    "src": "568:11:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  }
+                ],
+                "id": 812,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 809,
+                  "name": "TimedCrowdsale",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 1698,
+                  "src": "540:14:5",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_type$_t_contract$_TimedCrowdsale_$1698_$",
+                    "typeString": "type(contract TimedCrowdsale)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "540:40:5"
+              },
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "hexValue": "31",
+                    "id": 814,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "number",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "605:1:5",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_rational_1_by_1",
+                      "typeString": "int_const 1"
+                    },
+                    "value": "1"
+                  },
+                  {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "id": 815,
+                      "name": "msg",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 3200,
+                      "src": "608:3:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_magic_message",
+                        "typeString": "msg"
+                      }
+                    },
+                    "id": 816,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "sender",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": null,
+                    "src": "608:10:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  }
+                ],
+                "id": 817,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 813,
+                  "name": "AsureBonusesCrowdsale",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 215,
+                  "src": "583:21:5",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_type$_t_contract$_AsureBonusesCrowdsale_$215_$",
+                    "typeString": "type(contract AsureBonusesCrowdsale)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "583:36:5"
+              }
+            ],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 803,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 796,
+                  "name": "crowdsaleWallet",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 820,
+                  "src": "386:31:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  },
+                  "typeName": {
+                    "id": 795,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "386:15:5",
+                    "stateMutability": "payable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 798,
+                  "name": "token",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 820,
+                  "src": "423:12:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IERC20_$3010",
+                    "typeString": "contract IERC20"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 797,
+                    "name": "IERC20",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 3010,
+                    "src": "423:6:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$3010",
+                      "typeString": "contract IERC20"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 800,
+                  "name": "openingTime",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 820,
+                  "src": "441:19:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 799,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "441:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 802,
+                  "name": "closingTime",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 820,
+                  "src": "466:19:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 801,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "466:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "380:109:5"
+            },
+            "returnParameters": {
+              "id": 818,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "622:0:5"
+            },
+            "scope": 821,
+            "src": "369:255:5",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 822,
+        "src": "278:348:5"
+      }
+    ],
+    "src": "0:627:5"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.6+commit.b259423e.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.3",
+  "updatedAt": "2019-03-20T20:57:56.347Z",
+  "devdoc": {
+    "methods": {
+      "buyTokens(address)": {
+        "details": "low level token purchase ***DO NOT OVERRIDE*** This function has a non-reentrancy guard, so it shouldn't be called by another `nonReentrant` function.",
+        "params": {
+          "beneficiary": "Recipient of the token purchase"
+        }
+      },
+      "closingTime()": {
+        "return": "the crowdsale closing time."
+      },
+      "getCurrentRate()": {
+        "details": "Returns the rate of tokens per wei at the present time. Note that, rate can be changed by the owner",
+        "return": "The number of tokens a buyer gets per wei at a given time"
+      },
+      "hasClosed()": {
+        "details": "Checks whether the period in which the crowdsale is open has already elapsed.",
+        "return": "Whether crowdsale period has elapsed"
+      },
+      "initialRate()": {
+        "return": "the initial rate of the crowdsale."
+      },
+      "isOpen()": {
+        "return": "true if the crowdsale is open, false otherwise."
+      },
+      "isOwner()": {
+        "return": "true if `msg.sender` is the owner of the contract."
+      },
+      "nextBonusRate()": {
+        "return": "the next Rate of the crowdsale."
+      },
+      "nextBonusTimeslot()": {
+        "return": "the next Timeslot of the crowdsale."
+      },
+      "openingTime()": {
+        "return": "the crowdsale opening time."
+      },
+      "owner()": {
+        "return": "the address of the owner."
+      },
+      "renounceOwnership()": {
+        "details": "Allows the current owner to relinquish control of the contract."
+      },
+      "token()": {
+        "return": "the token being sold."
+      },
+      "transferOwnership(address)": {
+        "details": "Allows the current owner to transfer control of the contract to a newOwner.",
+        "params": {
+          "newOwner": "The address to transfer ownership to."
+        }
+      },
+      "updateBonusTimeslotRate(uint256,uint256)": {
+        "details": "Update timeslot and rate for the next Timeslot",
+        "params": {
+          "bonusRate": "rate for the timeslot",
+          "bonusTimeslot": "next time slot"
+        }
+      },
+      "updateInitialRate(uint256)": {
+        "details": "Update initial Rate",
+        "params": {
+          "newInitialRate": "set new initial Rate"
+        }
+      },
+      "wallet()": {
+        "return": "the address where funds are collected."
+      },
+      "weiRaised()": {
+        "return": "the amount of wei raised."
+      }
+    }
+  },
+  "userdoc": {
+    "methods": {
+      "rate()": {
+        "notice": "The base rate function is overridden to revert, since this crowdsale doens't use it, and all calls to it are a mistake."
+      },
+      "renounceOwnership()": {
+        "notice": "Renouncing to ownership will leave the contract without an owner. It will not be possible to call the functions with the `onlyOwner` modifier anymore."
+      }
+    }
+  }
+}
