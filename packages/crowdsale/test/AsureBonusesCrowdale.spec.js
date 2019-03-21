@@ -20,6 +20,8 @@ contract('AsureBonusesCrowdsale', async accounts => {
     openingTime = now.clone().add(1, 'days');
     closingTime = openingTime.clone().add(2, 'weeks');
     rate = new BN('2');
+    bonusRate = new BN('3');
+    bonusTime = new BN('0');
 
     if (Number((await time.latest()).toString()) >= openingTime.unix()) {
       console.error('===================================');
@@ -30,6 +32,8 @@ contract('AsureBonusesCrowdsale', async accounts => {
 
     crowdsale = await TestAsureBonusesCrowdsale.new(
       rate,
+      bonusRate,
+      bonusTime,
       owner,
       crowdsaleWallet,
       token.address,
@@ -47,9 +51,10 @@ contract('AsureBonusesCrowdsale', async accounts => {
   });
 
   describe('constructor', () => {
-    it('should initialize "initialRate" and "nextBonusRate"', async () => {
+    it('should initialize "initialRate", "bonusRate", and "bonusTime"', async () => {
       expect(await crowdsale.initialRate()).to.be.bignumber.equal(rate);
-      expect(await crowdsale.nextBonusRate()).to.be.bignumber.equal(rate);
+      expect(await crowdsale.bonusRate()).to.be.bignumber.equal(bonusRate);
+      expect(await crowdsale.bonusTime()).to.be.bignumber.equal(bonusTime);
     });
 
     it('should transfer ownership to new owner', async () => {
@@ -64,12 +69,12 @@ contract('AsureBonusesCrowdsale', async accounts => {
   });
 
   describe('updateRates', () => {
-    let newInitialRate, newBonusRate, newBonusTimeslot;
+    let newInitialRate, newBonusRate, newBonusTime;
 
     beforeEach(() => {
       newInitialRate = new BN('3');
       newBonusRate = new BN('6');
-      newBonusTimeslot = new BN('7');
+      newBonusTime = new BN('7');
     });
 
     it('should not allow an initialRate of smaller or equal zero', async () => {
@@ -78,7 +83,7 @@ contract('AsureBonusesCrowdsale', async accounts => {
       expect(await crowdsale.isOpen()).to.equal(false);
       expect(await crowdsale.hasClosed()).to.equal(false);
 
-      await shouldFail.reverting(crowdsale.updateRates(newInitialRate, newBonusRate, newBonusTimeslot));
+      await shouldFail.reverting(crowdsale.updateRates(newInitialRate, newBonusRate, newBonusTime));
     });
 
     it('should not allow a bonusRate of smaller or equal zero', async () => {
@@ -87,30 +92,30 @@ contract('AsureBonusesCrowdsale', async accounts => {
       expect(await crowdsale.isOpen()).to.equal(false);
       expect(await crowdsale.hasClosed()).to.equal(false);
 
-      await shouldFail.reverting(crowdsale.updateRates(newInitialRate, newBonusRate, newBonusTimeslot));
+      await shouldFail.reverting(crowdsale.updateRates(newInitialRate, newBonusRate, newBonusTime));
     });
 
     it('should only be allowed by owner', async () => {
       expect(await crowdsale.isOpen()).to.equal(false);
       expect(await crowdsale.hasClosed()).to.equal(false);
 
-      await shouldFail.reverting(crowdsale.updateRates(newInitialRate, newBonusRate, newBonusTimeslot));
+      await shouldFail.reverting(crowdsale.updateRates(newInitialRate, newBonusRate, newBonusTime));
     });
 
     it('should update rates and emit the "RatesUpdated" event', async () => {
       expect(await crowdsale.isOpen()).to.equal(false);
       expect(await crowdsale.hasClosed()).to.equal(false);
 
-      const { logs } = await crowdsale.updateRates(newInitialRate, newBonusRate, newBonusTimeslot, { from: owner });
+      const { logs } = await crowdsale.updateRates(newInitialRate, newBonusRate, newBonusTime, { from: owner });
 
       expect(await crowdsale.initialRate()).to.be.bignumber.equal(newInitialRate);
-      expect(await crowdsale.nextBonusRate()).to.be.bignumber.equal(newBonusRate);
-      expect(await crowdsale.nextBonusTimeslot()).to.be.bignumber.equal(newBonusTimeslot);
+      expect(await crowdsale.bonusRate()).to.be.bignumber.equal(newBonusRate);
+      expect(await crowdsale.bonusTime()).to.be.bignumber.equal(newBonusTime);
 
       expectEvent.inLogs(logs, 'RatesUpdated', {
         initialRate: newInitialRate,
-        nextBonusRate: newBonusRate,
-        nextBonusTimeslot: newBonusTimeslot
+        bonusRate: newBonusRate,
+        bonusTime: newBonusTime
       });
     });
 
@@ -118,19 +123,25 @@ contract('AsureBonusesCrowdsale', async accounts => {
       await time.increase(time.duration.days(2));
       expect(await crowdsale.isOpen()).to.equal(true);
 
-      await shouldFail.reverting(crowdsale.updateRates(newInitialRate, newBonusRate, newBonusTimeslot));
+      await shouldFail.reverting(crowdsale.updateRates(newInitialRate, newBonusRate, newBonusTime));
     });
 
     it('should revert if the crowdsale is closed', async () => {
       await time.increase(time.duration.weeks(3));
       expect(await crowdsale.hasClosed()).to.equal(true);
 
-      await shouldFail.reverting(crowdsale.updateRates(newInitialRate, newBonusRate, newBonusTimeslot));
+      await shouldFail.reverting(crowdsale.updateRates(newInitialRate, newBonusRate, newBonusTime));
     });
   });
 
   describe('getCurrentRate', () => {
-    // TODO add test describing getCurrentRate
+    it('should return zero if crowdsale is not open', async () => {
+      expect(await crowdsale.getCurrentRate()).to.be.bignumber.equal(new BN('0'));
+    });
+
+    xit('with no "bonusRate" / "bonusTime" should return the initialRate', async () => {
+      expect(await crowdsale.getCurrentRate()).to.be.bignumber.equal(rate);
+    });
   });
 
   describe('_getTokenAmount', () => {

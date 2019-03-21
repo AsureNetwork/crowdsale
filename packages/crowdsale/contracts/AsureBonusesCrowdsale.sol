@@ -16,22 +16,19 @@ import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 contract AsureBonusesCrowdsale is TimedCrowdsale, Ownable {
   using SafeMath for uint256;
   uint256 private _initialRate;
+  uint256 private _bonusRate;
+  uint256 private _bonusTime;
 
-  uint256 private _nextBonusTimeslot;
-  uint256 private _nextBonusRate;
-
-  event RatesUpdated(uint256 initialRate, uint256 nextBonusRate, uint256 nextBonusTimeslot);
+  event RatesUpdated(uint256 initialRate, uint256 bonusRate, uint256 bonusTime);
 
   /**
  * @dev Constructor, takes initial and final rates of tokens received per wei contributed.
  * @param owner of the crowdsale
  * @param initialRate Number of tokens a buyer gets per wei at the start of the crowdsale
  */
-  constructor (uint256 initialRate, address payable owner) public
+  constructor (uint256 initialRate, uint256 bonusRate, uint256 bonusTime, address payable owner) public
   {
-    require(initialRate > 0);
-    _initialRate = initialRate;
-    _nextBonusRate = initialRate;
+    updateRates(initialRate, bonusRate, bonusTime);
     transferOwnership(owner);
   }
 
@@ -53,34 +50,34 @@ contract AsureBonusesCrowdsale is TimedCrowdsale, Ownable {
   /**
    * @return the next Timeslot of the crowdsale.
    */
-  function nextBonusTimeslot() public view returns (uint256) {
-    return _nextBonusTimeslot;
+  function bonusTime() public view returns (uint256) {
+    return _bonusTime;
   }
 
   /**
    * @return the next Rate of the crowdsale.
    */
-  function nextBonusRate() public view returns (uint256) {
-    return _nextBonusRate;
+  function bonusRate() public view returns (uint256) {
+    return _bonusRate;
   }
 
-  function updateRates(uint256 newInitialRate, uint256 newBonusRate, uint256 newBonusTimeslot) public onlyOwner {
+  function updateRates(uint256 newInitialRate, uint256 newBonusRate, uint256 newBonusTime) public onlyOwner {
     require(!isOpen() && !hasClosed());
     require(newInitialRate > 0);
     require(newBonusRate > 0);
-    _updateRates(newInitialRate, newBonusRate, newBonusTimeslot);
+    _updateRates(newInitialRate, newBonusRate, newBonusTime);
   }
 
-  function _updateRates(uint256 newInitialRate, uint256 newBonusRate, uint256 newBonusTimeslot) internal {
+  function _updateRates(uint256 newInitialRate, uint256 newBonusRate, uint256 newBonusTime) internal {
     _initialRate = newInitialRate;
-    _nextBonusRate = newBonusRate;
-    _nextBonusTimeslot = newBonusTimeslot;
-    emit RatesUpdated(newInitialRate, newBonusRate, newBonusTimeslot);
+    _bonusRate = newBonusRate;
+    _bonusTime = newBonusTime;
+    emit RatesUpdated(_initialRate, _bonusRate, _bonusTime);
   }
 
   /**
    * @dev Returns the rate of tokens per wei at the present time.
-   * Note that, rate can be changed by the owner
+   * Note that, rate can be changed by the ownerw
    * @return The number of tokens a buyer gets per wei at a given time
    */
   function getCurrentRate() public view returns (uint256) {
@@ -88,8 +85,8 @@ contract AsureBonusesCrowdsale is TimedCrowdsale, Ownable {
       return 0;
     }
 
-    if (block.timestamp >= _nextBonusTimeslot) {
-      return _nextBonusRate;
+    if (block.timestamp >= _bonusTime) {
+      return _bonusRate;
     }
 
     return _initialRate;

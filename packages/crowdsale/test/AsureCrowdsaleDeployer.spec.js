@@ -70,6 +70,8 @@ contract('AsureCrowdsaleDeployer', async accounts => {
 
     const preSaleTx = await crowdsaleDeployer.createPreSale(
       200 * (1 / 0.5),         // initial rate: ETH = 200 USD + 50% bonus
+      200 * (1 / 0.5),         // bonus rate: ETH = 200 USD + 50% bonus
+      0,                       // bonus time
       owner,
       wallet, // wallet
       openingTimeUnix,         // today
@@ -79,6 +81,8 @@ contract('AsureCrowdsaleDeployer', async accounts => {
 
     const mainSaleTx = await crowdsaleDeployer.createMainSale(
       200 * (1 / 0.5),         // initial rate: ETH = 200 USD + 50% bonus
+      200 * (1 / 0.5),         // bonus rate: ETH = 200 USD + 50% bonus
+      0,                       // bonus time
       owner,
       wallet,     // wallet
       openingTimeUnix,         // today

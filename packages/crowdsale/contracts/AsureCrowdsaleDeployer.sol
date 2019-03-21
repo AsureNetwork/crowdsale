@@ -51,20 +51,24 @@ contract AsureCrowdsaleDeployer is Ownable {
 
   function createPreSale(
     uint256 rate,
+    uint256 bonusRate,
+    uint256 bonusTime,
     address payable owner,
     address payable crowdsaleWallet,
-    uint256 preSaleOpeningTime, // preSale opening time in unix epoch seconds
-    uint256 preSaleClosingTime // preSale closing time in unix epoch seconds
+    uint256 openingTime, // preSale opening time in unix epoch seconds
+    uint256 closingTime // preSale closing time in unix epoch seconds
   ) onlyOwner public returns (bool) {
     require(address(presale) == address(0), "mainsale already initialized");
 
     presale = new AsureCrowdsale(
       rate, // rate, in AsureTokens - 1 ETH == 1000 RUHR
+      bonusRate,
+      bonusTime,
       owner, // owner
       crowdsaleWallet, // wallet to send Ether
       token, // the token
-      preSaleOpeningTime, // opening time in unix epoch seconds
-      preSaleClosingTime  // closing time in unix epoch seconds
+      openingTime, // opening time in unix epoch seconds
+      closingTime  // closing time in unix epoch seconds
     );
     token.mint(address(presale), AVAILABLE_PRESALE_SUPPLY);
 
@@ -74,20 +78,24 @@ contract AsureCrowdsaleDeployer is Ownable {
 
   function createMainSale(
     uint256 rate,
+    uint256 bonusRate,
+    uint256 bonusTime,
     address payable owner,
     address payable crowdsaleWallet,
-    uint256 mainSaleOpeningTime, // mainSale opening time in unix epoch seconds
-    uint256 mainSaleClosingTime // mainSale closing time in unix epoch seconds
+    uint256 openingTime, // mainSale opening time in unix epoch seconds
+    uint256 closingTime // mainSale closing time in unix epoch seconds
   ) onlyOwner public returns (bool) {
     require(address(mainsale) == address(0), "mainsale already initialized");
 
     mainsale = new AsureCrowdsale(
       rate, // rate, in AsureTokens - 1 ETH == 1000
+      bonusRate,
+      bonusTime,
       owner, // owner
       crowdsaleWallet, // wallet to send Ether
       token, // the token
-      mainSaleOpeningTime, // opening time in unix epoch seconds
-      mainSaleClosingTime  // closing time in unix epoch seconds
+      openingTime, // opening time in unix epoch seconds
+      closingTime  // closing time in unix epoch seconds
     );
     token.mint(address(mainsale), AVAILABLE_MAINSALE_SUPPLY);
 
