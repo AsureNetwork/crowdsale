@@ -24,13 +24,6 @@ contract('AsureBonusesCrowdsale', async accounts => {
     bonusRate = new BN('3');
     bonusTime = openingTime.clone();
 
-    if (Number((await time.latest()).toString()) >= openingTime.unix()) {
-      console.error('===================================');
-      console.error('** it is time to restart ganache **');
-      console.error('===================================');
-      process.exit(1);
-    }
-
     crowdsale = await TestAsureBonusesCrowdsale.new(
       rate,
       bonusRate,
@@ -121,6 +114,18 @@ contract('AsureBonusesCrowdsale', async accounts => {
 
       it('should not allow a bonusTime smaller than the crowdsale openingTime', async () => {
         newBonusTime = openingTime.clone().subtract(1, 'second');
+
+        await shouldFail.reverting(crowdsale.updateRates(newInitialRate, newBonusRate, newBonusTime.unix(), {from: owner}));
+      });
+
+      it('should not allow a bonusTime equal than the crowdsale closingTime', async () => {
+        newBonusTime = closingTime.clone();
+
+        await shouldFail.reverting(crowdsale.updateRates(newInitialRate, newBonusRate, newBonusTime.unix(), {from: owner}));
+      });
+
+      it('should not allow a bonusTime greater than the crowdsale closingTime', async () => {
+        newBonusTime = closingTime.clone().add(1, 'second');
 
         await shouldFail.reverting(crowdsale.updateRates(newInitialRate, newBonusRate, newBonusTime.unix(), {from: owner}));
       });
