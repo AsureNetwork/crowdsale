@@ -9,21 +9,20 @@ contract AsureCrowdsaleDeployer is Ownable {
   AsureCrowdsale public presale;
   AsureCrowdsale public mainsale;
 
-  uint256 private constant decimalFactor = 10 ** uint256(18);
+  uint8 private constant decimals = 18;
+  uint256 private constant decimalFactor = 10 ** uint256(decimals);
   uint256 private constant AVAILABLE_TOTAL_SUPPLY = 100000000 * decimalFactor;
-  uint256 private constant AVAILABLE_PRESALE_SUPPLY = 10000000 * decimalFactor; // 10% Released at Token Distribution (TD)
-  uint256 private constant AVAILABLE_MAINSALE_SUPPLY = 35000000 * decimalFactor; // 35% Released at Token Distribution (TD)
-  uint256 private constant AVAILABLE_FOUNDATION_SUPPLY = 35000000 * decimalFactor; // 35% Released at Token Distribution (TD)
-  uint256 private constant AVAILABLE_BOUNTY_SUPPLY = 5000000 * decimalFactor; // 5% Released at TD
-  uint256 private constant AVAILABLE_FAMILYFRIENDS_SUPPLY = 5000000 * decimalFactor; // 5% Released at TD
-  uint256 private constant AVAILABLE_TEAM_SUPPLY = 8000000 * decimalFactor; // 8% Released at TD +2 years
-  uint256 private constant AVAILABLE_ADVISOR_SUPPLY = 2000000 * decimalFactor; // 2% Released at TD +2 years
+  uint256 private constant AVAILABLE_PRESALE_SUPPLY = 10000000 * decimalFactor;       // 10% Released at Token Distribution (TD)
+  uint256 private constant AVAILABLE_MAINSALE_SUPPLY = 35000000 * decimalFactor;      // 35% Released at Token Distribution (TD)
+  uint256 private constant AVAILABLE_FOUNDATION_SUPPLY = 35000000 * decimalFactor;    // 35% Released at Token Distribution (TD)
+  uint256 private constant AVAILABLE_BOUNTY_SUPPLY = 5000000 * decimalFactor;         // 5% Released at TD
+  uint256 private constant AVAILABLE_FAMILYFRIENDS_SUPPLY = 5000000 * decimalFactor;  // 5% Released at TD
+  uint256 private constant AVAILABLE_TEAM_SUPPLY = 8000000 * decimalFactor;           // 8% Released at TD +2 years
+  uint256 private constant AVAILABLE_ADVISOR_SUPPLY = 2000000 * decimalFactor;        // 2% Released at TD +2 years
 
-  constructor(address payable owner)
-  public
-  {
+  constructor(address owner) public {
     transferOwnership(owner);
-    token = new AsureToken(owner, "AsureToken", "ASR", 18, AVAILABLE_TOTAL_SUPPLY);
+    token = new AsureToken(owner, "AsureToken", "ASR", decimals, AVAILABLE_TOTAL_SUPPLY);
   }
 
   function mint(
@@ -55,20 +54,20 @@ contract AsureCrowdsaleDeployer is Ownable {
     uint256 bonusTime,
     address payable owner,
     address payable crowdsaleWallet,
-    uint256 openingTime, // preSale opening time in unix epoch seconds
-    uint256 closingTime // preSale closing time in unix epoch seconds
+    uint256 openingTime,
+    uint256 closingTime
   ) onlyOwner public returns (bool) {
     require(address(presale) == address(0), "mainsale already initialized");
 
     presale = new AsureCrowdsale(
-      rate, // rate, in AsureTokens - 1 ETH == 1000 RUHR
+      rate,
       bonusRate,
       bonusTime,
-      owner, // owner
-      crowdsaleWallet, // wallet to send Ether
-      token, // the token
-      openingTime, // opening time in unix epoch seconds
-      closingTime  // closing time in unix epoch seconds
+      owner,
+      crowdsaleWallet,
+      token,
+      openingTime,
+      closingTime
     );
     token.mint(address(presale), AVAILABLE_PRESALE_SUPPLY);
 
@@ -82,20 +81,20 @@ contract AsureCrowdsaleDeployer is Ownable {
     uint256 bonusTime,
     address payable owner,
     address payable crowdsaleWallet,
-    uint256 openingTime, // mainSale opening time in unix epoch seconds
-    uint256 closingTime // mainSale closing time in unix epoch seconds
+    uint256 openingTime,
+    uint256 closingTime
   ) onlyOwner public returns (bool) {
     require(address(mainsale) == address(0), "mainsale already initialized");
 
     mainsale = new AsureCrowdsale(
-      rate, // rate, in AsureTokens - 1 ETH == 1000
+      rate,
       bonusRate,
       bonusTime,
-      owner, // owner
-      crowdsaleWallet, // wallet to send Ether
-      token, // the token
-      openingTime, // opening time in unix epoch seconds
-      closingTime  // closing time in unix epoch seconds
+      owner,
+      crowdsaleWallet,
+      token,
+      openingTime,
+      closingTime
     );
     token.mint(address(mainsale), AVAILABLE_MAINSALE_SUPPLY);
 

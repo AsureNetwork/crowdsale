@@ -10,7 +10,7 @@ import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 
 contract AsureToken is ERC20, ERC20Detailed, ERC20Mintable, ERC20Burnable, ERC20Capped, Ownable {
   constructor(
-    address payable owner, // owner
+    address owner,
     string memory name,
     string memory symbol,
     uint8 decimals,
