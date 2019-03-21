@@ -10,8 +10,11 @@
   "scripts": {
     "compile": "truffle compile",
     "test": "truffle test",
-    "test-coverage": "truffle test --network coverage",
+    "test:coverage": "truffle test --network coverage",
     "coverage": "solidity-coverage",
+    "flattener:token": "truffle-flattener contracts\\AsureToken.sol > build\\flattened\\AsureTokenFlattened.sol",
+    "flattener:crowdsale": "truffle-flattener contracts\\AsureCrowdsale.sol > build\\flattened\\AsureCrowdsaleFlattened.sol",
+    "flattener:deployer": "truffle-flattener contracts\\AsureCrowdsaleDeployer.sol > build\\flattened\\AsureCrowdsaleDeployerFlattened.sol",
     "migrate:development:presale": "truffle migrate --to 2 --network development --reset",
     "migrate:development:mainsale": "truffle migrate --to 3 --network development --reset",
     "migrate:rinkeby": "truffle migrate --network rinkeby --reset"
@@ -30,6 +33,7 @@
     "moment": "^2.24.0",
     "openzeppelin-test-helpers": "^0.3.0",
     "solidity-coverage": "^0.5.11",
+    "truffle-flattener": "^1.3.0",
     "web3": "^1.0.0-beta.36"
   }
 }
