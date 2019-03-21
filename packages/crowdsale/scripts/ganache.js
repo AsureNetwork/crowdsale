@@ -17,11 +17,13 @@ function delay(ms) {
 const options = {
   port: 8545,
   network_id: 1234567890,
-  mnemonic : "flight cute ski coffee decide milk bitter table speed orchard bag meadow",
+  mnemonic: "flight cute ski coffee decide milk bitter table speed orchard bag meadow",
   time: now, /*ISO 8601*/
   // debug: true,
-  logger: { log: log.info },
+  logger: {log: log.info},
   blocktime: 0,
+  gasPrice: 1,
+  gasLimit: 0xfffffffffff,
   vmErrorsOnRPCResponse: true
 };
 
@@ -38,7 +40,8 @@ server.listen(options.port, async (err, result) => {
   } else {
     const state = result || server.provider.manager.state;
     log.info('EthereumJS TestRPC');
-
+    log.info("gasPrice: " + options.gasPrice);
+    log.info("gasLimit: " + options.gasLimit);
     // log.info('Accounts:');
     // Object.keys(state.accounts).forEach((address, index) => {
     //   const secretKey = state.accounts[address].secretKey.toString('hex');
@@ -52,20 +55,20 @@ server.listen(options.port, async (err, result) => {
     log.info(`Listening on ${options.hostname || 'localhost'}:${options.port}`);
 
     try {
-/*      if (process.argv.includes('--migrate')) {
-        log.info('Deploying smart contracts ...');
-        await exec('npm run migrate-dev');
-        log.info('Deployment of smart contracts was successful.');
-      }
+      /*      if (process.argv.includes('--migrate')) {
+              log.info('Deploying smart contracts ...');
+              await exec('npm run migrate-dev');
+              log.info('Deployment of smart contracts was successful.');
+            }
 
-      if (process.argv.includes('--deploy-test-data')) {
-        log.info('Deploying test data. This will take a few minutes ...');
-        await delay(2500);
-        await await exec('npm run deploy-dev', {
-          cwd: path.resolve(__dirname, '../../gpcli')
-        });
-        log.info('Deployment of test data was successful');
-      }*/
+            if (process.argv.includes('--deploy-test-data')) {
+              log.info('Deploying test data. This will take a few minutes ...');
+              await delay(2500);
+              await await exec('npm run deploy-dev', {
+                cwd: path.resolve(__dirname, '../../gpcli')
+              });
+              log.info('Deployment of test data was successful');
+            }*/
 
       log.info(`Started successfully`);
     } catch (error) {

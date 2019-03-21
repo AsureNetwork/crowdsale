@@ -15,7 +15,6 @@
     "postinstall": "lerna bootstrap",
     "bootstrap": "lerna bootstrap",
     "ganache": "node ./packages/crowdsale/scripts/ganache.js",
-    "ganache-coverage": "ganache-cli --port 8555 --networkId 17101710 --mnemonic \"flight cute ski coffee decide milk bitter table speed orchard bag meadow\"",
     "solc:version": "solcjs --version",
     "truffle:version": "truffle version"
   },

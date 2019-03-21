@@ -5,6 +5,6 @@ module.exports = {
   dir: '.',
   copyPackages: ['openzeppelin-solidity'],
   skipFiles: ['test/TestToken.sol','test/TestAsureBonusesCrowdsale.sol'],
-  compileCommand: '../node_modules/.bin/truffle compile',
-  testCommand: '../node_modules/.bin/truffle test --network coverage',
+  compileCommand: 'truffle compile',
+  testCommand: 'truffle test --network coverage',
 };

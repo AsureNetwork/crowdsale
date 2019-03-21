@@ -10,8 +10,7 @@
   "scripts": {
     "compile": "truffle compile",
     "test": "truffle test",
-    "test:coverage": "truffle test --network coverage",
-    "coverage": "solidity-coverage",
+    "coverage": "solidity-coverage # && copyfiles coverage/*.* ../../docs/coverage",
     "flattener": "npm-run-all flattener:token flattener:crowdsale flattener:deployer",
     "flattener:token": "truffle-flattener contracts/AsureToken.sol > build/flattened/AsureTokenFlattened.sol",
     "flattener:crowdsale": "truffle-flattener contracts/AsureCrowdsale.sol > build/flattened/AsureCrowdsaleFlattened.sol",
@@ -25,11 +24,12 @@
   "license": "Unlicense",
   "dependencies": {
     "openzeppelin-solidity": "^2.1.2",
-    "truffle-hdwallet-provider": "^1.0.0-web3one.0",
-    "truffle": "^5.0.5"
+    "truffle": "^5.0.5",
+    "truffle-hdwallet-provider": "^1.0.0-web3one.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "copyfiles": "^2.1.0",
     "coveralls": "^3.0.3",
     "moment": "^2.24.0",
     "npm-run-all": "^4.1.5",
