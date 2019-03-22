@@ -21,7 +21,7 @@ contract('AsureToken', async accounts => {
   });
 
   it('should verify test setup', async () => {
-    expect(await token.totalSupply()).to.be.bignumber.equal(maxCap);
+    expect(await token.totalSupply.call()).to.be.bignumber.equal(maxCap);
   });
 
   describe('constructor', () => {
@@ -33,15 +33,15 @@ contract('AsureToken', async accounts => {
     });
 
     it('should transfer ownership to new owner', async () => {
-      expect(await token.owner()).to.be.equal(owner);
+      expect(await token.owner.call()).to.be.equal(owner);
     });
 
     it('creator of the token should be a minter', async () => {
-      expect(await token.isMinter(accounts[0])).to.be.eq(true);
+      expect(await token.isMinter.call(accounts[0])).to.be.eq(true);
     });
 
     it('owner of the token should not be a minter', async () => {
-      expect(await token.isMinter(owner)).to.be.eq(false);
+      expect(await token.isMinter.call(owner)).to.be.eq(false);
     });
   });
 

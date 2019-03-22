@@ -195,5 +195,29 @@ contract('AsureCrowdsaleDeployer', async accounts => {
     //expect(Web3.utils.fromWei(burnBalance)).to.eq(String(10 * 10 ** 6-400));
   });
 
+  it('should revert minting too much', async () => {
+    const crowdsaleDeployer = await AsureCrowdsaleDeployer.new(owner);
 
+    const mintTx = await crowdsaleDeployer.mint(
+      wallet,    // foundationWallet
+      wallet,        // bountyWallet
+      wallet, // familyFriendsWallet
+      [wallet], //team
+      [8000000],
+      [wallet], //advisors
+      [2000000],
+      {from: owner}
+    );
+
+    await shouldFail.reverting(crowdsaleDeployer.mint(
+      wallet,    // foundationWallet
+      wallet,        // bountyWallet
+      wallet, // familyFriendsWallet
+      [wallet], //team
+      [8000000],
+      [wallet], //advisors
+      [2000000],
+      {from: owner}
+    ));
+  });
 });

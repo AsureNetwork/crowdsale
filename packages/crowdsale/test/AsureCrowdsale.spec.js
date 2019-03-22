@@ -60,23 +60,23 @@ contract('AsureCrowdsale', async accounts => {
 
   describe('constructor', () => {
     it('should add whitelist admins to crowdsale', async () => {
-      let isSenderAdminInSingleWhitelist = await singleWhitelistCrowdsale.isWhitelistAdmin(accounts[0]);
-      let isOwnerAdminInSingleWhitelist = await singleWhitelistCrowdsale.isWhitelistAdmin(owner);
+      let isSenderAdminInSingleWhitelist = await singleWhitelistCrowdsale.isWhitelistAdmin.call(accounts[0]);
+      let isOwnerAdminInSingleWhitelist = await singleWhitelistCrowdsale.isWhitelistAdmin.call(owner);
       expect(isSenderAdminInSingleWhitelist).to.be.equal(true);
       expect(isOwnerAdminInSingleWhitelist).to.be.equal(false);
 
-      let isSenderAdminInCrowdsale = await crowdsale.isWhitelistAdmin(accounts[0]);
-      let isOwnerAdminInCrowdsale = await crowdsale.isWhitelistAdmin(owner);
+      let isSenderAdminInCrowdsale = await crowdsale.isWhitelistAdmin.call(accounts[0]);
+      let isOwnerAdminInCrowdsale = await crowdsale.isWhitelistAdmin.call(owner);
       expect(isSenderAdminInCrowdsale).to.be.equal(true);
       expect(isOwnerAdminInCrowdsale).to.be.equal(true);
     });
 
     it('should transfer token ownership to new owner', async () => {
-      expect(await token.owner()).to.be.equal(owner);
+      expect(await token.owner.call()).to.be.equal(owner);
     });
 
     it('should transfer crowdsale ownership to new owner', async () => {
-      expect(await crowdsale.owner()).to.be.equal(owner);
+      expect(await crowdsale.owner.call()).to.be.equal(owner);
     });
   });
 
@@ -121,12 +121,12 @@ contract('AsureCrowdsale', async accounts => {
           ],
           {from: owner}
         );
-        expect(await crowdsale.isWhitelisted(accounts[0])).to.eq(false);
-        expect(await crowdsale.isWhitelisted(accounts[1])).to.eq(true);
-        expect(await crowdsale.isWhitelisted(accounts[2])).to.eq(true);
-        expect(await crowdsale.isWhitelisted(accounts[3])).to.eq(true);
-        expect(await crowdsale.isWhitelisted(accounts[4])).to.eq(true);
-        expect(await crowdsale.isWhitelisted(accounts[5])).to.eq(true);
+        expect(await crowdsale.isWhitelisted.call(accounts[0])).to.eq(false);
+        expect(await crowdsale.isWhitelisted.call(accounts[1])).to.eq(true);
+        expect(await crowdsale.isWhitelisted.call(accounts[2])).to.eq(true);
+        expect(await crowdsale.isWhitelisted.call(accounts[3])).to.eq(true);
+        expect(await crowdsale.isWhitelisted.call(accounts[4])).to.eq(true);
+        expect(await crowdsale.isWhitelisted.call(accounts[5])).to.eq(true);
       });
     });
   });
