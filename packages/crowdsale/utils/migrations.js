@@ -3,6 +3,7 @@ const path = require('path');
 
 function loadCrowdsaleConfig(migration, network) {
   migration = path.basename(migration).charAt(0);
+
   const fileName = `crowdsale-${network}-${migration}.json`;
 
   if (!fs.existsSync(path.join(process.cwd(), fileName))) {

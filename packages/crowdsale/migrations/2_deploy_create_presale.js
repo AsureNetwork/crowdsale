@@ -28,9 +28,9 @@ module.exports = async function (deployer, network) {
   const crowdsaleDeployer = await AsureCrowdsaleDeployer.at(AsureCrowdsaleDeployer.address);
 
   const mintTx = await crowdsaleDeployer.mint(
-    config.foundationWallet,    // foundationWallet
-    config.bountyWallet,        // bountyWallet
-    config.familyFriendsWallet, // familyFriendsWallet
+    config.foundationWallet,
+    config.bountyWallet,
+    config.familyFriendsWallet,
     config.team.map(b => b.addr),
     config.team.map(b => b.amount),
     config.advisor.map(b => b.addr),
