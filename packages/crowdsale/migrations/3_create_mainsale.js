@@ -10,14 +10,15 @@ module.exports = async function (deployer, network) {
 
   const config = loadCrowdsaleConfig(__filename, network);
   const mainSaleOpeningTime = moment(config.mainSale.opening, config.dateFormat).unix();
+  const mainSaleBonusTime = moment(config.mainSale.bonusTime, config.dateFormat).unix();
   const mainSaleClosingTime = moment(config.mainSale.closing, config.dateFormat).unix();
 
   const crowdsaleDeployer = await AsureCrowdsaleDeployer.at(AsureCrowdsaleDeployer.address);
 
   const mainSaleTx = await crowdsaleDeployer.createMainSale(
-    200 * (1 / 0.5),         // initial rate: ETH = 200 USD + 50% bonus
     200 * (1 / 0.5),         // bonus rate: ETH = 200 USD + 50% bonus
-    mainSaleOpeningTime,     // bonus time
+    mainSaleBonusTime,     // bonus time
+    200 * (1 / 0.5),         // default rate: ETH = 200 USD + 50% bonus
     config.owner,
     config.crowdsaleWallet,     // wallet
     mainSaleOpeningTime,        // december 2019

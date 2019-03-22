@@ -9,120 +9,122 @@
     "name": "AsureToken",
     "symbol": "ASR",
     "decimals": "18",
-    "addr": "0x0e4E0a633CC1580cf16BB5944C083f73d1E2D286"
+    "addr": "0x42c12253D8730D88D1B735C9b4F7F001b25F82C7"
   },
   "preSale": {
     "opening": "2019-08-01 00:00",
+    "bonusTime": "2019-08-08 00:00",
     "closing": "2019-08-15 00:00",
-    "addr": "0x0AB478C04E0E4e56f3F22465AcA6cae20B14EE73"
+    "addr": "0x428cd8cE5901a3f8b7B785e38393754737D7c27D"
   },
   "mainSale": {
     "opening": "2019-12-1 00:00",
+    "bonusTime": "2019-12-15 00:00",
     "closing": "2019-12-31 00:00",
-    "addr": "0xab09389b4f85eCc6fBD3f4EeE649F96239D3Ef8c"
+    "addr": "0x167886C13C9d4808381F63c696841375e6A7f3C2"
   },
   "team": [
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
       "amount": 500000,
-      "addr": "0xedF3287ABFa014Ae6413Fc4ce7e5E1c85e716F68"
+      "addr": "0x11DF6E2063EaE1657D9b7Ed79A98051F15a4b262"
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
       "amount": 500000,
-      "addr": "0x34f015314f9878c28F455BDF9800f14c1407C484"
+      "addr": "0x4F517eF18CfDb02B2aB259D61AAf0f239F5c255b"
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
       "amount": 500000,
-      "addr": "0x1B09f2aF6CAea685BbB3053969b1A2670e21be4a"
+      "addr": "0x626e2E30205b6069Bc4772C306828E80D7E78e14"
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
       "amount": 500000,
-      "addr": "0x813a6470749d2914cBBA8Df80642ca7843Bf233C"
+      "addr": "0x31F3AC4e6e805366C9906D0D5938a9217C063f10"
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
       "amount": 500000,
-      "addr": "0x13f818da0A11764Aa273d04D9829825945143B24"
+      "addr": "0x109833Ef35263A86dAb16f3D4b192c3136788f03"
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
       "amount": 500000,
-      "addr": "0x757aB43AAD466D740af4F78ab3150A010EEb9484"
+      "addr": "0xC2bE4F6bab50ef5519B8dD89ED44BDac63e4002d"
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
       "amount": 500000,
-      "addr": "0x048F2290a77B9d539dFF3c9C6ca41b092b48c38D"
+      "addr": "0xa751aaA84100b256555E520A3E7ef5E0C53AfFBE"
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
       "amount": 500000,
-      "addr": "0x3F447FD85cf84E84fC0E1E7023ac01b9F56E00E5"
+      "addr": "0xb36b873a75F9f928AdDEc36d48F37F234C77270e"
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
       "amount": 500000,
-      "addr": "0xd549B37d36B419f8BCd15E37f220fE79Ac005E86"
+      "addr": "0x5C228AF5C1cF852176B5706A11156987CD69FC21"
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
       "amount": 500000,
-      "addr": "0x01d12C4814c63D3928faf943cE693c17E6F71B1a"
+      "addr": "0x894DF38a361361b0819607199e4265794Bd45c43"
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
       "amount": 500000,
-      "addr": "0x03ad86990109Ee4D281CE5899d8C89235538c5bF"
+      "addr": "0x7762337F5F00a897a05334Cc706307E2d4650412"
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
       "amount": 500000,
-      "addr": "0x7376e1b8d8E26a294Ce649e0494D901e564B9A4b"
+      "addr": "0x76F6b88e9570c4c066DeF467673FEa1E685b69D0"
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
       "amount": 500000,
-      "addr": "0xAaa6Bfc44C4Dea4de853e155E93ac6a4e6479c1e"
+      "addr": "0x7E4Bb9C941da515c94794A1025e2eCB3cD91291f"
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
       "amount": 500000,
-      "addr": "0x3954e104805612e8aa43e1A98Fe9a00314AfCB66"
+      "addr": "0xc49B29D9B45C49d4e1e0243eC8a1a69744b6cD10"
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
       "amount": 500000,
-      "addr": "0x5002891ca192A0aDf44884d8A976c8AAf6edB848"
+      "addr": "0x373D8A3F9b4069D18E08Adac1a4950b49b303a96"
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
       "amount": 500000,
-      "addr": "0x53c3C0750273a2f373b778121A8DdC9E9B7A0da8"
+      "addr": "0x6e0BB740a3E2bf8755696b693772cce0fA8c5176"
     }
   ],
   "advisor": [
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
       "amount": 500000,
-      "addr": "0x5994c2eC1c8750effb11203d12526b285222a4FE"
+      "addr": "0x37Bb275B52B9390a4BF5b12eE8986F9Ca68fC6b1"
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
       "amount": 500000,
-      "addr": "0x960Dff5B6537B32528C944f88ACC88364c7F2662"
+      "addr": "0x545a72BC03b96e485C37D36De806f510C93C50a8"
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
       "amount": 500000,
-      "addr": "0x2b934d93Efe5ceeaD284992cAae731a674737993"
+      "addr": "0x98a5483462550803c73ec8C7A0DA6282dD1FaBb3"
     },
     {
       "owner": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
       "amount": 500000,
-      "addr": "0xc61cc3Ec375ccB51e0C3a4c709C4d466Ab2Cb59D"
+      "addr": "0xE032e552F2909cEaD8fF4D6e105ce810E38d2f29"
     }
   ]
 }

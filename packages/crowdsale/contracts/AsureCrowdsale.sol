@@ -10,19 +10,19 @@ import "./AsureBonusesCrowdsale.sol";
 
 contract AsureCrowdsale is Crowdsale, TimedCrowdsale, WhitelistCrowdsale, AsureBonusesCrowdsale {
   constructor(
-    uint256 rate, // rate, in Asure Tokens
-    uint256 bonusRate, // bonusRate, in Asure Tokens
-    uint256 bonusTime, // bonus time in unix epoch seconds
-    address payable owner, // owner
-    address payable crowdsaleWallet, // wallet to send Ether
-    IERC20 token, // the token
-    uint256 openingTime, // opening time in unix epoch seconds
-    uint256 closingTime               // closing time in unix epoch seconds
+    uint256 bonusRate,
+    uint256 bonusTime,
+    uint256 defaultRate,
+    address owner,
+    address payable wallet,
+    IERC20 token,
+    uint256 openingTime,
+    uint256 closingTime
   )
   public
-  Crowdsale(rate, crowdsaleWallet, token)
+  Crowdsale(1, wallet, token)
   TimedCrowdsale(openingTime, closingTime)
-  AsureBonusesCrowdsale(rate, bonusRate, bonusTime, owner)
+  AsureBonusesCrowdsale(bonusRate, bonusTime, defaultRate, owner)
   {
     if (!isWhitelistAdmin(owner)) {
       addWhitelistAdmin(owner);

@@ -69,20 +69,20 @@ contract('AsureCrowdsaleDeployer', async accounts => {
     );
 
     const preSaleTx = await crowdsaleDeployer.createPreSale(
-      200 * (1 / 0.5),         // initial rate: ETH = 200 USD + 50% bonus
       200 * (1 / 0.5),         // bonus rate: ETH = 200 USD + 50% bonus
       openingTimeUnix,         // bonus time
+      200 * (1 / 0.5),         // default rate: ETH = 200 USD + 50% bonus
       owner,
-      wallet, // wallet
+      wallet,                  // wallet
       openingTimeUnix,         // today
       closingTimeUnix,
       {from: owner}
     );
 
     const mainSaleTx = await crowdsaleDeployer.createMainSale(
-      200 * (1 / 0.5),         // initial rate: ETH = 200 USD + 50% bonus
       200 * (1 / 0.5),         // bonus rate: ETH = 200 USD + 50% bonus
       openingTimeUnix,         // bonus time
+      200 * (1 / 0.5),         // default rate: ETH = 200 USD + 50% bonus
       owner,
       wallet,                  // wallet
       openingTimeUnix,         // today
@@ -121,7 +121,7 @@ contract('AsureCrowdsaleDeployer', async accounts => {
 
   it('should instantiate PresaleCrowdsale correctly', async () => {
     const crowdsaleWallet = await presale.wallet.call();
-    const crowdsaleInitialRate = await presale.initialRate.call();
+    const crowdsaleInitialRate = await presale.defaultRate.call();
     const crowdsaleOpeningTime = await presale.openingTime.call();
     const crowdsaleClosingTime = await presale.closingTime.call();
 
@@ -133,12 +133,12 @@ contract('AsureCrowdsaleDeployer', async accounts => {
 
   it('should instantiate MainsaleCrowdsale correctly', async () => {
     const crowdsaleWallet = await mainsale.wallet.call();
-    const crowdsaleInitialRate = await mainsale.initialRate.call();
+    const crowdsaleDefaultRate = await mainsale.defaultRate.call();
     const crowdsaleOpeningTime = await mainsale.openingTime.call();
     const crowdsaleClosingTime = await mainsale.closingTime.call();
 
     expect(crowdsaleWallet).to.eq(wallet);
-    expect(crowdsaleInitialRate.toNumber()).to.eq(400);
+    expect(crowdsaleDefaultRate.toNumber()).to.eq(400);
     expect(crowdsaleOpeningTime.toNumber()).to.eq(openingTimeUnix);
     expect(crowdsaleClosingTime.toNumber()).to.eq(closingTimeUnix);
   });
@@ -158,8 +158,6 @@ contract('AsureCrowdsaleDeployer', async accounts => {
         .buyTokens
         .sendTransaction(beneficiary, {value: ethValue, from: beneficiary})
     );
-
-
   });
 
   it('should buy Asure tokens for 1 ETH', async () => {

@@ -49,22 +49,22 @@ contract AsureCrowdsaleDeployer is Ownable {
   }
 
   function createPreSale(
-    uint256 rate,
     uint256 bonusRate,
     uint256 bonusTime,
-    address payable owner,
-    address payable crowdsaleWallet,
+    uint256 defaultRate,
+    address owner,
+    address payable wallet,
     uint256 openingTime,
     uint256 closingTime
   ) onlyOwner public returns (bool) {
     require(address(presale) == address(0), "mainsale already initialized");
 
     presale = new AsureCrowdsale(
-      rate,
       bonusRate,
       bonusTime,
+      defaultRate,
       owner,
-      crowdsaleWallet,
+      wallet,
       token,
       openingTime,
       closingTime
@@ -76,22 +76,22 @@ contract AsureCrowdsaleDeployer is Ownable {
   }
 
   function createMainSale(
-    uint256 rate,
     uint256 bonusRate,
     uint256 bonusTime,
-    address payable owner,
-    address payable crowdsaleWallet,
+    uint256 defaultRate,
+    address owner,
+    address payable wallet,
     uint256 openingTime,
     uint256 closingTime
   ) onlyOwner public returns (bool) {
     require(address(mainsale) == address(0), "mainsale already initialized");
 
     mainsale = new AsureCrowdsale(
-      rate,
       bonusRate,
       bonusTime,
+      defaultRate,
       owner,
-      crowdsaleWallet,
+      wallet,
       token,
       openingTime,
       closingTime

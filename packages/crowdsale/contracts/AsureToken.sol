@@ -27,10 +27,10 @@ contract AsureToken is ERC20, ERC20Detailed, ERC20Mintable, ERC20Burnable, ERC20
   }
 
   /**
-  * @dev ERC223 alternative emergency Token Extraction
-  */
+   * @dev ERC223 alternative emergency Token Extraction
+   */
   function emergencyTokenExtraction(address erc20tokenAddr) onlyOwner
-    public returns (bool) {
+  public returns (bool) {
     IERC20 erc20token = IERC20(erc20tokenAddr);
     return erc20token.transfer(msg.sender, erc20token.balanceOf(address(this)));
   }

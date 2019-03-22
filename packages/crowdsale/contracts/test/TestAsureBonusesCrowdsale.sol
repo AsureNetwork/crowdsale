@@ -7,18 +7,18 @@ import "../AsureBonusesCrowdsale.sol";
 
 contract TestAsureBonusesCrowdsale is Crowdsale, TimedCrowdsale, AsureBonusesCrowdsale {
   constructor(
-    uint256 rate,
     uint256 bonusRate,
     uint256 bonusTime,
-    address payable owner,
-    address payable crowdsaleWallet,
+    uint256 defaultRate,
+    address owner,
+    address payable wallet,
     IERC20 token,
     uint256 openingTime,
     uint256 closingTime
   )
   public
-  Crowdsale(rate, crowdsaleWallet, token)
+  Crowdsale(1, wallet, token)
   TimedCrowdsale(openingTime, closingTime)
-  AsureBonusesCrowdsale(rate, bonusRate, bonusTime, owner)
+  AsureBonusesCrowdsale(bonusRate, bonusTime, defaultRate, owner)
   {}
 }

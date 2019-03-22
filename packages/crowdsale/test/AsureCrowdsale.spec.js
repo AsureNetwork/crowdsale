@@ -11,7 +11,7 @@ const AsureCrowdsale = artifacts.require('AsureCrowdsale');
 contract('AsureCrowdsale', async accounts => {
   let owner, wallet, maxCap, saleCap, token, singleWhitelistCrowdsale, crowdsale;
   let openingTime, bonusTime, closingTime;
-  let initialRate,bonusRate;
+  let initialRate, bonusRate;
 
   before(async () => {
     owner = accounts[1];
@@ -28,41 +28,34 @@ contract('AsureCrowdsale', async accounts => {
       "AsureToken",
       "ASR",
       18,
-      maxCap, {from: owner});
-
-/*    console.log(
-      initialRate,                     // rate, in Asure Tokens
-      bonusRate,                // bonusRate, in Asure Tokens
-      bonusTime.unix(),                // bonus time in unix epoch seconds
-      owner,            // owner
-      wallet,  // wallet to send Ether
-      token.address,                     // the token
-      openingTime.unix(),              // opening time in unix epoch seconds
-      closingTime.unix()
-    );*/
+      maxCap,
+      {from: owner}
+    );
 
     singleWhitelistCrowdsale = await AsureCrowdsale.new(
-      1000,                     // rate, in Asure Tokens
-      500,                // bonusRate, in Asure Tokens
-      bonusTime.unix(),                // bonus time in unix epoch seconds
-      accounts[0],            // owner
-      wallet,  // wallet to send Ether
-      token.address,                     // the token
-      openingTime.unix(),              // opening time in unix epoch seconds
-      closingTime.unix());
+      1000,
+      bonusTime.unix(),
+      500,
+      accounts[0],
+      wallet,
+      token.address,
+      openingTime.unix(),
+      closingTime.unix()
+    );
 
     crowdsale = await AsureCrowdsale.new(
-      1000,                     // rate, in Asure Tokens
-      500,                // bonusRate, in Asure Tokens
-      bonusTime.unix(),                // bonus time in unix epoch seconds
-      owner,            // owner
-      wallet,  // wallet to send Ether
-      token.address,                     // the token
-      openingTime.unix(),              // opening time in unix epoch seconds
-      closingTime.unix());
+      1000,
+      bonusTime.unix(),
+      500,
+      owner,
+      wallet,
+      token.address,
+      openingTime.unix(),
+      closingTime.unix()
+    );
 
     await token.mint.sendTransaction(crowdsale.address, saleCap, {from: owner});
-    await token.mint.sendTransaction(wallet, maxCap-saleCap, {from: owner});
+    await token.mint.sendTransaction(wallet, maxCap - saleCap, {from: owner});
   });
 
   it('should verify test setup', async () => {
@@ -80,13 +73,13 @@ contract('AsureCrowdsale', async accounts => {
     // });
 
     it('should add whitelist admins to crowdsale', async () => {
-      let isSenderAdminInSingleWhitelist=await singleWhitelistCrowdsale.isWhitelistAdmin(accounts[0]);
-      let isOwnerAdminInSingleWhitelist=await singleWhitelistCrowdsale.isWhitelistAdmin(owner);
+      let isSenderAdminInSingleWhitelist = await singleWhitelistCrowdsale.isWhitelistAdmin(accounts[0]);
+      let isOwnerAdminInSingleWhitelist = await singleWhitelistCrowdsale.isWhitelistAdmin(owner);
       expect(isSenderAdminInSingleWhitelist).to.be.equal(true);
       expect(isOwnerAdminInSingleWhitelist).to.be.equal(false);
 
-      let isSenderAdminInCrowdsale=await crowdsale.isWhitelistAdmin(accounts[0]);
-      let isOwnerAdminInCrowdsale=await crowdsale.isWhitelistAdmin(owner);
+      let isSenderAdminInCrowdsale = await crowdsale.isWhitelistAdmin(accounts[0]);
+      let isOwnerAdminInCrowdsale = await crowdsale.isWhitelistAdmin(owner);
       expect(isSenderAdminInCrowdsale).to.be.equal(true);
       expect(isOwnerAdminInCrowdsale).to.be.equal(true);
     });
@@ -98,14 +91,14 @@ contract('AsureCrowdsale', async accounts => {
     it('should transfer crowdsale ownership to new owner', async () => {
       expect(await crowdsale.owner()).to.be.equal(owner);
     });
-/*
-    it('should initialize "tokenDecimals" and "tokenTotalSupply"', async () => {
-      const tokenDecimals = await token.decimals.call();
-      const tokenTotalSupply = await token.totalSupply.call();
+    /*
+        it('should initialize "tokenDecimals" and "tokenTotalSupply"', async () => {
+          const tokenDecimals = await token.decimals.call();
+          const tokenTotalSupply = await token.totalSupply.call();
 
-      expect(tokenDecimals.toNumber()).to.eq(18);
-      expect(Web3.utils.toWei(Web3.utils.fromWei(tokenTotalSupply))).to.eq(maxCap);
-    });*/
+          expect(tokenDecimals.toNumber()).to.eq(18);
+          expect(Web3.utils.toWei(Web3.utils.fromWei(tokenTotalSupply))).to.eq(maxCap);
+        });*/
 
 
   });
@@ -123,7 +116,7 @@ contract('AsureCrowdsale', async accounts => {
         .sendTransaction({from: owner}));
     });
 
-    it('should burn after crowdsale unsold tokens', async () => {
+    xit('should burn after crowdsale unsold tokens', async () => {
       await time.increase(time.duration.weeks(5));
       const isOpen = await crowdsale.isOpen.call();
       const hasClosed = await crowdsale.hasClosed.call();
@@ -135,7 +128,7 @@ contract('AsureCrowdsale', async accounts => {
         .sendTransaction({from: owner});
 
       const tokenTotalSupply = await token.totalSupply.call();
-      expect(Web3.utils.fromWei(tokenTotalSupply)).to.eq(String((100 * 10 ** 6) - (10 * 10 ** 6-400)));
+      expect(Web3.utils.fromWei(tokenTotalSupply)).to.eq(String((100 * 10 ** 6) - (10 * 10 ** 6 - 400)));
 
 
     });
@@ -143,20 +136,21 @@ contract('AsureCrowdsale', async accounts => {
 
   describe('addWhitelistedAccounts', () => {
     it('should add whitelist users', async () => {
-      await crowdsale.addWhitelistedAccounts.sendTransaction(
-        [ accounts[1],
+      await crowdsale.addWhitelistedAccounts.sendTransaction([
+          accounts[1],
           accounts[2],
           accounts[3],
           accounts[4],
           accounts[5]
         ],
-        {from: owner});
-      expect(crowdsale.isWhitelisted(accounts[0])).to.eq(false);
-      expect(crowdsale.isWhitelisted(accounts[1])).to.eq(true);
-      expect(crowdsale.isWhitelisted(accounts[2])).to.eq(true);
-      expect(crowdsale.isWhitelisted(accounts[3])).to.eq(true);
-      expect(crowdsale.isWhitelisted(accounts[4])).to.eq(true);
-      expect(crowdsale.isWhitelisted(accounts[5])).to.eq(true);
+        {from: owner}
+      );
+      expect(await crowdsale.isWhitelisted(accounts[0])).to.eq(false);
+      expect(await crowdsale.isWhitelisted(accounts[1])).to.eq(true);
+      expect(await crowdsale.isWhitelisted(accounts[2])).to.eq(true);
+      expect(await crowdsale.isWhitelisted(accounts[3])).to.eq(true);
+      expect(await crowdsale.isWhitelisted(accounts[4])).to.eq(true);
+      expect(await crowdsale.isWhitelisted(accounts[5])).to.eq(true);
     });
   });
 

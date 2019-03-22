@@ -10,6 +10,7 @@ module.exports = async function (deployer, network) {
 
   const config = loadCrowdsaleConfig(__filename, network);
   const preSaleOpeningTime = moment(config.preSale.opening, config.dateFormat).unix();
+  const preSaleBonusTime = moment(config.preSale.bonusTime, config.dateFormat).unix();
   const preSaleClosingTime = moment(config.preSale.closing, config.dateFormat).unix();
   const mainSaleOpeningTime = moment(config.mainSale.opening, config.dateFormat).unix();
 
@@ -38,12 +39,12 @@ module.exports = async function (deployer, network) {
   );
 
   const preSaleTx = await crowdsaleDeployer.createPreSale(
-    200 * (1 / 0.5),         // initial rate: ETH = 200 USD + 50% bonus
     200 * (1 / 0.5),         // bonus rate: ETH = 200 USD + 50% bonus
-    preSaleOpeningTime,      // bonus time
+    preSaleBonusTime,        // bonus time
+    200 * (1 / 0.5),         // default rate: ETH = 200 USD + 50% bonus
     config.owner,
-    config.crowdsaleWallet,     // wallet
-    preSaleOpeningTime,         // august 2019
+    config.crowdsaleWallet,  // wallet
+    preSaleOpeningTime,      // august 2019
     preSaleClosingTime,
     { from: config.owner }
   );
