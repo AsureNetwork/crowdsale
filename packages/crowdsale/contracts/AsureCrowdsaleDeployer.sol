@@ -57,7 +57,7 @@ contract AsureCrowdsaleDeployer is Ownable {
     uint256 openingTime,
     uint256 closingTime
   ) onlyOwner public returns (bool) {
-    require(address(presale) == address(0), "mainsale already initialized");
+    require(address(presale) == address(0), "ALREADY_INITIALIZED");
 
     presale = new AsureCrowdsale(
       bonusRate,
@@ -84,7 +84,7 @@ contract AsureCrowdsaleDeployer is Ownable {
     uint256 openingTime,
     uint256 closingTime
   ) onlyOwner public returns (bool) {
-    require(address(mainsale) == address(0), "mainsale already initialized");
+    require(address(mainsale) == address(0), "ALREADY_INITIALIZED");
 
     mainsale = new AsureCrowdsale(
       bonusRate,
