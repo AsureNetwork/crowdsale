@@ -1,27 +1,23 @@
-const moment = require('moment');
 const Web3 = require('web3');
-// Import all required modules from openzeppelin-test-helpers
 const {BN, time, constants, expectEvent, shouldFail} = require('openzeppelin-test-helpers');
-// Import preferred chai flavor: both expect and should are supported
 const {expect} = require('chai');
 
 const AsureToken = artifacts.require('AsureToken');
 const TestToken = artifacts.require('TestToken');
 
 contract('AsureToken', async accounts => {
-  let owner, maxCap, token;
+  let owner, name, symbol, decimals, maxCap, token;
 
   before(async () => {
-    owner = accounts[0];
-    maxCap = String(100 * 10 ** 6);
+    owner = accounts[1];
+    name = "Asure";
+    symbol = "ASR";
+    decimals = new BN('18');
+    maxCap = new BN(String(100 * 10 ** (6 + decimals)));
 
-    token = await AsureToken.new(owner,
-      "AsureToken",
-      "ASR",
-      18,
-      maxCap, {from: owner});
+    token = await AsureToken.new(owner);
 
-    await token.mint.sendTransaction(owner, maxCap, {from: owner});
+    await token.mint(owner, maxCap);
   });
 
   it('should verify test setup', async () => {
@@ -29,44 +25,53 @@ contract('AsureToken', async accounts => {
   });
 
   describe('constructor', () => {
-    it('should initialize "tokenName" and "tokenSymbol"', async () => {
-      const tokenName = await token.name.call();
-      const tokenSymbol = await token.symbol.call();
-      expect(tokenName).to.eq('AsureToken');
-      expect(tokenSymbol).to.eq('ASR');
-    });
-
-    it('should initialize "tokenDecimals" and "tokenTotalSupply"', async () => {
-      const tokenDecimals = await token.decimals.call();
-      const tokenTotalSupply = await token.totalSupply.call();
-
-      expect(tokenDecimals.toNumber()).to.eq(18);
-      expect(Web3.utils.toWei(Web3.utils.fromWei(tokenTotalSupply))).to.eq(maxCap);
+    it('should initialize "name", "symbol", "decimals", and "totalSupply"', async () => {
+      expect(await token.name.call()).to.eq(name, 'name');
+      expect(await token.symbol.call()).to.eq(symbol, 'symbol');
+      expect(await token.decimals.call()).to.bignumber.equal(decimals, 'decimals');
+      expect(await token.totalSupply.call()).to.bignumber.equal(maxCap, 'totalSupply');
     });
 
     it('should transfer ownership to new owner', async () => {
       expect(await token.owner()).to.be.equal(owner);
     });
-  });
 
-  describe('emergencyTokenExtraction', () => {
-    it('should transfer wrong tokens', async () => {
+    it('creator of the token should be a minter', async () => {
+      expect(await token.isMinter(accounts[0])).to.be.eq(true);
+    });
 
-      let testToken = await TestToken.new();
-      await testToken.mint.sendTransaction(token.address, String(1000), {from: owner});
-
-      let balanceOfWrongTokenInToken = await testToken.balanceOf.call(token.address);
-      expect(Web3.utils.toWei(Web3.utils.fromWei(balanceOfWrongTokenInToken))).to.eq('1000');
-
-      await token.emergencyTokenExtraction.sendTransaction(testToken.address, {from: owner});
-
-      let balanceOfWrongTokenInOwner = await testToken.balanceOf.call(owner);
-      expect(Web3.utils.toWei(Web3.utils.fromWei(balanceOfWrongTokenInOwner))).to.eq('1000');
-
-      balanceOfWrongTokenInToken = await testToken.balanceOf.call(token.address);
-      expect(Web3.utils.toWei(Web3.utils.fromWei(balanceOfWrongTokenInToken))).to.eq('0');
+    it('owner of the token should not be a minter', async () => {
+      expect(await token.isMinter(owner)).to.be.eq(false);
     });
   });
 
+  describe('emergencyTokenExtraction', () => {
+    let testToken, amount;
 
+    beforeEach(async () => {
+      amount = new BN('1000');
+      testToken = await TestToken.new();
+
+      await testToken.mint(token.address, amount);
+      expect(await testToken.balanceOf.call(token.address)).to.bignumber.equal(amount);
+    });
+
+    it('should revert if not called by owner', async () => {
+      await shouldFail.reverting(token.emergencyTokenExtraction(testToken.address));
+    });
+
+    it('should transfer wrong tokens', async () => {
+      await token.emergencyTokenExtraction(testToken.address, {from: owner});
+
+      expect(await testToken.balanceOf.call(owner)).to.bignumber.equal(amount);
+      expect(await testToken.balanceOf.call(token.address)).to.bignumber.equal(new BN('0'));
+    });
+
+    it('should revert if balance of specified token is zero', async () => {
+      await token.emergencyTokenExtraction(testToken.address, {from: owner});
+      expect(await testToken.balanceOf.call(token.address)).to.bignumber.equal(new BN('0'));
+
+      await shouldFail.reverting(token.emergencyTokenExtraction(testToken.address, {from: owner}));
+    });
+  });
 });

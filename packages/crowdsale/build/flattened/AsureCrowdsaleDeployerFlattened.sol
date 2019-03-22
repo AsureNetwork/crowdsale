@@ -1489,7 +1489,7 @@ contract AsureCrowdsaleDeployer is Ownable {
 
   constructor(address owner) public {
     transferOwnership(owner);
-    token = new AsureToken(owner, "AsureToken", "ASR", decimals, AVAILABLE_TOTAL_SUPPLY);
+    token = new AsureToken(owner);
   }
 
   function mint(

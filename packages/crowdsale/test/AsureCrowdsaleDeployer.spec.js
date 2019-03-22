@@ -104,17 +104,9 @@ contract('AsureCrowdsaleDeployer', async accounts => {
   });
 
   it('should instantiate AsureToken correctly', async () => {
-    const tokenName = await token.name.call();
-    const tokenSymbol = await token.symbol.call();
-    const tokenDecimals = await token.decimals.call();
-    const tokenTotalSupply = await token.totalSupply.call();
     const balanceOfPresale = await token.balanceOf.call(presale.address);
     const balanceOfMainsale = await token.balanceOf.call(mainsale.address);
 
-    expect(tokenName).to.eq('AsureToken');
-    expect(tokenSymbol).to.eq('ASR');
-    expect(tokenDecimals.toNumber()).to.eq(18);
-    expect(Web3.utils.fromWei(tokenTotalSupply)).to.eq(maxCap);
     expect(Web3.utils.fromWei(balanceOfPresale)).to.eq(String(10 * 10 ** 6));
     expect(Web3.utils.fromWei(balanceOfMainsale)).to.eq(String(35 * 10 ** 6));
   });

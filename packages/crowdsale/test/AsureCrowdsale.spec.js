@@ -24,13 +24,7 @@ contract('AsureCrowdsale', async accounts => {
     closingTime = openingTime.clone().add(2, 'weeks');
     initialRate = 1000;
     bonusRate = 500;
-    token = await AsureToken.new(owner,
-      "AsureToken",
-      "ASR",
-      18,
-      maxCap,
-      {from: owner}
-    );
+    token = await AsureToken.new(owner, {from: owner});
 
     singleWhitelistCrowdsale = await AsureCrowdsale.new(
       1000,
@@ -153,5 +147,4 @@ contract('AsureCrowdsale', async accounts => {
       expect(await crowdsale.isWhitelisted(accounts[5])).to.eq(true);
     });
   });
-
 });
