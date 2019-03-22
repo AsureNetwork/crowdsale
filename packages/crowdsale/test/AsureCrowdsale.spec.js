@@ -116,7 +116,7 @@ contract('AsureCrowdsale', async accounts => {
         .sendTransaction({from: owner}));
     });
 
-    xit('should burn after crowdsale unsold tokens', async () => {
+    it('should burn after crowdsale unsold tokens', async () => {
       await time.increase(time.duration.weeks(5));
       const isOpen = await crowdsale.isOpen.call();
       const hasClosed = await crowdsale.hasClosed.call();
@@ -128,9 +128,7 @@ contract('AsureCrowdsale', async accounts => {
         .sendTransaction({from: owner});
 
       const tokenTotalSupply = await token.totalSupply.call();
-      expect(Web3.utils.fromWei(tokenTotalSupply)).to.eq(String((100 * 10 ** 6) - (10 * 10 ** 6 - 400)));
-
-
+      expect(Web3.utils.toWei(Web3.utils.fromWei(tokenTotalSupply))).to.eq(String((100 * 10 ** 6) - (10 * 10 ** 6)));
     });
   });
 
