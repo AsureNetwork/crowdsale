@@ -3,6 +3,7 @@ const {loadCrowdsaleConfig, saveCrowdsaleConfig} = require('../utils/migrations'
 
 const AsureCrowdsaleDeployer = artifacts.require("AsureCrowdsaleDeployer");
 const TokenVesting = artifacts.require("TokenVesting");
+const AsureBounty = artifacts.require("AsureBounty");
 
 module.exports = async function (deployer, network) {
   await deployer;
@@ -20,15 +21,24 @@ module.exports = async function (deployer, network) {
     await createVestingContract(deployer, config.advisor[i], mainSaleOpeningTime);
   }
 
+
+
   await deployer.deploy(
     AsureCrowdsaleDeployer,
     config.owner,
   );
   const crowdsaleDeployer = await AsureCrowdsaleDeployer.at(AsureCrowdsaleDeployer.address);
+  config.token.addr = await crowdsaleDeployer.token.call();
+
+  await deployer.deploy(
+    AsureBounty,
+    config.owner,
+    config.token.addr
+  );
 
   const mintTx = await crowdsaleDeployer.mint(
     config.foundationWallet,
-    config.bountyWallet,
+    AsureBounty.address,
     config.familyFriendsWallet,
     config.team.map(b => b.addr),
     config.team.map(b => b.amount),
@@ -52,12 +62,25 @@ module.exports = async function (deployer, network) {
     { from: config.owner }
   );
 
-  config.token.addr = await crowdsaleDeployer.token.call();
   config.preSale.addr = await crowdsaleDeployer.presale.call();
   saveCrowdsaleConfig(__filename, network, config);
 
+  /*const asureBounty = await AsureBounty.at(AsureBounty.address);
+  const dropTx = await asureBounty.drop([
+    config.owner,
+    config.owner,
+    config.owner,
+    config.owner,
+    config.owner,
+    config.owner,
+    config.owner,
+    config.owner,
+    config.owner,
+    config.owner],[100,100,100,100,100,100,100,100,100,100],{ from: config.owner });
+  */
   console.log('Tx mint gas used', mintTx.receipt.gasUsed);
   console.log('Tx preSale gas used', preSaleTx.receipt.gasUsed);
+  //console.log('Tx dropTx gas used', dropTx.receipt.gasUsed);
   console.log(`Asure PreSale deployment successful.`);
 };
 
