@@ -195,7 +195,7 @@ contract('AsureCrowdsaleDeployer', async accounts => {
     //expect(Web3.utils.fromWei(burnBalance)).to.eq(String(10 * 10 ** 6-400));
   });
 
-  it('should revert minting too much', async () => {
+  it('should not mint too much', async () => {
     const crowdsaleDeployer = await AsureCrowdsaleDeployer.new(owner);
 
     const mintTx = await crowdsaleDeployer.mint(
@@ -220,4 +220,42 @@ contract('AsureCrowdsaleDeployer', async accounts => {
       {from: owner}
     ));
   });
+
+  it('should not create presale too much', async () => {
+    const crowdsaleDeployer = await AsureCrowdsaleDeployer.new(owner);
+
+    const mintTx = await crowdsaleDeployer.mint(
+      wallet,    // foundationWallet
+      wallet,        // bountyWallet
+      wallet, // familyFriendsWallet
+      [wallet], //team
+      [8000000],
+      [wallet], //advisors
+      [2000000],
+      {from: owner}
+    );
+
+    const preSaleTx = await crowdsaleDeployer.createPreSale(
+      200 * (1 / 0.5),         // bonus rate: ETH = 200 USD + 50% bonus
+      openingTimeUnix,         // bonus time
+      200 * (1 / 0.5),         // default rate: ETH = 200 USD + 50% bonus
+      owner,
+      wallet,                  // wallet
+      openingTimeUnix,         // today
+      closingTimeUnix,
+      {from: owner}
+    );
+
+/*    await shouldFail.reverting(crowdsaleDeployer.createPreSale(
+      200 * (1 / 0.5),         // bonus rate: ETH = 200 USD + 50% bonus
+      openingTimeUnix,         // bonus time
+      200 * (1 / 0.5),         // default rate: ETH = 200 USD + 50% bonus
+      owner,
+      wallet,                  // wallet
+      openingTimeUnix,         // today
+      closingTimeUnix,
+      {from: owner}
+    ));*/
+  });
+
 });
