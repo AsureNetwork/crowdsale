@@ -74,7 +74,6 @@ contract AsureCrowdsaleDeployer is Ownable {
     );
     token.mint(address(presale), AVAILABLE_PRESALE_SUPPLY);
 
-    require(token.totalSupply() == AVAILABLE_TOTAL_SUPPLY - AVAILABLE_MAINSALE_SUPPLY, "AVAILABLE_TOTAL_SUPPLY");
     return true;
   }
 
@@ -101,7 +100,6 @@ contract AsureCrowdsaleDeployer is Ownable {
     );
     token.mint(address(mainsale), AVAILABLE_MAINSALE_SUPPLY);
 
-    require(token.totalSupply() == AVAILABLE_TOTAL_SUPPLY, "AVAILABLE_TOTAL_SUPPLY");
     return true;
   }
 }
