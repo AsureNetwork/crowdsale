@@ -9,6 +9,7 @@ const TestAsureBonusesCrowdsale = artifacts.require('TestAsureBonusesCrowdsale')
 
 contract('AsureBonusesCrowdsale', async accounts => {
   let owner, token, crowdsale, defaultRate, wallet, openingTime, closingTime;
+
   isolateTests(() => {
     before(async () => {
       owner = accounts[1];

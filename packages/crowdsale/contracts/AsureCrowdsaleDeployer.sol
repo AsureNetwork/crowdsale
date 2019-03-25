@@ -34,6 +34,9 @@ contract AsureCrowdsaleDeployer is Ownable {
     address[] memory advisorAddr,
     uint256[] memory advisorAmounts
   ) onlyOwner public returns (bool) {
+    require(teamAddr.length == teamAmounts.length);
+    require(advisorAddr.length == advisorAmounts.length);
+
     token.mint(foundationWallet, AVAILABLE_FOUNDATION_SUPPLY);
     token.mint(bountyWallet, AVAILABLE_BOUNTY_SUPPLY);
     token.mint(familyFriendsWallet, AVAILABLE_FAMILYFRIENDS_SUPPLY);
