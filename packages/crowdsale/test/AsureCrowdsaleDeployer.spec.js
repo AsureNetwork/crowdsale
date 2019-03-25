@@ -21,453 +21,328 @@ contract('AsureCrowdsaleDeployer', async accounts => {
 
   let crowdsaleDeployer, token, presale, mainsale;
 
-  isolateTests(() => {
+  beforeEach(async () => {
+    crowdsaleDeployer = await AsureCrowdsaleDeployer.new(owner);
+  });
+
+  describe('constructor', () => {
+    it('should transfer ownership to new owner', async () => {
+      expect(await crowdsaleDeployer.owner.call()).to.be.equal(owner);
+    });
+
+    it('should create AsureToken and transfer ownership to new owner', async () => {
+      const token = await AsureToken.at(await crowdsaleDeployer.token.call());
+
+      expect(await token.owner.call()).to.be.equal(owner);
+    });
+  });
+
+  describe('mint', () => {
     beforeEach(async () => {
-      crowdsaleDeployer = await AsureCrowdsaleDeployer.new(owner);
+      token = await AsureToken.at(await crowdsaleDeployer.token.call());
     });
 
-    describe('constructor', () => {
-      it('should transfer ownership to new owner', async () => {
-        expect(await crowdsaleDeployer.owner.call()).to.be.equal(owner);
-      });
-
-      it('should create AsureToken and transfer ownership to new owner', async () => {
-        const token = await AsureToken.at(await crowdsaleDeployer.token.call());
-
-        expect(await token.owner.call()).to.be.equal(owner);
-      });
-    });
-
-    describe('mint', () => {
-      beforeEach(async () => {
-        token = await AsureToken.at(await crowdsaleDeployer.token.call());
-      });
-
-      it('should only be callable by owner', async () => {
-        await shouldFail.reverting(crowdsaleDeployer.mint(
-          faundation,
-          bounty,
-          familyFriends,
-          [team1],
-          [8000000],
-          [advisor1],
-          [2000000],
-        ));
-      });
-
-      it('should revert if team addresses and team amounts do not have the same length', async () => {
-        await shouldFail.reverting(crowdsaleDeployer.mint(
-          faundation,
-          bounty,
-          familyFriends,
-          [team1, team2],
-          [8000000],
-          [advisor1],
-          [2000000],
-          {from: owner}
-        ));
-      });
-
-      it('should revert if advisor addresses and advisor amounts do not have the same length', async () => {
-        await shouldFail.reverting(crowdsaleDeployer.mint(
-          faundation,
-          bounty,
-          familyFriends,
-          [team1],
-          [8000000],
-          [advisor1, advisor2],
-          [2000000],
-          {from: owner}
-        ));
-      });
-
-      it('should revert if amounts do not sum up correctly', async () => {
-        await shouldFail.reverting(crowdsaleDeployer.mint(
-          faundation,
-          bounty,
-          familyFriends,
-          [team1],
-          [9000000], // wrong amount - allowed are only 8000000
-          [advisor1],
-          [2000000],
-          {from: owner}
-        ));
-      });
-
-      it('should revert if amounts do not sum up correctly because it is called a second time', async () => {
-        await crowdsaleDeployer.mint(
-          faundation,
-          bounty,
-          familyFriends,
-          [team1],
-          [8000000],
-          [advisor1],
-          [2000000],
-          {from: owner}
-        );
-
-        await shouldFail.reverting(crowdsaleDeployer.mint(
-          faundation,
-          bounty,
-          familyFriends,
-          [team1],
-          [8000000],
-          [advisor1],
-          [2000000],
-          {from: owner}
-        ));
-      });
-
-      it('should mint tokens with specified amounts', async () => {
-        await crowdsaleDeployer.mint(
-          faundation,
-          bounty,
-          familyFriends,
-          [team1, team2],
-          [4000000, 4000000],
-          [advisor1, advisor2],
-          [1000000, 1000000],
-          {from: owner}
-        );
-
-        expect(await token.balanceOf.call(faundation)).to.be.bignumber.equal(Web3.utils.toWei(new BN('35000000')));
-        expect(await token.balanceOf.call(bounty)).to.be.bignumber.equal(Web3.utils.toWei(new BN('5000000')));
-        expect(await token.balanceOf.call(familyFriends)).to.be.bignumber.equal(Web3.utils.toWei(new BN('5000000')));
-        expect(await token.balanceOf.call(team1)).to.be.bignumber.equal(Web3.utils.toWei(new BN('4000000')));
-        expect(await token.balanceOf.call(team2)).to.be.bignumber.equal(Web3.utils.toWei(new BN('4000000')));
-        expect(await token.balanceOf.call(advisor1)).to.be.bignumber.equal(Web3.utils.toWei(new BN('1000000')));
-        expect(await token.balanceOf.call(advisor2)).to.be.bignumber.equal(Web3.utils.toWei(new BN('1000000')));
-      });
-    });
-
-    describe('createPreSale', () => {
-      const bonusRate = 200 * (1 / 0.5); // bonus rate: ETH = 200 USD + 50% bonus
-      const defaultRate = 200 * (1 / 0.5); // default rate: ETH = 200 USD + 50% bonus
-
-      const now = moment();
-      const openingTime = now.clone().add(1, 'days');
-      const bonusTime = openingTime.clone().add(1, 'week');
-      const closingTime = openingTime.clone().add(2, 'weeks');
-
-      beforeEach(async () => {
-        token = await AsureToken.at(await crowdsaleDeployer.token.call());
-        await crowdsaleDeployer.mint(
-          faundation,
-          bounty,
-          familyFriends,
-          [team1],
-          [8000000],
-          [advisor1],
-          [2000000],
-          {from: owner}
-        );
-      });
-
-      it('should only be callable by owner', async () => {
-        await shouldFail.reverting(crowdsaleDeployer.createPreSale(
-          bonusRate,
-          bonusTime.unix(),
-          defaultRate,
-          owner,
-          wallet,
-          openingTime.unix(),
-          closingTime.unix()
-        ));
-      });
-
-      it('should only be callable if presale does not yet exists', async () => {
-        await crowdsaleDeployer.createPreSale(
-          bonusRate,
-          bonusTime.unix(),
-          defaultRate,
-          owner,
-          wallet,
-          openingTime.unix(),
-          closingTime.unix(),
-          {from: owner}
-        );
-
-        await shouldFail.reverting(crowdsaleDeployer.createPreSale(
-          bonusRate,
-          bonusTime.unix(),
-          defaultRate,
-          owner,
-          wallet,
-          openingTime.unix(),
-          closingTime.unix(),
-          {from: owner}
-        ));
-      });
-
-      it('should instantiate presale correctly', async () => {
-        await crowdsaleDeployer.createPreSale(
-          bonusRate,
-          bonusTime.unix(),
-          defaultRate,
-          owner,
-          wallet,
-          openingTime.unix(),
-          closingTime.unix(),
-          {from: owner}
-        );
-
-        const presale = await AsureCrowdsale.at(await crowdsaleDeployer.presale.call());
-        expect(await presale.bonusRate.call()).to.be.bignumber.equal(new BN(String(bonusRate)));
-        expect(await presale.bonusTime.call()).to.be.bignumber.equal(new BN(String(bonusTime.unix())));
-        expect(await presale.defaultRate.call()).to.be.bignumber.equal(new BN(String(defaultRate)));
-        expect(await presale.owner.call()).to.eq(owner);
-        expect(await presale.wallet.call()).to.eq(wallet);
-        expect(await presale.openingTime.call()).to.be.bignumber.equal(new BN(String(openingTime.unix())));
-        expect(await presale.closingTime.call()).to.be.bignumber.equal(new BN(String(closingTime.unix())));
-      });
-
-      it('should mint tokens for presale with specified amount', async () => {
-        await crowdsaleDeployer.createPreSale(
-          bonusRate,
-          bonusTime.unix(),
-          defaultRate,
-          owner,
-          wallet,
-          openingTime.unix(),
-          closingTime.unix(),
-          {from: owner}
-        );
-
-        const presale = await AsureCrowdsale.at(await crowdsaleDeployer.presale.call());
-        expect(await token.balanceOf.call(presale.address)).to.be.bignumber.equal(Web3.utils.toWei(new BN('10000000')));
-      });
-    });
-
-
-    describe('createMainSale', () => {
-      const bonusRate = 200 * (1 / 0.5); // bonus rate: ETH = 200 USD + 50% bonus
-      const defaultRate = 200 * (1 / 0.5); // default rate: ETH = 200 USD + 50% bonus
-
-      const now = moment();
-      const openingTime = now.clone().add(1, 'days');
-      const bonusTime = openingTime.clone().add(1, 'week');
-      const closingTime = openingTime.clone().add(2, 'weeks');
-
-      beforeEach(async () => {
-        token = await AsureToken.at(await crowdsaleDeployer.token.call());
-        await crowdsaleDeployer.mint(
-          faundation,
-          bounty,
-          familyFriends,
-          [team1],
-          [8000000],
-          [advisor1],
-          [2000000],
-          {from: owner}
-        );
-        await crowdsaleDeployer.createPreSale(
-          bonusRate,
-          bonusTime.unix(),
-          defaultRate,
-          owner,
-          wallet,
-          openingTime.unix(),
-          closingTime.unix(),
-          {from: owner}
-        );
-      });
-
-      it('should only be callable by owner', async () => {
-        await shouldFail.reverting(crowdsaleDeployer.createMainSale(
-          bonusRate,
-          bonusTime.unix(),
-          defaultRate,
-          owner,
-          wallet,
-          openingTime.unix(),
-          closingTime.unix()
-        ));
-      });
-
-      it('should only be callable if mainsale does not yet exists', async () => {
-        await crowdsaleDeployer.createMainSale(
-          bonusRate,
-          bonusTime.unix(),
-          defaultRate,
-          owner,
-          wallet,
-          openingTime.unix(),
-          closingTime.unix(),
-          {from: owner}
-        );
-
-        await shouldFail.reverting(crowdsaleDeployer.createMainSale(
-          bonusRate,
-          bonusTime.unix(),
-          defaultRate,
-          owner,
-          wallet,
-          openingTime.unix(),
-          closingTime.unix(),
-          {from: owner}
-        ));
-      });
-
-      it('should instantiate mainsale correctly', async () => {
-        await crowdsaleDeployer.createMainSale(
-          bonusRate,
-          bonusTime.unix(),
-          defaultRate,
-          owner,
-          wallet,
-          openingTime.unix(),
-          closingTime.unix(),
-          {from: owner}
-        );
-
-        const mainsale = await AsureCrowdsale.at(await crowdsaleDeployer.mainsale.call());
-        expect(await mainsale.bonusRate.call()).to.be.bignumber.equal(new BN(String(bonusRate)));
-        expect(await mainsale.bonusTime.call()).to.be.bignumber.equal(new BN(String(bonusTime.unix())));
-        expect(await mainsale.defaultRate.call()).to.be.bignumber.equal(new BN(String(defaultRate)));
-        expect(await mainsale.owner.call()).to.eq(owner);
-        expect(await mainsale.wallet.call()).to.eq(wallet);
-        expect(await mainsale.openingTime.call()).to.be.bignumber.equal(new BN(String(openingTime.unix())));
-        expect(await mainsale.closingTime.call()).to.be.bignumber.equal(new BN(String(closingTime.unix())));
-      });
-
-      it('should mint tokens for mainsale with specified amount', async () => {
-        await crowdsaleDeployer.createMainSale(
-          bonusRate,
-          bonusTime.unix(),
-          defaultRate,
-          owner,
-          wallet,
-          openingTime.unix(),
-          closingTime.unix(),
-          {from: owner}
-        );
-
-        const mainsale = await AsureCrowdsale.at(await crowdsaleDeployer.mainsale.call());
-        expect(await token.balanceOf.call(mainsale.address)).to.be.bignumber.equal(Web3.utils.toWei(new BN('35000000')));
-      });
-    });
-
-    xit('reverts when transferring to a not whitelisted address address', async function () {
-      const beneficiary = accounts[2];
-      const ethValue = Web3.utils.toWei('1');
-
-      await time.increase(time.duration.days(5));
-
-      const presaleIsOpen = await presale.isOpen.call();
-      expect(presaleIsOpen).to.eq(true);
-
-      // Edge cases that trigger a require statement can be tested for, optionally checking the revert reason as well
-      await shouldFail.reverting(
-        presale
-          .buyTokens
-          .sendTransaction(beneficiary, {value: ethValue, from: beneficiary})
-      );
-    });
-
-    xit('should buy Asure tokens for 1 ETH', async () => {
-      const beneficiary = accounts[2];
-      const ethValue = Web3.utils.toWei('1');
-
-      const presaleIsOpen = await presale.isOpen.call();
-      expect(presaleIsOpen).to.eq(true);
-
-      await presale
-        .addWhitelisted
-        .sendTransaction(beneficiary, {from: owner});
-
-      await presale
-        .buyTokens
-        .sendTransaction(beneficiary, {value: ethValue, from: beneficiary});
-
-      const presaleWeiRaised = await presale.weiRaised.call();
-      expect(Web3.utils.fromWei(presaleWeiRaised)).to.eq('1');
-
-      const beneficiaryBalance = await token.balanceOf.call(beneficiary);
-      expect(Web3.utils.fromWei(beneficiaryBalance)).to.eq('400');
-    });
-
-
-    xit('should burn Asure tokens after preSale', async () => {
-
-      await time.increase(time.duration.weeks(5));
-
-      const presaleIsOpen = await presale.isOpen.call();
-      const presaleHasClosed = await presale.hasClosed.call();
-      expect(presaleIsOpen).to.eq(false);
-      expect(presaleHasClosed).to.eq(true);
-
-      await presale
-        .burn
-        .sendTransaction({from: owner});
-
-      const tokenTotalSupply = await token.totalSupply.call();
-      expect(Web3.utils.fromWei(tokenTotalSupply)).to.eq(String((100 * 10 ** 6) - (10 * 10 ** 6 - 400)));
-
-      //const burnBalance = await token.balanceOf.call(constants.ZERO_ADDRESS);
-      //expect(Web3.utils.fromWei(burnBalance)).to.eq(String(10 * 10 ** 6-400));
-    });
-
-    xit('should not mint too much', async () => {
-      const crowdsaleDeployer = await AsureCrowdsaleDeployer.new(owner);
-
-      const mintTx = await crowdsaleDeployer.mint(
-        wallet,    // foundationWallet
-        wallet,        // bountyWallet
-        wallet, // familyFriendsWallet
-        [wallet], //team
-        [8000000],
-        [wallet], //advisors
-        [2000000],
-        {from: owner}
-      );
-
+    it('should only be callable by owner', async () => {
       await shouldFail.reverting(crowdsaleDeployer.mint(
-        wallet,    // foundationWallet
-        wallet,        // bountyWallet
-        wallet, // familyFriendsWallet
-        [wallet], //team
+        faundation,
+        bounty,
+        familyFriends,
+        [team1],
         [8000000],
-        [wallet], //advisors
+        [advisor1],
+        [2000000],
+      ));
+    });
+
+    it('should revert if team addresses and team amounts do not have the same length', async () => {
+      await shouldFail.reverting(crowdsaleDeployer.mint(
+        faundation,
+        bounty,
+        familyFriends,
+        [team1, team2],
+        [8000000],
+        [advisor1],
         [2000000],
         {from: owner}
       ));
     });
 
-    xit('should not create presale too much', async () => {
-      const crowdsaleDeployer = await AsureCrowdsaleDeployer.new(owner);
-
-      const mintTx = await crowdsaleDeployer.mint(
-        wallet,    // foundationWallet
-        wallet,        // bountyWallet
-        wallet, // familyFriendsWallet
-        [wallet], //team
+    it('should revert if advisor addresses and advisor amounts do not have the same length', async () => {
+      await shouldFail.reverting(crowdsaleDeployer.mint(
+        faundation,
+        bounty,
+        familyFriends,
+        [team1],
         [8000000],
-        [wallet], //advisors
+        [advisor1, advisor2],
+        [2000000],
+        {from: owner}
+      ));
+    });
+
+    it('should revert if amounts do not sum up correctly', async () => {
+      await shouldFail.reverting(crowdsaleDeployer.mint(
+        faundation,
+        bounty,
+        familyFriends,
+        [team1],
+        [9000000], // wrong amount - allowed are only 8000000
+        [advisor1],
+        [2000000],
+        {from: owner}
+      ));
+    });
+
+    it('should revert if amounts do not sum up correctly because it is called a second time', async () => {
+      await crowdsaleDeployer.mint(
+        faundation,
+        bounty,
+        familyFriends,
+        [team1],
+        [8000000],
+        [advisor1],
         [2000000],
         {from: owner}
       );
 
-      const preSaleTx = await crowdsaleDeployer.createPreSale(
-        200 * (1 / 0.5),         // bonus rate: ETH = 200 USD + 50% bonus
-        openingTime.unix(),         // bonus time
-        200 * (1 / 0.5),         // default rate: ETH = 200 USD + 50% bonus
+      await shouldFail.reverting(crowdsaleDeployer.mint(
+        faundation,
+        bounty,
+        familyFriends,
+        [team1],
+        [8000000],
+        [advisor1],
+        [2000000],
+        {from: owner}
+      ));
+    });
+
+    it('should mint tokens with specified amounts', async () => {
+      await crowdsaleDeployer.mint(
+        faundation,
+        bounty,
+        familyFriends,
+        [team1, team2],
+        [4000000, 4000000],
+        [advisor1, advisor2],
+        [1000000, 1000000],
+        {from: owner}
+      );
+
+      expect(await token.balanceOf.call(faundation)).to.be.bignumber.equal(Web3.utils.toWei(new BN('35000000')));
+      expect(await token.balanceOf.call(bounty)).to.be.bignumber.equal(Web3.utils.toWei(new BN('5000000')));
+      expect(await token.balanceOf.call(familyFriends)).to.be.bignumber.equal(Web3.utils.toWei(new BN('5000000')));
+      expect(await token.balanceOf.call(team1)).to.be.bignumber.equal(Web3.utils.toWei(new BN('4000000')));
+      expect(await token.balanceOf.call(team2)).to.be.bignumber.equal(Web3.utils.toWei(new BN('4000000')));
+      expect(await token.balanceOf.call(advisor1)).to.be.bignumber.equal(Web3.utils.toWei(new BN('1000000')));
+      expect(await token.balanceOf.call(advisor2)).to.be.bignumber.equal(Web3.utils.toWei(new BN('1000000')));
+    });
+  });
+
+  describe('createPreSale', () => {
+    const bonusRate = 200 * (1 / 0.5); // bonus rate: ETH = 200 USD + 50% bonus
+    const defaultRate = 200 * (1 / 0.5); // default rate: ETH = 200 USD + 50% bonus
+
+    const now = moment();
+    const openingTime = now.clone().add(1, 'days');
+    const bonusTime = openingTime.clone().add(1, 'week');
+    const closingTime = openingTime.clone().add(2, 'weeks');
+
+    beforeEach(async () => {
+      token = await AsureToken.at(await crowdsaleDeployer.token.call());
+      await crowdsaleDeployer.mint(
+        faundation,
+        bounty,
+        familyFriends,
+        [team1],
+        [8000000],
+        [advisor1],
+        [2000000],
+        {from: owner}
+      );
+    });
+
+    it('should only be callable by owner', async () => {
+      await shouldFail.reverting(crowdsaleDeployer.createPreSale(
+        bonusRate,
+        bonusTime.unix(),
+        defaultRate,
         owner,
-        wallet,                  // wallet
-        openingTime.unix(),         // today
+        wallet,
+        openingTime.unix(),
+        closingTime.unix()
+      ));
+    });
+
+    it('should only be callable if presale does not yet exists', async () => {
+      await crowdsaleDeployer.createPreSale(
+        bonusRate,
+        bonusTime.unix(),
+        defaultRate,
+        owner,
+        wallet,
+        openingTime.unix(),
         closingTime.unix(),
         {from: owner}
       );
 
-      /*    await shouldFail.reverting(crowdsaleDeployer.createPreSale(
-            200 * (1 / 0.5),         // bonus rate: ETH = 200 USD + 50% bonus
-            openingTime.unix(),         // bonus time
-            200 * (1 / 0.5),         // default rate: ETH = 200 USD + 50% bonus
-            owner,
-            wallet,                  // wallet
-            openingTime.unix(),         // today
-            closingTime.unix(),
-            {from: owner}
-          ));*/
+      await shouldFail.reverting(crowdsaleDeployer.createPreSale(
+        bonusRate,
+        bonusTime.unix(),
+        defaultRate,
+        owner,
+        wallet,
+        openingTime.unix(),
+        closingTime.unix(),
+        {from: owner}
+      ));
+    });
+
+    it('should instantiate presale correctly', async () => {
+      await crowdsaleDeployer.createPreSale(
+        bonusRate,
+        bonusTime.unix(),
+        defaultRate,
+        owner,
+        wallet,
+        openingTime.unix(),
+        closingTime.unix(),
+        {from: owner}
+      );
+
+      const presale = await AsureCrowdsale.at(await crowdsaleDeployer.presale.call());
+      expect(await presale.bonusRate.call()).to.be.bignumber.equal(new BN(String(bonusRate)));
+      expect(await presale.bonusTime.call()).to.be.bignumber.equal(new BN(String(bonusTime.unix())));
+      expect(await presale.defaultRate.call()).to.be.bignumber.equal(new BN(String(defaultRate)));
+      expect(await presale.owner.call()).to.eq(owner);
+      expect(await presale.wallet.call()).to.eq(wallet);
+      expect(await presale.openingTime.call()).to.be.bignumber.equal(new BN(String(openingTime.unix())));
+      expect(await presale.closingTime.call()).to.be.bignumber.equal(new BN(String(closingTime.unix())));
+    });
+
+    it('should mint tokens for presale with specified amount', async () => {
+      await crowdsaleDeployer.createPreSale(
+        bonusRate,
+        bonusTime.unix(),
+        defaultRate,
+        owner,
+        wallet,
+        openingTime.unix(),
+        closingTime.unix(),
+        {from: owner}
+      );
+
+      const presale = await AsureCrowdsale.at(await crowdsaleDeployer.presale.call());
+      expect(await token.balanceOf.call(presale.address)).to.be.bignumber.equal(Web3.utils.toWei(new BN('10000000')));
+    });
+  });
+
+
+  describe('createMainSale', () => {
+    const bonusRate = 200 * (1 / 0.5); // bonus rate: ETH = 200 USD + 50% bonus
+    const defaultRate = 200 * (1 / 0.5); // default rate: ETH = 200 USD + 50% bonus
+
+    const now = moment();
+    const openingTime = now.clone().add(1, 'days');
+    const bonusTime = openingTime.clone().add(1, 'week');
+    const closingTime = openingTime.clone().add(2, 'weeks');
+
+    beforeEach(async () => {
+      token = await AsureToken.at(await crowdsaleDeployer.token.call());
+      await crowdsaleDeployer.mint(
+        faundation,
+        bounty,
+        familyFriends,
+        [team1],
+        [8000000],
+        [advisor1],
+        [2000000],
+        {from: owner}
+      );
+      await crowdsaleDeployer.createPreSale(
+        bonusRate,
+        bonusTime.unix(),
+        defaultRate,
+        owner,
+        wallet,
+        openingTime.unix(),
+        closingTime.unix(),
+        {from: owner}
+      );
+    });
+
+    it('should only be callable by owner', async () => {
+      await shouldFail.reverting(crowdsaleDeployer.createMainSale(
+        bonusRate,
+        bonusTime.unix(),
+        defaultRate,
+        owner,
+        wallet,
+        openingTime.unix(),
+        closingTime.unix()
+      ));
+    });
+
+    it('should only be callable if mainsale does not yet exists', async () => {
+      await crowdsaleDeployer.createMainSale(
+        bonusRate,
+        bonusTime.unix(),
+        defaultRate,
+        owner,
+        wallet,
+        openingTime.unix(),
+        closingTime.unix(),
+        {from: owner}
+      );
+
+      await shouldFail.reverting(crowdsaleDeployer.createMainSale(
+        bonusRate,
+        bonusTime.unix(),
+        defaultRate,
+        owner,
+        wallet,
+        openingTime.unix(),
+        closingTime.unix(),
+        {from: owner}
+      ));
+    });
+
+    it('should instantiate mainsale correctly', async () => {
+      await crowdsaleDeployer.createMainSale(
+        bonusRate,
+        bonusTime.unix(),
+        defaultRate,
+        owner,
+        wallet,
+        openingTime.unix(),
+        closingTime.unix(),
+        {from: owner}
+      );
+
+      const mainsale = await AsureCrowdsale.at(await crowdsaleDeployer.mainsale.call());
+      expect(await mainsale.bonusRate.call()).to.be.bignumber.equal(new BN(String(bonusRate)));
+      expect(await mainsale.bonusTime.call()).to.be.bignumber.equal(new BN(String(bonusTime.unix())));
+      expect(await mainsale.defaultRate.call()).to.be.bignumber.equal(new BN(String(defaultRate)));
+      expect(await mainsale.owner.call()).to.eq(owner);
+      expect(await mainsale.wallet.call()).to.eq(wallet);
+      expect(await mainsale.openingTime.call()).to.be.bignumber.equal(new BN(String(openingTime.unix())));
+      expect(await mainsale.closingTime.call()).to.be.bignumber.equal(new BN(String(closingTime.unix())));
+    });
+
+    it('should mint tokens for mainsale with specified amount', async () => {
+      await crowdsaleDeployer.createMainSale(
+        bonusRate,
+        bonusTime.unix(),
+        defaultRate,
+        owner,
+        wallet,
+        openingTime.unix(),
+        closingTime.unix(),
+        {from: owner}
+      );
+
+      const mainsale = await AsureCrowdsale.at(await crowdsaleDeployer.mainsale.call());
+      expect(await token.balanceOf.call(mainsale.address)).to.be.bignumber.equal(Web3.utils.toWei(new BN('35000000')));
     });
   });
 });

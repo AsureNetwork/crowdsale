@@ -108,7 +108,7 @@ contract('AsureCrowdsale', async accounts => {
 
     describe('addWhitelistedAccounts', () => {
       it('should revert if not called by owner or creator of the crowdsale', async () => {
-        await shouldFail.reverting(crowdsale.addWhitelistedAccounts([accounts[1]], { from: accounts[2] }));
+        await shouldFail.reverting(crowdsale.addWhitelistedAccounts([accounts[1]], {from: accounts[2]}));
       });
 
       it('should add whitelist users', async () => {
@@ -127,6 +127,31 @@ contract('AsureCrowdsale', async accounts => {
         expect(await crowdsale.isWhitelisted.call(accounts[3])).to.eq(true);
         expect(await crowdsale.isWhitelisted.call(accounts[4])).to.eq(true);
         expect(await crowdsale.isWhitelisted.call(accounts[5])).to.eq(true);
+      });
+    });
+
+    describe('buyTokens', () => {
+      const beneficiary = accounts[3];
+
+      beforeEach(async () => {
+        await time.increase(time.duration.days(5));
+        expect(await crowdsale.isOpen.call()).to.eq(true);
+      });
+
+      it('should revert if the beneficiary is not whitelisted', async () => {
+        await shouldFail.reverting(crowdsale.buyTokens.sendTransaction(beneficiary, {
+          value: Web3.utils.toWei('1'),
+          from: beneficiary
+        }));
+      });
+
+      it('should buy tokens for 1 wei', async () => {
+        await crowdsale.addWhitelisted.sendTransaction(beneficiary, {from: owner});
+
+        await crowdsale.buyTokens.sendTransaction(beneficiary, {value: new BN('1'), from: beneficiary});
+
+        expect(await crowdsale.weiRaised.call()).to.bignumber.equal(new BN('1'));
+        expect(await token.balanceOf.call(beneficiary)).to.bignumber.equal(new BN('1000'));
       });
     });
   });
