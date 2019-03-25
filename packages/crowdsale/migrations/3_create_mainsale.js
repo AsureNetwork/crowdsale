@@ -15,20 +15,23 @@ module.exports = async function (deployer, network) {
 
   const crowdsaleDeployer = await AsureCrowdsaleDeployer.at(AsureCrowdsaleDeployer.address);
 
+  const ethUsdPrice = 136.79; // ETH price in USD
+  const bonusRate = Math.ceil(ethUsdPrice * (1 / 0.85));
+  const defaultRate = Math.ceil(ethUsdPrice);
+
   const mainSaleTx = await crowdsaleDeployer.createMainSale(
-    200 * (1 / 0.5),         // bonus rate: ETH = 200 USD + 50% bonus
-    mainSaleBonusTime,     // bonus time
-    200 * (1 / 0.5),         // default rate: ETH = 200 USD + 50% bonus
+    bonusRate,
+    mainSaleBonusTime,
+    defaultRate,
     config.owner,
-    config.crowdsaleWallet,     // wallet
-    mainSaleOpeningTime,        // december 2019
+    config.crowdsaleWallet,
+    mainSaleOpeningTime,
     mainSaleClosingTime,
     { from: config.owner }
   );
 
   config.mainSale.addr = await crowdsaleDeployer.mainsale.call();
   saveCrowdsaleConfig(__filename, network, config);
-
 
   console.log('Tx mainSaleTx gas used', mainSaleTx.receipt.gasUsed);
   console.log(`Asure MainSale deployment successful.`);

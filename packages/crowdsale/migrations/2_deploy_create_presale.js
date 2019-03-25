@@ -1,4 +1,3 @@
-const fs = require('fs');
 const moment = require('moment');
 const {loadCrowdsaleConfig, saveCrowdsaleConfig} = require('../utils/migrations');
 
@@ -38,13 +37,17 @@ module.exports = async function (deployer, network) {
     { from: config.owner }
   );
 
+  const ethUsdPrice = 136.79; // ETH price in USD
+  const bonusRate = Math.ceil(ethUsdPrice * (1 / 0.50));
+  const defaultRate = Math.ceil(ethUsdPrice * (1 / 0.75));
+
   const preSaleTx = await crowdsaleDeployer.createPreSale(
-    200 * (1 / 0.5),         // bonus rate: ETH = 200 USD + 50% bonus
-    preSaleBonusTime,        // bonus time
-    200 * (1 / 0.5),         // default rate: ETH = 200 USD + 50% bonus
+    bonusRate,
+    preSaleBonusTime,
+    defaultRate,
     config.owner,
-    config.crowdsaleWallet,  // wallet
-    preSaleOpeningTime,      // august 2019
+    config.crowdsaleWallet,
+    preSaleOpeningTime,
     preSaleClosingTime,
     { from: config.owner }
   );
@@ -60,14 +63,14 @@ module.exports = async function (deployer, network) {
 
 
 async function createVestingContract(deployer, beneficiary, mainSaleOpeningTime) {
-  const twoYearsInSeconds = 63072000; // ~2 yr = 60*60*24*365*2
+  const twoYearsInSeconds = moment.duration().add(2, 'years').asSeconds();
 
   await deployer.deploy(
     TokenVesting,
     beneficiary.owner,   // address
     mainSaleOpeningTime, // unix timestemp
     0,                   // cliffDuration
-    twoYearsInSeconds,   // duration in sec ~2 yr = 60*60*24*365*2
+    twoYearsInSeconds,   // duration in seconds
     false                // bool revocable
   );
 
