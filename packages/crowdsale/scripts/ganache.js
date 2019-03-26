@@ -22,8 +22,8 @@ const options = {
   // debug: true,
   logger: {log: log.info},
   blocktime: 0,
-  gasPrice: 1,
-  gasLimit: 0xfffffffffff,
+  //gasPrice: 1,
+  //gasLimit: 0xfffffffffff,
   vmErrorsOnRPCResponse: true
 };
 
