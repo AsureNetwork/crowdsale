@@ -2,7 +2,15 @@ const fs = require('fs');
 const path = require('path');
 
 function loadCrowdsaleConfig(migration, network) {
+  if (migration == null) {
+    /*
+     * Retrieve the latest migration file name  if no migration is specified.
+     */
+    const allMigrations = fs.readdirSync(path.join(__dirname, '../migrations')).sort();
+    migration = allMigrations[allMigrations.length - 1];
+  }
   migration = path.basename(migration).charAt(0);
+
 
   const fileName = `crowdsale-${network}-${migration}.json`;
 

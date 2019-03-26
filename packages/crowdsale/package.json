@@ -10,6 +10,7 @@
   "scripts": {
     "compile": "truffle compile",
     "test": "truffle test",
+    "test:integration": "truffle test ./test/Integration.spec.js",
     "coverage": "solidity-coverage # && copyfiles coverage/*.* ../../docs/coverage",
     "flattener": "npm-run-all flattener:token flattener:crowdsale flattener:deployer",
     "flattener:token": "truffle-flattener contracts/AsureToken.sol > build/flattened/AsureTokenFlattened.sol",

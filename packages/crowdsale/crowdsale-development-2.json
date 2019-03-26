@@ -11,11 +11,13 @@
     "decimals": "18"
   },
   "preSale": {
+    "ethUsdPrice": 136.79,
     "opening": "2019-08-01 00:00",
     "bonusTime": "2019-08-08 00:00",
     "closing": "2019-08-15 00:00"
   },
   "mainSale": {
+    "ethUsdPrice": 136.79,
     "opening": "2019-12-1 00:00",
     "bonusTime": "2019-12-15 00:00",
     "closing": "2019-12-31 00:00"

@@ -22,9 +22,11 @@ const options = {
   // debug: true,
   logger: {log: log.info},
   blocktime: 0,
-  //gasPrice: 1,
-  //gasLimit: 0xfffffffffff,
-  vmErrorsOnRPCResponse: true
+  // gasPrice: 1,
+  // gasLimit: 0xfffffffffff,
+  vmErrorsOnRPCResponse: true,
+  accounts: 200,
+  defaultBalanceEther: 99999999
 };
 
 const server = Ganache.server(options);

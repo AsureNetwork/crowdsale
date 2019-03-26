@@ -21,8 +21,6 @@ module.exports = async function (deployer, network) {
     await createVestingContract(deployer, config.advisor[i], mainSaleOpeningTime);
   }
 
-
-
   await deployer.deploy(
     AsureCrowdsaleDeployer,
     config.owner,
@@ -47,7 +45,7 @@ module.exports = async function (deployer, network) {
     { from: config.owner }
   );
 
-  const ethUsdPrice = 136.79; // ETH price in USD
+  const ethUsdPrice = config.preSale.ethUsdPrice;
   const bonusRate = Math.ceil(ethUsdPrice * (1 / 0.50));
   const defaultRate = Math.ceil(ethUsdPrice * (1 / 0.75));
 
