@@ -25,7 +25,7 @@ const options = {
   // gasPrice: 1,
   // gasLimit: 0xfffffffffff,
   vmErrorsOnRPCResponse: true,
-  accounts: 200,
+  total_accounts: 200,
   defaultBalanceEther: 99999999
 };
 
