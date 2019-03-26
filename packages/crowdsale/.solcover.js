@@ -1,6 +1,6 @@
 module.exports = {
   port: 8555,
-  testrpcOptions: '-p 8555 --mnemonic "flight cute ski coffee decide milk bitter table speed orchard bag meadow"',
+  testrpcOptions: '-a 200 -p 8555 --mnemonic "flight cute ski coffee decide milk bitter table speed orchard bag meadow"',
   //norpc: true,
   dir: '.',
   copyPackages: ['openzeppelin-solidity'],

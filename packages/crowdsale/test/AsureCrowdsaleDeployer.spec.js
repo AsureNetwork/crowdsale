@@ -2,7 +2,6 @@ const moment = require('moment');
 const Web3 = require('web3');
 const {BN, time, constants, expectEvent, shouldFail} = require('openzeppelin-test-helpers');
 const {expect} = require('chai');
-const {isolateTests} = require("../utils/testHelpers");
 
 const AsureToken = artifacts.require('AsureToken');
 const AsureCrowdsale = artifacts.require('AsureCrowdsale');

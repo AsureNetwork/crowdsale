@@ -33,10 +33,11 @@ module.exports = async function (deployer, network) {
     config.owner,
     config.token.addr
   );
+  config.bountyAddr = AsureBounty.address;
 
   const mintTx = await crowdsaleDeployer.mint(
     config.foundationWallet,
-    AsureBounty.address,
+    config.bountyAddr,
     config.familyFriendsWallet,
     config.team.map(b => b.addr),
     config.team.map(b => b.amount),
