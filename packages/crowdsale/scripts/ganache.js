@@ -7,18 +7,15 @@ const util = require('util');
 const path = require('path');
 const exec = util.promisify(require('child_process').exec);
 const Ganache = require('ganache-cli');
+const moment = require('moment');
 const log = require('../utils/logger');
-const now = new Date();
-
-function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+const {initialBlocktime} = require('../utils/testHelpers');
 
 const options = {
   port: 8545,
   network_id: 1234567890,
   mnemonic: "flight cute ski coffee decide milk bitter table speed orchard bag meadow",
-  time: now, /*ISO 8601*/
+  time: initialBlocktime.toDate(),
   // debug: true,
   logger: {log: log.info},
   blocktime: 0,
@@ -31,10 +28,10 @@ const options = {
 
 const server = Ganache.server(options);
 
-// const getUseCase = secretKey => {
-//   const acc = options.accounts.find(a => a.secretKey === `0x${secretKey}`);
-//   return acc ? acc.usecase : 'null';
-// };
+const getUseCase = secretKey => {
+  const acc = options.accounts.find(a => a.secretKey === `0x${secretKey}`);
+  return acc ? acc.usecase : 'null';
+};
 
 server.listen(options.port, async (err, result) => {
   if (err) {
@@ -44,39 +41,19 @@ server.listen(options.port, async (err, result) => {
     log.info('EthereumJS TestRPC');
     log.info("gasPrice: " + options.gasPrice);
     log.info("gasLimit: " + options.gasLimit);
-    // log.info('Accounts:');
-    // Object.keys(state.accounts).forEach((address, index) => {
-    //   const secretKey = state.accounts[address].secretKey.toString('hex');
-    //   log.info(
-    //     `(${index}) ${address}${
-    //       state.isUnlocked(address) === false ? ' ðŸ”’' : ''
-    //       }, pKey: ${secretKey}, ${getUseCase(secretKey)}`
-    //   );
-    // });
+    log.info("time: " + initialBlocktime.toISOString());
+    log.info('Accounts:');
+    Object.keys(state.accounts).forEach((address, index) => {
+      const secretKey = state.accounts[address].secretKey.toString('hex');
+      log.info(
+        `(${index}) ${address}${
+          state.isUnlocked(address) === false ? ' ðŸ”’' : ''
+          }, pKey: ${secretKey}`
+      );
+    });
 
     log.info(`Listening on ${options.hostname || 'localhost'}:${options.port}`);
-
-    try {
-      /*      if (process.argv.includes('--migrate')) {
-              log.info('Deploying smart contracts ...');
-              await exec('npm run migrate-dev');
-              log.info('Deployment of smart contracts was successful.');
-            }
-
-            if (process.argv.includes('--deploy-test-data')) {
-              log.info('Deploying test data. This will take a few minutes ...');
-              await delay(2500);
-              await await exec('npm run deploy-dev', {
-                cwd: path.resolve(__dirname, '../../gpcli')
-              });
-              log.info('Deployment of test data was successful');
-            }*/
-
-      log.info(`Started successfully`);
-    } catch (error) {
-      log.error(error);
-      process.exit(1);
-    }
+    log.info(`Started successfully`);
   }
 });
 

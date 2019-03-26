@@ -2,7 +2,7 @@ const {BN, time, constants, expectEvent, shouldFail} = require('openzeppelin-tes
 const Web3 = require('web3');
 const {expect} = require('chai');
 const moment = require('moment');
-const {isolateTests} = require("../utils/testHelpers");
+const {isolateTests, initialBlocktime} = require("../utils/testHelpers");
 
 const TestToken = artifacts.require('TestToken');
 const TestAsureBonusesCrowdsale = artifacts.require('TestAsureBonusesCrowdsale');
@@ -17,8 +17,7 @@ contract('AsureBonusesCrowdsale', async accounts => {
 
       token = await TestToken.new();
 
-      const now = moment();
-      openingTime = now.clone().add(1, 'days');
+      openingTime = initialBlocktime.clone().add(1, 'days');
       closingTime = openingTime.clone().add(2, 'weeks');
       bonusRate = new BN('3');
       bonusTime = openingTime.clone().add(1, 'week');

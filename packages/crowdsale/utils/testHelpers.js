@@ -1,4 +1,5 @@
 const Web3 = require('web3');
+const moment = require('moment');
 
 function send(method, params = []) {
   const jsonrpc = '2.0';
@@ -32,4 +33,6 @@ function isolateTests(tests) {
   });
 }
 
-module.exports = {send, isolateTests};
+const initialBlocktime = moment('2019-07-22T22:00:00.000Z');
+
+module.exports = {send, isolateTests, initialBlocktime};

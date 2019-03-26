@@ -1,7 +1,8 @@
 const moment = require('moment');
 const Web3 = require('web3');
-const {BN, time, constants, expectEvent, shouldFail} = require('openzeppelin-test-helpers');
+const {BN, shouldFail} = require('openzeppelin-test-helpers');
 const {expect} = require('chai');
+const {initialBlocktime} = require("../utils/testHelpers");
 
 const AsureToken = artifacts.require('AsureToken');
 const AsureCrowdsale = artifacts.require('AsureCrowdsale');
@@ -18,7 +19,7 @@ contract('AsureCrowdsaleDeployer', async accounts => {
   const advisor1 = accounts[8];
   const advisor2 = accounts[9];
 
-  let crowdsaleDeployer, token, presale, mainsale;
+  let crowdsaleDeployer, token;
 
   beforeEach(async () => {
     crowdsaleDeployer = await AsureCrowdsaleDeployer.new(owner);
@@ -142,8 +143,7 @@ contract('AsureCrowdsaleDeployer', async accounts => {
     const bonusRate = 200 * (1 / 0.5); // bonus rate: ETH = 200 USD + 50% bonus
     const defaultRate = 200 * (1 / 0.5); // default rate: ETH = 200 USD + 50% bonus
 
-    const now = moment();
-    const openingTime = now.clone().add(1, 'days');
+    const openingTime = initialBlocktime.clone().add(1, 'days');
     const bonusTime = openingTime.clone().add(1, 'week');
     const closingTime = openingTime.clone().add(2, 'weeks');
 
@@ -241,8 +241,7 @@ contract('AsureCrowdsaleDeployer', async accounts => {
     const bonusRate = 200 * (1 / 0.5); // bonus rate: ETH = 200 USD + 50% bonus
     const defaultRate = 200 * (1 / 0.5); // default rate: ETH = 200 USD + 50% bonus
 
-    const now = moment();
-    const openingTime = now.clone().add(1, 'days');
+    const openingTime = initialBlocktime.clone().add(1, 'days');
     const bonusTime = openingTime.clone().add(1, 'week');
     const closingTime = openingTime.clone().add(2, 'weeks');
 

@@ -10,7 +10,16 @@ const AsureToken = artifacts.require('AsureToken');
 const AsureCrowdsale = artifacts.require('AsureCrowdsale');
 const TokenVesting = artifacts.require('TokenVesting');
 
-const config = loadCrowdsaleConfig(null, 'development');
+/*
+ * XXX The selected network is not available in tests so get it from the commandline if possible.
+ * This makes the integration tests work in "development" and "coverage" networks.
+ */
+let network = 'development';
+if (process.argv.includes('--network')) {
+  const idx = process.argv.indexOf('--network');
+  network = process.argv[idx + 1];
+}
+const config = loadCrowdsaleConfig(null, network);
 
 contract('Integration', async accounts => {
   let token;
