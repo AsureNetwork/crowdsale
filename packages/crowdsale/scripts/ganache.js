@@ -9,7 +9,8 @@ const exec = util.promisify(require('child_process').exec);
 const Ganache = require('ganache-cli');
 const moment = require('moment');
 const log = require('../utils/logger');
-const {initialBlocktime} = require('../utils/testHelpers');
+
+const initialBlocktime = moment('2019-07-22T22:00:00.000Z');
 
 const options = {
   port: 8545,
@@ -52,8 +53,15 @@ server.listen(options.port, async (err, result) => {
       );
     });
 
+    // server.provider.send({id: 0, jsonrpc: '2.0', method: 'evm_snapshot', params: []}, (err, result) => {
+    //   if (result.error) {
+    //     log.error('Failed to create snapshot #1');
+    //     process.exit(1);
+    //   } else {
     log.info(`Listening on ${options.hostname || 'localhost'}:${options.port}`);
     log.info(`Started successfully`);
+    //   }
+    // });
   }
 });
 
