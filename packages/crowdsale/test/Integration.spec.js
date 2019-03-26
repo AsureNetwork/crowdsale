@@ -1,4 +1,4 @@
-const {BN, time, constants, expectEvent, shouldFail} = require('openzeppelin-test-helpers');
+const {BN, time, constants, expectEvent, balance, shouldFail} = require('openzeppelin-test-helpers');
 const moment = require('moment');
 const Web3 = require('web3');
 const {expect} = require('chai');
@@ -24,10 +24,11 @@ const config = loadCrowdsaleConfig(null, network);
 
 contract('Integration', async accounts => {
   isolateAllTests(() => {
-    let token;
+    let token, crowdsaleWalletTracker;
 
     before(async () => {
       token = await AsureToken.at(config.token.addr);
+      crowdsaleWalletTracker = await balance.tracker(config.crowdsaleWallet);
     });
 
     describe('Initial ASR token distribution', () => {
@@ -82,18 +83,21 @@ contract('Integration', async accounts => {
     });
 
     describe('PreSale', () => {
-      let presale;
+      let investors, bonusRate, defaultRate, presale;
 
       before(async () => {
+        investors = accounts.slice(100, 200);
+        bonusRate = new BN('274');
+        defaultRate = new BN('183');
         presale = await AsureCrowdsale.at(config.preSale.addr);
       });
 
       it('should have been initialized correctly', async () => {
-        expect(await presale.bonusRate.call()).to.be.bignumber.equal(new BN('274'), 'bonusRate');
+        expect(await presale.bonusRate.call()).to.be.bignumber.equal(bonusRate, 'bonusRate');
         expect(await presale.bonusTime.call()).to.be.bignumber.equal(
           new BN(String(moment(config.preSale.bonusTime, config.dateFormat).unix())), 'bonusTime'
         );
-        expect(await presale.defaultRate.call()).to.be.bignumber.equal(new BN('183'), 'defaultRate');
+        expect(await presale.defaultRate.call()).to.be.bignumber.equal(defaultRate, 'defaultRate');
         expect(await presale.owner.call()).to.equalIgnoreCase(config.owner, 'owner');
         expect(await presale.wallet.call()).to.equalIgnoreCase(config.crowdsaleWallet, 'wallet');
         expect(await presale.token.call()).to.equalIgnoreCase(token.address, 'token');
@@ -112,14 +116,94 @@ contract('Integration', async accounts => {
         expect(await presale.hasClosed.call()).to.be.equal(false, 'hasClosed');
       });
 
+      it('should have whitelisted all investors', async () => {
+        await presale.addWhitelistedAccounts(investors, {from: config.owner});
+
+        for(let investor of investors) {
+          expect(await presale.isWhitelisted.call(investor)).to.be.equal(true);
+        }
+      });
+
       describe('in first week', () => {
         it('should be open', async () => {
           await advanceBlocktime(moment(config.preSale.opening, config.dateFormat));
           expect(await presale.isOpen()).to.equal(true);
         });
 
-        it('should sell ASR tokens with bonusRate in first week', async () => {
+        it('should sell ASR tokens with bonusRate', async () => {
+          const earlyInvestors = investors.slice(0, 20);
 
+          expect(earlyInvestors.length).to.be.equal(20);
+          for(let investor of earlyInvestors) {
+            await presale.buyTokens(investor, {
+              from: investor,
+              value: Web3.utils.toWei('1000')
+            });
+
+            expect(await token.balanceOf.call(investor)).to.be.bignumber.equal(
+              Web3.utils.toWei(new BN('274000'))
+            );
+          }
+
+          expect(await token.balanceOf.call(presale.address)).to.be.bignumber.equal(
+            Web3.utils.toWei(new BN('4520000'))
+          );
+          expect(await crowdsaleWalletTracker.delta()).to.be.bignumber.equal(
+            Web3.utils.toWei(new BN('20000'))
+          );
+        });
+      });
+
+      describe('in second week', () => {
+        it('should be open', async () => {
+          await advanceBlocktime(moment(config.preSale.bonusTime, config.dateFormat).add(1, 'second'));
+          expect(await presale.isOpen()).to.equal(true);
+        });
+
+        it('should sell ASR tokens with defaultRate', async () => {
+          const defaultInvestors = investors.slice(20, 40);
+
+          expect(defaultInvestors.length).to.be.equal(20);
+          for(let investor of defaultInvestors) {
+            await presale.buyTokens(investor, {
+              from: investor,
+              value: Web3.utils.toWei('1000')
+            });
+
+            expect(await token.balanceOf.call(investor)).to.be.bignumber.equal(
+              Web3.utils.toWei(new BN('183000'))
+            );
+          }
+
+          expect(await token.balanceOf.call(presale.address)).to.be.bignumber.equal(
+            Web3.utils.toWei(new BN('860000'))
+          );
+          expect(await crowdsaleWalletTracker.delta()).to.be.bignumber.equal(
+            Web3.utils.toWei(new BN('20000'))
+          );
+        });
+      });
+
+      describe('after closed', () => {
+        it('should be open', async () => {
+          await advanceBlocktime(moment(config.preSale.closing, config.dateFormat).add(1, 'second'));
+          expect(await presale.isOpen()).to.equal(false);
+          expect(await presale.hasClosed()).to.equal(true);
+        });
+
+        it('everyone should be able to burn remaining tokens', async () => {
+          expect(await token.balanceOf.call(presale.address)).to.be.bignumber.equal(
+            Web3.utils.toWei(new BN('860000'))
+          );
+
+          await presale.burn();
+
+          expect(await token.balanceOf.call(presale.address)).to.be.bignumber.equal(
+            Web3.utils.toWei(new BN('0'))
+          );
+          expect(await token.totalSupply.call()).to.be.bignumber.equal(
+            (await token.cap()).sub(Web3.utils.toWei(new BN('860000')))
+          );
         });
       });
     });

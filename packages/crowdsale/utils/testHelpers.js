@@ -59,7 +59,7 @@ async function advanceBlocktime(to) {
   const from = moment.unix(await time.latest());
   const diff = moment.duration(to.diff(from));
 
-  console.log(`advanceBlocktime: from ${from.unix()}, to ${to.unix()}, diff ${diff.asSeconds()}`);
+  //console.log(`advanceBlocktime: from ${from.unix()}, to ${to.unix()}, diff ${diff.asSeconds()}`);
 
   await time.increase(diff.asSeconds());
 }

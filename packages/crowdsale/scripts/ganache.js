@@ -24,7 +24,7 @@ const options = {
   // gasLimit: 0xfffffffffff,
   vmErrorsOnRPCResponse: true,
   total_accounts: 200,
-  defaultBalanceEther: 99999999
+  default_balance_ether: 9999999
 };
 
 const server = Ganache.server(options);
