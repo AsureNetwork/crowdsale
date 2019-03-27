@@ -119,7 +119,7 @@ contract('Integration', async accounts => {
       it('should have whitelisted all investors', async () => {
         await presale.addWhitelistedAccounts(investors, {from: config.owner});
 
-        for(let investor of investors) {
+        for (let investor of investors) {
           expect(await presale.isWhitelisted.call(investor)).to.be.equal(true);
         }
       });
@@ -134,7 +134,7 @@ contract('Integration', async accounts => {
           const earlyInvestors = investors.slice(0, 20);
 
           expect(earlyInvestors.length).to.be.equal(20);
-          for(let investor of earlyInvestors) {
+          for (let investor of earlyInvestors) {
             await presale.buyTokens(investor, {
               from: investor,
               value: Web3.utils.toWei('1000')
@@ -164,7 +164,7 @@ contract('Integration', async accounts => {
           const defaultInvestors = investors.slice(20, 40);
 
           expect(defaultInvestors.length).to.be.equal(20);
-          for(let investor of defaultInvestors) {
+          for (let investor of defaultInvestors) {
             await presale.buyTokens(investor, {
               from: investor,
               value: Web3.utils.toWei('1000')
@@ -205,6 +205,25 @@ contract('Integration', async accounts => {
             (await token.cap()).sub(Web3.utils.toWei(new BN('860000')))
           );
         });
+      });
+    });
+
+    describe('Vested team and advisor tokens', () => {
+      it('should be released two years after main sale opening', async () => {
+        await advanceBlocktime(moment(config.mainSale.opening, config.dateFormat).add(2, 'years').add(1, 'second'));
+
+        for (let member of config.team.concat(config.advisor)) {
+          expect(await token.balanceOf.call(member.owner)).to.be.bignumber.equal(
+            Web3.utils.toWei(new BN('0'))
+          );
+
+          const tokenVesting = await TokenVesting.at(member.addr);
+          await tokenVesting.release(token.address, {from: member.owner});
+
+          expect(await token.balanceOf.call(member.owner)).to.be.bignumber.equal(
+            Web3.utils.toWei(new BN(String(member.amount)))
+          );
+        }
       });
     });
   });
