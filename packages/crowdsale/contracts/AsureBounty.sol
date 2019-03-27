@@ -8,9 +8,9 @@ contract AsureBounty is Ownable {
   uint8 private constant decimals = 18;
   uint256 private constant decimalFactor = 10 ** uint256(decimals);
 
-  constructor (address owner, address tokenAddr) public{
+  constructor (address owner, address tokenAddr) public {
     transferOwnership(owner);
-    token = IERC20(address(tokenAddr));
+    token = IERC20(tokenAddr);
   }
 
   function drop(address[] memory recipients, uint256[] memory values) onlyOwner public {
@@ -21,7 +21,7 @@ contract AsureBounty is Ownable {
 
   function airdrop(address[] memory recipients) onlyOwner public {
     for (uint256 i = 0; i < recipients.length; i++) {
-      token.transfer(recipients[i], 100*decimalFactor); //
+      token.transfer(recipients[i], 100 * decimalFactor);
     }
   }
 }
