@@ -1,5 +1,3 @@
-const fs = require('fs');
-const path = require('path');
 const moment = require('moment');
 const {loadCrowdsaleConfig, saveCrowdsaleConfig} = require('../utils/migrations');
 
@@ -15,7 +13,7 @@ module.exports = async function (deployer, network) {
 
   const crowdsaleDeployer = await AsureCrowdsaleDeployer.at(AsureCrowdsaleDeployer.address);
 
-  const ethUsdPrice = 136.79; // ETH price in USD
+  const ethUsdPrice = config.mainSale.ethUsdPrice;
   const bonusRate = Math.ceil(ethUsdPrice * (1 / 0.85));
   const defaultRate = Math.ceil(ethUsdPrice);
 

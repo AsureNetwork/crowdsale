@@ -21,8 +21,6 @@ module.exports = async function (deployer, network) {
     await createVestingContract(deployer, config.advisor[i], mainSaleOpeningTime);
   }
 
-
-
   await deployer.deploy(
     AsureCrowdsaleDeployer,
     config.owner,
@@ -35,10 +33,11 @@ module.exports = async function (deployer, network) {
     config.owner,
     config.token.addr
   );
+  config.bountyAddr = AsureBounty.address;
 
   const mintTx = await crowdsaleDeployer.mint(
     config.foundationWallet,
-    AsureBounty.address,
+    config.bountyAddr,
     config.familyFriendsWallet,
     config.team.map(b => b.addr),
     config.team.map(b => b.amount),
@@ -47,7 +46,7 @@ module.exports = async function (deployer, network) {
     { from: config.owner }
   );
 
-  const ethUsdPrice = 136.79; // ETH price in USD
+  const ethUsdPrice = config.preSale.ethUsdPrice;
   const bonusRate = Math.ceil(ethUsdPrice * (1 / 0.50));
   const defaultRate = Math.ceil(ethUsdPrice * (1 / 0.75));
 
