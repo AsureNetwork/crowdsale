@@ -1,6 +1,12 @@
 # Contracts requirements 
 
-### Token Details
+## Bug Bounty Program
+To minimize risk and identify potential vectors of attack we launched a bug bounty program before the
+Crowdsale begins. The bug bounty payouts for hackers will focus on major attacks:
+Gaining access to ETH or ERC20 tokens in locking contracts; 
+Breaking the smart-contracts, either by passing a decision or draining its funds against a majority function. 
+
+## Token Details
 |||
 |---|---|
 |Token name (Ticker)   | Asure Token (ASR)  |
@@ -25,7 +31,7 @@
 |||
 |Hardcap    | $ 40.000.000  |
 
-### Token allocation
+## Token allocation
  
 ||||
 |---:|---:|---|
