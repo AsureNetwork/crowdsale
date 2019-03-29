@@ -2,9 +2,12 @@ pragma solidity ^0.5.0;
 
 import "./AsureToken.sol";
 import "./AsureCrowdsale.sol";
+import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "openzeppelin-solidity/contracts/drafts/TokenVesting.sol";
 
 contract AsureCrowdsaleDeployer is Ownable {
+  using SafeMath for uint256;
+
   AsureToken public token;
   AsureCrowdsale public presale;
   AsureCrowdsale public mainsale;
@@ -41,13 +44,13 @@ contract AsureCrowdsaleDeployer is Ownable {
     token.mint(bountyWallet, AVAILABLE_BOUNTY_SUPPLY);
     token.mint(familyFriendsWallet, AVAILABLE_FAMILYFRIENDS_SUPPLY);
     for (uint i = 0; i < teamAddr.length; i++) {
-      token.mint(teamAddr[i], teamAmounts[i] * decimalFactor);
+      token.mint(teamAddr[i], teamAmounts[i].mul(decimalFactor));
     }
     for (uint i = 0; i < advisorAddr.length; i++) {
-      token.mint(advisorAddr[i], advisorAmounts[i] * decimalFactor);
+      token.mint(advisorAddr[i], advisorAmounts[i].mul(decimalFactor));
     }
 
-    require(token.totalSupply() == AVAILABLE_TOTAL_SUPPLY - AVAILABLE_PRESALE_SUPPLY - AVAILABLE_MAINSALE_SUPPLY, "AVAILABLE_TOTAL_SUPPLY");
+    require(token.totalSupply() == AVAILABLE_TOTAL_SUPPLY.sub(AVAILABLE_PRESALE_SUPPLY).sub(AVAILABLE_MAINSALE_SUPPLY), "AVAILABLE_TOTAL_SUPPLY");
     return true;
   }
 
