@@ -1,5 +1,10 @@
 # Contracts requirements 
 
+## TGE Paper
+This document outlines important details about the upcoming ASR Token Generation Event (TGE), the purpose of the ASR token, and the legal requirements to participate in the ASR TGE.
+
+[Asure Network TGE Paper][asure tge].
+
 ## Bug Bounty Program
 To minimize risk and identify potential vectors of attack we launched a bug bounty program before the
 Crowdsale begins. The bug bounty payouts for hackers will focus on major attacks:
@@ -42,3 +47,7 @@ Breaking the smart-contracts, either by passing a decision or draining its funds
 | 5%  |   5.000.000 ASR | Bounty |
 | 5%  |   5.000.000 ASR | Family & Friends |
 | 2%  |   2.000.000 ASR | Advisors |
+
+
+
+[asure tge]: https://www.asure.network/asure.network.tge.en.pdf
