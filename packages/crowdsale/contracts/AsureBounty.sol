@@ -14,6 +14,8 @@ contract AsureBounty is Ownable {
   }
 
   function drop(address[] memory recipients, uint256[] memory values) onlyOwner public {
+    require(recipients.length == values.length);
+
     for (uint256 i = 0; i < recipients.length; i++) {
       token.transfer(recipients[i], values[i]);
     }

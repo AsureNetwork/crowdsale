@@ -44,6 +44,12 @@ contract('AsureBounty', async accounts => {
   });
 
   describe('drop', () => {
+    it('should revert if recipients and values have not the same length', async () => {
+      await shouldFail.reverting(
+        bounty.drop.sendTransaction([accounts[5]], [], {from: owner})
+      );
+    });
+
     it('should drop called by owner', async () => {
       let recipients = [], values = [];
       for (let i = 0; i < 5; i++) {
