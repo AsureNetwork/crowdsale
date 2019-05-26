@@ -13,7 +13,7 @@ contract('AsureToken', async accounts => {
     name = "Asure";
     symbol = "ASR";
     decimals = new BN('18');
-    maxCap = new BN(String(100 * 10 ** (6 + decimals)));
+    maxCap = Web3.utils.toWei(new BN((100 * 10**6)));
 
     token = await AsureToken.new(owner);
 
@@ -22,6 +22,7 @@ contract('AsureToken', async accounts => {
 
   it('should verify test setup', async () => {
     expect(await token.totalSupply.call()).to.be.bignumber.equal(maxCap);
+    expect(await token.balanceOf.call(owner)).to.be.bignumber.equal(maxCap);
   });
 
   describe('constructor', () => {
@@ -42,6 +43,16 @@ contract('AsureToken', async accounts => {
 
     it('owner of the token should not be a minter', async () => {
       expect(await token.isMinter.call(owner)).to.be.eq(false);
+    });
+  });
+
+  describe('transfer', async () => {
+    it('should revert if ASR tokens are transfered to the token contract itself', async () => {
+      const from = owner;
+      const to = token.address;
+      const value = Web3.utils.toWei(new BN('1'));
+
+      await shouldFail.reverting(token.transfer.sendTransaction(to, value, {from}));
     });
   });
 

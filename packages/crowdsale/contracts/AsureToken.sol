@@ -21,6 +21,18 @@ contract AsureToken is ERC20, ERC20Detailed, ERC20Mintable, ERC20Burnable, ERC20
   }
 
   /**
+    * @dev Transfer token for a specified address
+    * @param to The address to transfer to.
+    * @param value The amount to be transferred.
+    */
+  function transfer(address to, uint256 value) public returns (bool) {
+    require(to != address(this));
+
+    _transfer(msg.sender, to, value);
+    return true;
+  }
+
+  /**
    * @dev ERC223 alternative emergency Token Extraction
    */
   function emergencyTokenExtraction(address erc20tokenAddr) onlyOwner
