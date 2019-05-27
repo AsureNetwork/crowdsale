@@ -21,7 +21,7 @@ Breaking the smart-contracts, either by passing a decision or draining its funds
 |Token for sale        | 45.000.000 ASR  |
 |Accepted currencies   | ETH  |
 |Exchange Rate         | 1 ASR = $ 1.00 (ETH equivalent)  |
-|Minimum Contribution  | $ 100 (ETH equivalent)   |
+|Minimum Contribution  | 0.5 ETH)   |
 |||
 |Pre-Sale              | August 1, 2019 — August 15, 2019  |
 |Pre-Sale Cap          | $ 5.000.000 — 10 Million ASR  |
