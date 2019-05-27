@@ -40,4 +40,14 @@ contract AsureCrowdsale is Crowdsale, TimedCrowdsale, WhitelistCrowdsale, AsureB
     ERC20Burnable burnableToken = ERC20Burnable(address(token()));
     burnableToken.burn(burnableToken.balanceOf(address(this)));
   }
+
+  /**
+    * @dev Extend parent behavior requiring a minimum contribution of 0.5 ETH.
+    * @param _beneficiary Token beneficiary
+    * @param _weiAmount Amount of wei contributed
+    */
+  function _preValidatePurchase(address _beneficiary, uint256 _weiAmount) internal view {
+    require(_weiAmount >= 5 * 10 ** 17);
+    super._preValidatePurchase(_beneficiary, _weiAmount);
+  }
 }

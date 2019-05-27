@@ -139,18 +139,38 @@ contract('AsureCrowdsale', async accounts => {
 
       it('should revert if the beneficiary is not whitelisted', async () => {
         await shouldFail.reverting(crowdsale.buyTokens.sendTransaction(beneficiary, {
-          value: Web3.utils.toWei('1'),
+          value: Web3.utils.toWei(new BN('1'), 'ether'),
           from: beneficiary
         }));
       });
 
-      it('should buy tokens for 1 wei', async () => {
+      it('should revert if amount is below minimum contribution rate of 0.5 ETH', async () => {
         await crowdsale.addWhitelisted.sendTransaction(beneficiary, {from: owner});
 
-        await crowdsale.buyTokens.sendTransaction(beneficiary, {value: new BN('1'), from: beneficiary});
+        await shouldFail.reverting(crowdsale.buyTokens.sendTransaction(beneficiary, {
+          value: Web3.utils.toWei(new BN('1'), 'ether').div(new BN('2')).sub(new BN('1')),
+          from: beneficiary
+        }));
+      });
 
-        expect(await crowdsale.weiRaised.call()).to.bignumber.equal(new BN('1'));
-        expect(await token.balanceOf.call(beneficiary)).to.bignumber.equal(new BN('1000'));
+      it('should buy tokens for 0.5 ETH', async () => {
+        const value = Web3.utils.toWei(new BN('1'), 'ether').div(new BN('2'));
+        await crowdsale.addWhitelisted.sendTransaction(beneficiary, {from: owner});
+
+        await crowdsale.buyTokens.sendTransaction(beneficiary, {value, from: beneficiary});
+
+        expect(await crowdsale.weiRaised.call()).to.bignumber.equal(value);
+        expect(await token.balanceOf.call(beneficiary)).to.bignumber.equal(value.mul(new BN(bonusRate.toString())));
+      });
+
+      it('should buy tokens for 10 ETH', async () => {
+        const value = Web3.utils.toWei(new BN('10'), 'ether');
+        await crowdsale.addWhitelisted.sendTransaction(beneficiary, {from: owner});
+
+        await crowdsale.buyTokens.sendTransaction(beneficiary, {value, from: beneficiary});
+
+        expect(await crowdsale.weiRaised.call()).to.bignumber.equal(value);
+        expect(await token.balanceOf.call(beneficiary)).to.bignumber.equal(value.mul(new BN(bonusRate.toString())));
       });
     });
   });
