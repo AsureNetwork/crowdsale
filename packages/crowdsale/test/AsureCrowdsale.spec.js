@@ -15,8 +15,8 @@ contract('AsureCrowdsale', async accounts => {
   before(async () => {
     owner = accounts[1];
     wallet = accounts[2];
-    maxCap = new BN(String(100 * 10 ** 6));
-    saleCap = new BN(String(10 * 10 ** 6));
+    maxCap = Web3.utils.toWei(new BN((100 * 10**6)));
+    saleCap = Web3.utils.toWei(new BN((10 * 10**6)));
     openingTime = initialBlocktime.clone().add(1, 'days');
     bonusTime = openingTime.clone().add(1, 'weeks');
     closingTime = openingTime.clone().add(2, 'weeks');
@@ -47,7 +47,7 @@ contract('AsureCrowdsale', async accounts => {
     );
 
     await token.mint(crowdsale.address, saleCap);
-    await token.mint(wallet, maxCap - saleCap);
+    await token.mint(wallet, maxCap.sub(saleCap));
   });
 
   it('should verify test setup', async () => {
@@ -101,7 +101,7 @@ contract('AsureCrowdsale', async accounts => {
 
         crowdsale.burn();
 
-        expect(await token.totalSupply.call()).to.bignumber.equal(new BN(String((100 * 10 ** 6) - (10 * 10 ** 6))))
+        expect(await token.totalSupply.call()).to.bignumber.equal(maxCap.sub(saleCap))
       });
     });
 
