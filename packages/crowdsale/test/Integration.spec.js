@@ -286,6 +286,13 @@ contract('Integration', async accounts => {
           expect(await mainsale.isOpen()).to.equal(true);
         });
 
+        xit('should tranfer parts to an IEO', async () => {
+          const ieo = accounts[10];
+          const value = Web3.utils.toWei(new BN('29040001'));
+
+          await mainsale.transferToIEO(ieo, value, {from: config.owner});
+        });
+
         it('should sell ASR tokens with defaultRate', async () => {
           const defaultInvestors = investors.slice(20, 40);
 

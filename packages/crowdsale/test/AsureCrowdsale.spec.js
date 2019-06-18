@@ -105,6 +105,35 @@ contract('AsureCrowdsale', async accounts => {
       });
     });
 
+    describe('transferToIEO', () => {
+      const ieo = accounts[6];
+
+      it('should revert if not called by owner', async () => {
+        const value = Web3.utils.toWei(new BN('1'));
+        await shouldFail.reverting(crowdsale.transferToIEO.sendTransaction(ieo, value, { from: accounts[6] }));
+      });
+
+      it('should revert if crowdsale has closed', async () => {
+        await time.increase(time.duration.weeks(5));
+        expect(await crowdsale.hasClosed.call()).to.eq(true);
+
+        const value = Web3.utils.toWei(new BN('1'));
+        await shouldFail.reverting(crowdsale.transferToIEO.sendTransaction(ieo, value, { from: owner }));
+      });
+
+      it('should revert if specified value is bigger than the contract holds', async () => {
+        const value = saleCap.add(new BN('1'));
+        await shouldFail.reverting(crowdsale.transferToIEO.sendTransaction(ieo, value, { from: owner }));
+      });
+
+      it('should transfer half of the funds to the IEO address', async () => {
+        const value = saleCap.div(new BN('2'));
+        await crowdsale.transferToIEO.sendTransaction(ieo, value, { from: owner });
+
+        expect(await token.balanceOf.call(ieo)).to.bignumber.equal(value);
+      });
+    });
+
     describe('addWhitelistedAccounts', () => {
       it('should revert if not called by owner or creator of the crowdsale', async () => {
         await shouldFail.reverting(crowdsale.addWhitelistedAccounts([accounts[1]], {from: accounts[2]}));
