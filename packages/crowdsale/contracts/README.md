@@ -32,7 +32,8 @@ Breaking the smart-contracts, either by passing a decision or draining its funds
 |Main-Sale Terms       | First first week 15% bonus ($ 0.85) <br/> After first week 0% bonus ($ 1.00)|
 |||
 |Listings | ASR tokens will be listed on crypto exchanges  |
-|Hint  | All unsold tokens in public TGE will be burned   |
+|IEO & IDO  | In cooperation with partners for an IEO or IDO, the agreed amount of ASR tokens will be transferred to the respective partners from the crowdsale contract. |
+| Hint  | All unsold tokens in public TGE will be burned   |
 |||
 |Hardcap    | $ 40.000.000  |
 
