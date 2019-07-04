@@ -2,7 +2,6 @@ const moment = require('moment');
 const {loadCrowdsaleConfig, saveCrowdsaleConfig} = require('../utils/migrations');
 
 const AsureCrowdsaleDeployer = artifacts.require("AsureCrowdsaleDeployer");
-const TokenVesting = artifacts.require("TokenVesting");
 const AsureBounty = artifacts.require("AsureBounty");
 
 module.exports = async function (deployer, network) {
