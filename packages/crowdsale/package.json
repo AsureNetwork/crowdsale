@@ -16,10 +16,11 @@
     "flattener:token": "truffle-flattener contracts/AsureToken.sol > build/flattened/AsureTokenFlattened.sol",
     "flattener:crowdsale": "truffle-flattener contracts/AsureCrowdsale.sol > build/flattened/AsureCrowdsaleFlattened.sol",
     "flattener:deployer": "truffle-flattener contracts/AsureCrowdsaleDeployer.sol > build/flattened/AsureCrowdsaleDeployerFlattened.sol",
-    "migrate:development:presale": "truffle migrate --to 2 --network development --reset",
-    "migrate:development:mainsale": "truffle migrate --to 3 --network development --reset",
-    "migrate:rinkeby:presale": "truffle migrate --to 2 --network rinkeby",
-    "migrate:rinkeby:mainsale": "truffle migrate --to 3 --network rinkeby"
+    "migrate:development:presale": "truffle migrate --to 3 --network development --reset",
+    "migrate:development:mainsale": "truffle migrate --to 4 --network development --reset",
+    "migrate:rinkeby:vesting": "truffle migrate --to 2 --network rinkeby",
+    "migrate:rinkeby:presale": "truffle migrate --to 3 --network rinkeby",
+    "migrate:rinkeby:mainsale": "truffle migrate --to 4 --network rinkeby"
   },
   "keywords": [],
   "author": "Fabian Raetz <fabian.raetz@gmail.com>",

@@ -12,14 +12,6 @@ module.exports = async function (deployer, network) {
   const preSaleOpeningTime = moment(config.preSale.opening, config.dateFormat).unix();
   const preSaleBonusTime = moment(config.preSale.bonusTime, config.dateFormat).unix();
   const preSaleClosingTime = moment(config.preSale.closing, config.dateFormat).unix();
-  const mainSaleOpeningTime = moment(config.mainSale.opening, config.dateFormat).unix();
-
-  for (let i = 0; i < config.team.length; i++) {
-    await createVestingContract(deployer, config.team[i], mainSaleOpeningTime);
-  }
-  for (let i = 0; i < config.advisor.length; i++) {
-    await createVestingContract(deployer, config.advisor[i], mainSaleOpeningTime);
-  }
 
   await deployer.deploy(
     AsureCrowdsaleDeployer,
@@ -82,20 +74,3 @@ module.exports = async function (deployer, network) {
   //console.log('Tx dropTx gas used', dropTx.receipt.gasUsed);
   console.log(`Asure PreSale deployment successful.`);
 };
-
-
-async function createVestingContract(deployer, beneficiary, mainSaleOpeningTime) {
-  const twoYearsInSeconds = moment.duration().add(2, 'years').asSeconds();
-
-  await deployer.deploy(
-    TokenVesting,
-    beneficiary.owner,   // address
-    mainSaleOpeningTime, // unix timestemp
-    0,                   // cliffDuration
-    twoYearsInSeconds,   // duration in seconds
-    false                // bool revocable
-  );
-
-  beneficiary.addr = TokenVesting.address;
-  console.log(`token-vesting > owner (amount)  : ${beneficiary.addr} > ${beneficiary.owner} (${beneficiary.amount})`);
-}
