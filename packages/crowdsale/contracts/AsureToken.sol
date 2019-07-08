@@ -36,6 +36,19 @@ contract AsureToken is ERC20, ERC20Detailed, ERC20Mintable, ERC20Burnable, ERC20
   }
 
   /**
+   * @dev Function to mint tokens
+   * @param to The address that will receive the minted tokens.
+   * @param value The amount of tokens to mint.
+   * @return A boolean that indicates if the operation was successful.
+   */
+  function mint(address to, uint256 value) public onlyMinter returns (bool) {
+    require(to != address(this));
+
+    _mint(to, value);
+    return true;
+  }
+
+  /**
    * @dev ERC223 alternative emergency Token Extraction
    */
   function emergencyTokenExtraction(address erc20tokenAddr) onlyOwner public {

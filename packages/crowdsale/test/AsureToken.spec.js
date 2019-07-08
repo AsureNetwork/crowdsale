@@ -6,7 +6,7 @@ const AsureToken = artifacts.require('AsureToken');
 const TestToken = artifacts.require('TestToken');
 
 contract('AsureToken', async accounts => {
-  let owner, name, symbol, decimals, maxCap, token;
+  let owner, name, symbol, decimals, maxCap, cap, token;
 
   before(async () => {
     owner = accounts[1];
@@ -15,14 +15,19 @@ contract('AsureToken', async accounts => {
     decimals = new BN('18');
     maxCap = Web3.utils.toWei(new BN((100 * 10**6)));
 
+    /*
+     * Leave 1 Wei for mint() test case.
+     */
+    cap = maxCap.sub(new BN('1'));
+
     token = await AsureToken.new(owner);
 
-    await token.mint(owner, maxCap);
+    await token.mint(owner, cap);
   });
 
   it('should verify test setup', async () => {
-    expect(await token.totalSupply.call()).to.be.bignumber.equal(maxCap);
-    expect(await token.balanceOf.call(owner)).to.be.bignumber.equal(maxCap);
+    expect(await token.totalSupply.call()).to.be.bignumber.equal(cap);
+    expect(await token.balanceOf.call(owner)).to.be.bignumber.equal(cap);
   });
 
   describe('constructor', () => {
@@ -30,7 +35,7 @@ contract('AsureToken', async accounts => {
       expect(await token.name.call()).to.eq(name, 'name');
       expect(await token.symbol.call()).to.eq(symbol, 'symbol');
       expect(await token.decimals.call()).to.bignumber.equal(decimals, 'decimals');
-      expect(await token.totalSupply.call()).to.bignumber.equal(maxCap, 'totalSupply');
+      expect(await token.totalSupply.call()).to.bignumber.equal(cap, 'totalSupply');
     });
 
     it('should transfer ownership to new owner', async () => {
@@ -53,6 +58,16 @@ contract('AsureToken', async accounts => {
       const value = Web3.utils.toWei(new BN('1'));
 
       await shouldFail.reverting(token.transfer.sendTransaction(to, value, {from}));
+    });
+  });
+
+  describe('mint', async () => {
+    it('should revert if ASR tokens are minted to the token contract itself', async () => {
+      const from = accounts[0];
+      const to = token.address;
+      const value = new BN('1');
+
+      await shouldFail.reverting(token.mint.sendTransaction(to, value, {from}));
     });
   });
 
