@@ -21,7 +21,7 @@ const options = {
   logger: {log: log.info},
   blocktime: 0,
   // gasPrice: 1,
-  // gasLimit: 0xfffffffffff,
+  gasLimit: 6900000,
   vmErrorsOnRPCResponse: true,
   total_accounts: 200,
   default_balance_ether: 9999999
