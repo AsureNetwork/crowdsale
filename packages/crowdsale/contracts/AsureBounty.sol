@@ -10,6 +10,7 @@ contract AsureBounty is Ownable {
   IERC20 public token;
   uint8 private constant decimals = 18;
   uint256 private constant decimalFactor = 10 ** uint256(decimals);
+  uint256 private constant DEFAULT_AIRDROP_AMOUNT_ASR = 100 * decimalFactor;  // 100 ASR
 
   constructor (address owner, address tokenAddr) public {
     transferOwnership(owner);
@@ -26,7 +27,7 @@ contract AsureBounty is Ownable {
 
   function airdrop(address[] memory recipients) onlyOwner public {
     for (uint256 i = 0; i < recipients.length; i++) {
-      token.safeTransfer(recipients[i], 100 * decimalFactor);
+      token.safeTransfer(recipients[i], DEFAULT_AIRDROP_AMOUNT_ASR);
     }
   }
 }

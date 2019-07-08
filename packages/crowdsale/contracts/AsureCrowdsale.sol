@@ -12,6 +12,8 @@ import "./AsureBonusesCrowdsale.sol";
 contract AsureCrowdsale is Crowdsale, TimedCrowdsale, WhitelistCrowdsale, AsureBonusesCrowdsale {
   using SafeERC20 for ERC20;
 
+  uint256 private constant PURCHASE_MINIMUM_AMOUNT_WEI = 5 * 10 ** 17;  // 0.5 ETH
+
   constructor(
     uint256 bonusRate,
     uint256 bonusTime,
@@ -60,7 +62,7 @@ contract AsureCrowdsale is Crowdsale, TimedCrowdsale, WhitelistCrowdsale, AsureB
     * @param _weiAmount Amount of wei contributed
     */
   function _preValidatePurchase(address _beneficiary, uint256 _weiAmount) internal view {
-    require(_weiAmount >= 5 * 10 ** 17);
+    require(_weiAmount >= PURCHASE_MINIMUM_AMOUNT_WEI);
     super._preValidatePurchase(_beneficiary, _weiAmount);
   }
 }
