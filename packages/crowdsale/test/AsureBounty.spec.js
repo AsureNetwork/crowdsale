@@ -50,6 +50,12 @@ contract('AsureBounty', async accounts => {
       );
     });
 
+    it('should revert if specified amount is not available', async () => {
+      await shouldFail.reverting(
+        bounty.drop.sendTransaction([accounts[5]], [maxCap.add(new BN('1'))], {from: owner})
+      );
+    });
+
     it('should drop called by owner', async () => {
       let recipients = [], values = [];
       for (let i = 0; i < 5; i++) {
@@ -67,7 +73,6 @@ contract('AsureBounty', async accounts => {
       expect(startBalance.sub(endBalance)).to.be.bignumber.equal(sum);
       expect(await token.balanceOf.call(accounts[5])).to.be.bignumber.equal(sum);
       expect(await token.balanceOf.call(bountyAddr)).to.be.bignumber.equal(maxCap.sub(sum));
-
     });
   });
 
@@ -89,6 +94,5 @@ contract('AsureBounty', async accounts => {
       expect(startBalance.sub(endBalance)).to.be.bignumber.equal(sum);
       expect(await token.balanceOf.call(accounts[6])).to.be.bignumber.equal(sum);
     });
-
   });
 });

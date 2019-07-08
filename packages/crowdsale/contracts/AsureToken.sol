@@ -6,9 +6,12 @@ import "openzeppelin-solidity/contracts/token/ERC20/ERC20Detailed.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/ERC20Mintable.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/ERC20Burnable.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/ERC20Capped.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/SafeERC20.sol";
 import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 
 contract AsureToken is ERC20, ERC20Detailed, ERC20Mintable, ERC20Burnable, ERC20Capped, Ownable {
+  using SafeERC20 for IERC20;
+
   constructor(address owner)
   ERC20Burnable()
   ERC20Mintable()
@@ -35,13 +38,12 @@ contract AsureToken is ERC20, ERC20Detailed, ERC20Mintable, ERC20Burnable, ERC20
   /**
    * @dev ERC223 alternative emergency Token Extraction
    */
-  function emergencyTokenExtraction(address erc20tokenAddr) onlyOwner
-  public returns (bool) {
+  function emergencyTokenExtraction(address erc20tokenAddr) onlyOwner public {
     IERC20 erc20token = IERC20(erc20tokenAddr);
     uint256 balance = erc20token.balanceOf(address(this));
     if (balance == 0) {
       revert();
     }
-    return erc20token.transfer(msg.sender, balance);
+    erc20token.safeTransfer(msg.sender, balance);
   }
 }
