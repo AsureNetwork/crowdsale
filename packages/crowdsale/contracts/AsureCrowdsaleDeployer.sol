@@ -43,14 +43,29 @@ contract AsureCrowdsaleDeployer is Ownable {
     token.mint(foundationWallet, AVAILABLE_FOUNDATION_SUPPLY);
     token.mint(bountyWallet, AVAILABLE_BOUNTY_SUPPLY);
     token.mint(familyFriendsWallet, AVAILABLE_FAMILYFRIENDS_SUPPLY);
+    require(
+      token.totalSupply() == AVAILABLE_TOTAL_SUPPLY.sub(AVAILABLE_MAINSALE_SUPPLY).sub(AVAILABLE_PRESALE_SUPPLY).sub(AVAILABLE_ADVISOR_SUPPLY).sub(AVAILABLE_TEAM_SUPPLY),
+      "AVAILABLE_FAMILYFRIENDS_SUPPLY"
+    );
+
+
     for (uint i = 0; i < teamAddr.length; i++) {
       token.mint(teamAddr[i], teamAmounts[i].mul(decimalFactor));
     }
+    require(
+      token.totalSupply() == AVAILABLE_TOTAL_SUPPLY.sub(AVAILABLE_MAINSALE_SUPPLY).sub(AVAILABLE_PRESALE_SUPPLY).sub(AVAILABLE_ADVISOR_SUPPLY),
+      "AVAILABLE_TEAM_SUPPLY"
+    );
+
+
     for (uint i = 0; i < advisorAddr.length; i++) {
       token.mint(advisorAddr[i], advisorAmounts[i].mul(decimalFactor));
     }
+    require(
+      token.totalSupply() == AVAILABLE_TOTAL_SUPPLY.sub(AVAILABLE_MAINSALE_SUPPLY).sub(AVAILABLE_PRESALE_SUPPLY),
+      "AVAILABLE_ADVISOR_SUPPLY"
+    );
 
-    require(token.totalSupply() == AVAILABLE_TOTAL_SUPPLY.sub(AVAILABLE_PRESALE_SUPPLY).sub(AVAILABLE_MAINSALE_SUPPLY), "AVAILABLE_TOTAL_SUPPLY");
     return true;
   }
 

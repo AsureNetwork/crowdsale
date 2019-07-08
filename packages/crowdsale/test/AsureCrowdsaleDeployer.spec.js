@@ -93,6 +93,19 @@ contract('AsureCrowdsaleDeployer', async accounts => {
       ));
     });
 
+    it('should revert if amounts are not split correctly between the team and advisors', async () => {
+      await shouldFail.reverting(crowdsaleDeployer.mint(
+        faundation,
+        bounty,
+        familyFriends,
+        [team1],
+        [9000000], // wrong amount - allowed are only 8000000
+        [advisor1],
+        [1000000], // also wrong amount but together they make up the correct amount again
+        {from: owner}
+      ));
+    });
+
     it('should revert if amounts do not sum up correctly because it is called a second time', async () => {
       await crowdsaleDeployer.mint(
         faundation,
