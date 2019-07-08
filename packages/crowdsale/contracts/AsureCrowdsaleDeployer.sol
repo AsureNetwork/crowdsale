@@ -22,6 +22,7 @@ contract AsureCrowdsaleDeployer is Ownable {
   uint256 private constant AVAILABLE_FAMILYFRIENDS_SUPPLY = 5000000 * decimalFactor;  // 5% Released at TD
   uint256 private constant AVAILABLE_TEAM_SUPPLY = 8000000 * decimalFactor;           // 8% Released at TD +2 years
   uint256 private constant AVAILABLE_ADVISOR_SUPPLY = 2000000 * decimalFactor;        // 2% Released at TD +2 years
+  uint256 private constant TOKEN_VESTING_DURATION_SECONDS = 63072000;                 // 2 years as seconds
 
   constructor(address owner) public {
     transferOwnership(owner);
@@ -50,6 +51,8 @@ contract AsureCrowdsaleDeployer is Ownable {
 
 
     for (uint i = 0; i < teamAddr.length; i++) {
+      TokenVesting vesting = TokenVesting(teamAddr[i]);
+      require(vesting.duration() == TOKEN_VESTING_DURATION_SECONDS);
       token.mint(teamAddr[i], teamAmounts[i].mul(decimalFactor));
     }
     require(
@@ -59,6 +62,8 @@ contract AsureCrowdsaleDeployer is Ownable {
 
 
     for (uint i = 0; i < advisorAddr.length; i++) {
+      TokenVesting vesting = TokenVesting(advisorAddr[i]);
+      require(vesting.duration() == TOKEN_VESTING_DURATION_SECONDS);
       token.mint(advisorAddr[i], advisorAmounts[i].mul(decimalFactor));
     }
     require(

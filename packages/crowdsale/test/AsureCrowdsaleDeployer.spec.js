@@ -7,6 +7,7 @@ const {initialBlocktime} = require("../utils/testHelpers");
 const AsureToken = artifacts.require('AsureToken');
 const AsureCrowdsale = artifacts.require('AsureCrowdsale');
 const AsureCrowdsaleDeployer = artifacts.require('AsureCrowdsaleDeployer');
+const TokenVesting = artifacts.require('TokenVesting');
 
 contract('AsureCrowdsaleDeployer', async accounts => {
   const owner = accounts[1];
@@ -14,15 +15,33 @@ contract('AsureCrowdsaleDeployer', async accounts => {
   const faundation = accounts[3];
   const bounty = accounts[4];
   const familyFriends = accounts[5];
-  const team1 = accounts[6];
-  const team2 = accounts[7];
-  const advisor1 = accounts[8];
-  const advisor2 = accounts[9];
+  const team1Addr = accounts[6];
+  const team2Addr = accounts[7];
+  const advisor1Addr = accounts[8];
+  const advisor2Addr = accounts[9];
 
-  let crowdsaleDeployer, token;
+  let crowdsaleDeployer, token, team1, team2, advisor1, advisor2;
+
+  const deployVestingContracts = async durationInYears => {
+    const start = moment().unix();
+    const duration = moment.duration().add(durationInYears, 'years').asSeconds();
+
+    const team1Vesting = await TokenVesting.new(team1Addr, start, 0, duration, false);
+    const team2Vesting = await TokenVesting.new(team2Addr, start, 0, duration, false);
+    const advisor1Vesting = await TokenVesting.new(advisor1Addr, start, 0, duration, false);
+    const advisor2Vesting = await TokenVesting.new(advisor2Addr, start, 0, duration, false);
+
+    team1 = team1Vesting.address;
+    team2 = team2Vesting.address;
+    advisor1 = advisor1Vesting.address;
+    advisor2 = advisor2Vesting.address;
+  };
+
 
   beforeEach(async () => {
     crowdsaleDeployer = await AsureCrowdsaleDeployer.new(owner);
+
+    await deployVestingContracts(2);
   });
 
   describe('constructor', () => {
@@ -75,6 +94,21 @@ contract('AsureCrowdsaleDeployer', async accounts => {
         [team1],
         [8000000],
         [advisor1, advisor2],
+        [2000000],
+        {from: owner}
+      ));
+    });
+
+    it('should revert if vesting duration does not equal 2 years', async () => {
+      await deployVestingContracts(1);
+
+      await shouldFail.reverting(crowdsaleDeployer.mint(
+        faundation,
+        bounty,
+        familyFriends,
+        [team1],
+        [8000000],
+        [advisor1],
         [2000000],
         {from: owner}
       ));
