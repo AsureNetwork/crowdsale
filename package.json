@@ -4,7 +4,7 @@
   "devDependencies": {
     "@types/node": "^10.11.7",
     "dotenv": "^4.0.0",
-    "ganache-cli": "^6.4.1",
+    "ganache-cli": "^6.5.0",
     "lerna": "^3.13.0",
     "prettier": "^1.14.3",
     "solc": "^0.5.4",
