@@ -38,8 +38,8 @@ module.exports = async function (deployer, network) {
   );
 
   const ethUsdPrice = config.preSale.ethUsdPrice;
-  const bonusRate = Math.ceil(ethUsdPrice * (1 / 0.50));
-  const defaultRate = Math.ceil(ethUsdPrice * (1 / 0.75));
+  const bonusRate = config.preSale.bonusRate = Math.ceil(ethUsdPrice * (1 / 0.50));
+  const defaultRate = config.preSale.defaultRate = Math.ceil(ethUsdPrice * (1 / 0.75));
 
   const preSaleTx = await crowdsaleDeployer.createPreSale(
     bonusRate,

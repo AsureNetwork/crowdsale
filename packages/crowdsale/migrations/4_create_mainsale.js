@@ -14,8 +14,8 @@ module.exports = async function (deployer, network) {
   const crowdsaleDeployer = await AsureCrowdsaleDeployer.at(AsureCrowdsaleDeployer.address);
 
   const ethUsdPrice = config.mainSale.ethUsdPrice;
-  const bonusRate = Math.ceil(ethUsdPrice * (1 / 0.85));
-  const defaultRate = Math.ceil(ethUsdPrice);
+  const bonusRate = config.mainSale.bonusRate = Math.ceil(ethUsdPrice * (1 / 0.85));
+  const defaultRate = config.mainSale.defaultRate = Math.ceil(ethUsdPrice);
 
   const mainSaleTx = await crowdsaleDeployer.createMainSale(
     bonusRate,
