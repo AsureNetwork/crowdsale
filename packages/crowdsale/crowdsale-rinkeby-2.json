@@ -1,9 +1,9 @@
 {
   "dateFormat": "YYYY-MM-DD HH:mm",
-  "owner": "0x879bb3b117e5f6b2d4795d3926265ef97e87bdbc",
-  "crowdsaleWallet": "0x030f6fad158e880a2b4ecc23bd2e2a012c2b23ad",
-  "foundationWallet": "0xe2aee73c7378b8e33f2cad52f840a071e852d92a",
-  "familyFriendsWallet": "0x071102092c7cfb70a1fa8de05f23e672aeee9435",
+  "owner": "0xbb6194fbfc974d848722dcab1ef990dc4738df32",
+  "crowdsaleWallet": "0xcbbc3d3d381f3a9a48cbae9ca701ac3c92e0aea5",
+  "foundationWallet": "0xcbbc3d3d381f3a9a48cbae9ca701ac3c92e0aea5",
+  "familyFriendsWallet": "0x8a950257cec01575931E37e9DB54Ef610E92837c",
   "token": {
     "name": "AsureToken",
     "symbol": "ASR",
@@ -11,9 +11,9 @@
   },
   "preSale": {
     "ethUsdPrice": 293.44,
-    "opening": "2019-08-01 00:00",
-    "bonusTime": "2019-08-08 00:00",
-    "closing": "2019-08-15 00:00"
+    "opening": "2019-07-23 17:00",
+    "bonusTime": "2019-07-24 12:00",
+    "closing": "2019-07-26 00:00"
   },
   "mainSale": {
     "ethUsdPrice": 293.44,
