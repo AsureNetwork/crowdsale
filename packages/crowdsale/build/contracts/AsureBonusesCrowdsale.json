@@ -351,6 +351,7 @@
       "type": "function"
     }
   ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.10+commit.5a6ea5b1\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"hasClosed\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"defaultRate\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"rate\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"weiRaised\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"isOpen\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"closingTime\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"wallet\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"bonusRate\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"isOwner\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"openingTime\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"bonusTime\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"newBonusRate\",\"type\":\"uint256\"},{\"name\":\"newBonusTime\",\"type\":\"uint256\"},{\"name\":\"newDefaultRate\",\"type\":\"uint256\"}],\"name\":\"updateRates\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"beneficiary\",\"type\":\"address\"}],\"name\":\"buyTokens\",\"outputs\":[],\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getCurrentRate\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"token\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"name\":\"bonusRate\",\"type\":\"uint256\"},{\"name\":\"bonusTime\",\"type\":\"uint256\"},{\"name\":\"defaultRate\",\"type\":\"uint256\"},{\"name\":\"owner\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"fallback\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"bonusRate\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"bonusTime\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"defaultRate\",\"type\":\"uint256\"}],\"name\":\"RatesUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"purchaser\",\"type\":\"address\"},{\"indexed\":true,\"name\":\"beneficiary\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"value\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"TokensPurchased\",\"type\":\"event\"}],\"devdoc\":{\"details\":\"Crowdsale with bonus rate which will be lowered to default rate after\\r bonus time is reached.\\r\",\"methods\":{\"bonusRate()\":{\"return\":\"the number of token units a buyer gets per wei before the bonus time.\\r\"},\"bonusTime()\":{\"return\":\"the crowdsale bonus time in unix epoch seconds.\\r\"},\"buyTokens(address)\":{\"details\":\"low level token purchase ***DO NOT OVERRIDE*** This function has a non-reentrancy guard, so it shouldn't be called by another `nonReentrant` function.\",\"params\":{\"beneficiary\":\"Recipient of the token purchase\"}},\"closingTime()\":{\"return\":\"the crowdsale closing time.\"},\"constructor\":{\"details\":\"Constructor, takes initial and bonus rates of tokens received per wei contributed.\\r\",\"params\":{\"bonusRate\":\"Number of token units a buyer gets per wei before bonus time\\r\",\"bonusTime\":\"The crowdsale bonus time in unix epoch seconds\\r\",\"defaultRate\":\"Number of token units a buyer gets per wei after the bonus time\\r\",\"owner\":\"of the crowdsale\\r\"}},\"defaultRate()\":{\"return\":\"the number of token units a buyer gets per wei after the bonus time.\\r\"},\"getCurrentRate()\":{\"details\":\"Returns the rate of tokens per wei at the present time.\\r Note that, rate can be changed by the owner until the crowdsale is open.\\r\",\"return\":\"The number of tokens a buyer gets per wei at a given time\\r\"},\"hasClosed()\":{\"details\":\"Checks whether the period in which the crowdsale is open has already elapsed.\",\"return\":\"Whether crowdsale period has elapsed\"},\"isOpen()\":{\"return\":\"true if the crowdsale is open, false otherwise.\"},\"isOwner()\":{\"return\":\"true if `msg.sender` is the owner of the contract.\"},\"openingTime()\":{\"return\":\"the crowdsale opening time.\"},\"owner()\":{\"return\":\"the address of the owner.\"},\"renounceOwnership()\":{\"details\":\"Allows the current owner to relinquish control of the contract.\"},\"token()\":{\"return\":\"the token being sold.\"},\"transferOwnership(address)\":{\"details\":\"Allows the current owner to transfer control of the contract to a newOwner.\",\"params\":{\"newOwner\":\"The address to transfer ownership to.\"}},\"updateRates(uint256,uint256,uint256)\":{\"details\":\"Owner can update bonus rate, bonus time, and default rate before crowdsale opened.\\r\",\"params\":{\"newBonusRate\":\"Number of token units a buyer gets per wei before bonus time\\r\",\"newBonusTime\":\"The crowdsale bonus time in unix epoch seconds\\r\",\"newDefaultRate\":\"Number of token units a buyer gets per wei after the bonus time\\r\"}},\"wallet()\":{\"return\":\"the address where funds are collected.\"},\"weiRaised()\":{\"return\":\"the amount of wei raised.\"}},\"title\":\"AsureBonusesCrowdsale,\\r\"},\"userdoc\":{\"methods\":{\"rate()\":{\"notice\":\"The base rate function is overridden to revert, since this crowdsale doesn't use it, and\\r all calls to it are a mistake.\\r\"},\"renounceOwnership()\":{\"notice\":\"Renouncing to ownership will leave the contract without an owner. It will not be possible to call the functions with the `onlyOwner` modifier anymore.\"}}}},\"settings\":{\"compilationTarget\":{\"/C/git/crowdsale/packages/crowdsale/contracts/AsureBonusesCrowdsale.sol\":\"AsureBonusesCrowdsale\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/git/crowdsale/packages/crowdsale/contracts/AsureBonusesCrowdsale.sol\":{\"keccak256\":\"0x6f435057781dc00a8c1ba5057432f2b3a61b7957163975cf5e82ec7bf4346c15\",\"urls\":[\"bzzr://06564c33979c624d5315ea71be31cab9522e0873e9d22eb21e348184271feaf0\",\"dweb:/ipfs/QmfUMgzRMvoaVCBWpN5uQzcT2HGequh2sF1E76ZreSXd5W\"]},\"openzeppelin-solidity/contracts/access/Roles.sol\":{\"keccak256\":\"0x659ba0f9a3392cd50a8a5fafaf5dfd8c6a0878f6a4613bceff4e90dceddcd865\",\"urls\":[\"bzzr://f704341d520fbc98716541f1b3f67737f0ee6e94adf072a66acb2bd25d593c2b\",\"dweb:/ipfs/QmcmyB4cNazZ1sw963Afaijt67M9bDgwmGXCgQajGTD4tm\"]},\"openzeppelin-solidity/contracts/access/roles/WhitelistAdminRole.sol\":{\"keccak256\":\"0x296248d0db94ffd742e1918944172d8c6f0eda2395330f7e33c058884620efdc\",\"urls\":[\"bzzr://45789874754eddf27772eba7db7c32d825d35f2207a151a8147538fcd587370a\",\"dweb:/ipfs/QmcmHNuJBMbmFZSLfcX8g3rwUsntpPkJgihuGFrjBuapQN\"]},\"openzeppelin-solidity/contracts/access/roles/WhitelistedRole.sol\":{\"keccak256\":\"0xfd5715327c3f75b7056fdf2e9dbb9b22559549af0381cc85859c9dcd8f101000\",\"urls\":[\"bzzr://482e11fb5259da689a571d828c509b9b3e00265c5a07337c5c4c3db444690ca1\",\"dweb:/ipfs/QmXLXQtAtYAiKihMngJPN7TFHJJDhiBL9AHuoUuVdtrgNF\"]},\"openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol\":{\"keccak256\":\"0x8347d09dc704fcd85e048f30bb17d8ec8c0f2bcea7287651fd9f8d1a3d3be24f\",\"urls\":[\"bzzr://0dc01d15c736b7e7a1a01d508b958fa18d30db5690af6dffd6f367a6f7408ad4\",\"dweb:/ipfs/QmUBG9RDuRL4Bg7Uz4CFxa1wjMsR9fJaFjAiGeJntat174\"]},\"openzeppelin-solidity/contracts/crowdsale/validation/CappedCrowdsale.sol\":{\"keccak256\":\"0x9afa9516c50f544efe548f3ce4e74e0984cf20991bb98efe57104f659d3fde8b\",\"urls\":[\"bzzr://80ec9b3dfecf25ba1bd350abbbb95127069caa23743d19a6e64295279e85f587\",\"dweb:/ipfs/QmevLTu6u6bTN3MFa8Wp6kCdFJ8GKr7ErCEB4Kmd8FaDjz\"]},\"openzeppelin-solidity/contracts/crowdsale/validation/TimedCrowdsale.sol\":{\"keccak256\":\"0x6413acc30449378ef618490709536506415a92727012f619c65a8ad0bbc4ab61\",\"urls\":[\"bzzr://890222baa3cf84d93ecc24f59f30a528b29b5134d0885f4dd5383823fa2db8c2\",\"dweb:/ipfs/Qme3HzaouQuDZKKA6dedfL2EmdyKxZ3VmvriKFzwxPWocT\"]},\"openzeppelin-solidity/contracts/crowdsale/validation/WhitelistCrowdsale.sol\":{\"keccak256\":\"0x9353bb9d6dc0ecfe57d0ae3584504cc6b2dc277b18ef4e9d70e1f524d4b62ff1\",\"urls\":[\"bzzr://05a5001c670f395d1d214a5f2ef75ca4f9cde6737d1174e0976a66f9839b260e\",\"dweb:/ipfs/Qmc3M69nCg7jcnjDhwkET37W5qdtrYbT5FHoMwFMbWjsZD\"]},\"openzeppelin-solidity/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x965012d27b4262d7a41f5028cbb30c51ebd9ecd4be8fb30380aaa7a3c64fbc8b\",\"urls\":[\"bzzr://41ca38f6b0fa4b77b0feec43e422cfbec48b7eb38a41edf0b85c77e8d9a296b1\",\"dweb:/ipfs/QmbMdvSXcqGKxeeYvzF3VrWpoHQyVzMXBhzhAokF2Gdymv\"]},\"openzeppelin-solidity/contracts/ownership/Ownable.sol\":{\"keccak256\":\"0x980de387a1a020a498f53d00f89fecebb12c949a17e8f160093c0303ede2b786\",\"urls\":[\"bzzr://08894efa2a557982070beda6a81a032407e70532d24bdafe80d39660c74904d9\",\"dweb:/ipfs/QmeN3ZiYGSjCnQFeYaJNgoXjF9eDue1g3e9pqManRkeBtV\"]},\"openzeppelin-solidity/contracts/token/ERC20/ERC20.sol\":{\"keccak256\":\"0xba431353cb4fe70777ac026231eb5468e41aa1e81240a2b8136917acc5fff4dc\",\"urls\":[\"bzzr://80cd02a56e6e33504318124d0d645c82e615cc8a4b5829cc9d82d17635c644c8\",\"dweb:/ipfs/QmT8y2VVjGaFdGphpcXrgvdPi2EgF9LuCDgJiJ89LvpFRV\"]},\"openzeppelin-solidity/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0x079c4e23ee448f529e43bfa3c4e8fb4be52cd0318ee923a276835bedf45b93d8\",\"urls\":[\"bzzr://48248e86f64407a95f241d6c5c8cfea6b4d4ebf4ebb467e5c98c8af3868fafe4\",\"dweb:/ipfs/QmdxqtgEFZjHCoiYyz6pUAQ5iBm7As25jcyEbZoTaAgyDa\"]},\"openzeppelin-solidity/contracts/token/ERC20/SafeERC20.sol\":{\"keccak256\":\"0x05fcee7431cd35cd312e14e7f316a44ca3ccc5fb3b859aefc15c1a5db94add7e\",\"urls\":[\"bzzr://5ba67fb83aa7806883a335d53a27dcf1f53b75fa38dedd57893cc84633aa4d4c\",\"dweb:/ipfs/QmZBWbRwAD7ChE8Dsqo4rm7ubtGtDL1bjkAVVq6dVPmVwk\"]},\"openzeppelin-solidity/contracts/utils/ReentrancyGuard.sol\":{\"keccak256\":\"0x58e8ca389c46941a0bfc26b91025d3427864bd9070a7762f90d29677cd3f3dd8\",\"urls\":[\"bzzr://5c079549429384de9624a5686a33649e7e637bf0b715773182e77dffc9ea4c38\",\"dweb:/ipfs/Qmd4uMLdQm1XBTgsYSttVCnMwPRMT47WvqABENyXFyVMYm\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
@@ -384,7 +385,7 @@
         "id": 2,
         "nodeType": "ImportDirective",
         "scope": 192,
-        "sourceUnit": 2888,
+        "sourceUnit": 3313,
         "src": "27:63:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -395,7 +396,7 @@
         "id": 3,
         "nodeType": "ImportDirective",
         "scope": 192,
-        "sourceUnit": 3131,
+        "sourceUnit": 3556,
         "src": "92:64:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -406,7 +407,7 @@
         "id": 4,
         "nodeType": "ImportDirective",
         "scope": 192,
-        "sourceUnit": 1707,
+        "sourceUnit": 2132,
         "src": "158:82:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -417,7 +418,7 @@
         "id": 5,
         "nodeType": "ImportDirective",
         "scope": 192,
-        "sourceUnit": 1819,
+        "sourceUnit": 2244,
         "src": "242:81:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -428,7 +429,7 @@
         "id": 6,
         "nodeType": "ImportDirective",
         "scope": 192,
-        "sourceUnit": 1849,
+        "sourceUnit": 2274,
         "src": "325:85:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -439,7 +440,7 @@
         "id": 7,
         "nodeType": "ImportDirective",
         "scope": 192,
-        "sourceUnit": 1635,
+        "sourceUnit": 2060,
         "src": "412:65:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -450,7 +451,7 @@
         "id": 8,
         "nodeType": "ImportDirective",
         "scope": 192,
-        "sourceUnit": 2347,
+        "sourceUnit": 2772,
         "src": "479:59:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -461,7 +462,7 @@
         "id": 9,
         "nodeType": "ImportDirective",
         "scope": 192,
-        "sourceUnit": 2456,
+        "sourceUnit": 2881,
         "src": "540:63:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -475,10 +476,10 @@
               "id": 10,
               "name": "TimedCrowdsale",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1818,
+              "referencedDeclaration": 2243,
               "src": "791:14:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_TimedCrowdsale_$1818",
+                "typeIdentifier": "t_contract$_TimedCrowdsale_$2243",
                 "typeString": "contract TimedCrowdsale"
               }
             },
@@ -493,10 +494,10 @@
               "id": 12,
               "name": "Ownable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 2455,
+              "referencedDeclaration": 2880,
               "src": "807:7:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Ownable_$2455",
+                "typeIdentifier": "t_contract$_Ownable_$2880",
                 "typeString": "contract Ownable"
               }
             },
@@ -506,10 +507,10 @@
           }
         ],
         "contractDependencies": [
-          1634,
-          1818,
-          2455,
-          3305
+          2059,
+          2243,
+          2880,
+          3731
         ],
         "contractKind": "contract",
         "documentation": "@title AsureBonusesCrowdsale,\r\n@dev Crowdsale with bonus rate which will be lowered to default rate after\r\nbonus time is reached.\r",
@@ -517,10 +518,10 @@
         "id": 191,
         "linearizedBaseContracts": [
           191,
-          2455,
-          1818,
-          1634,
-          3305
+          2880,
+          2243,
+          2059,
+          3731
         ],
         "name": "AsureBonusesCrowdsale",
         "nodeType": "ContractDefinition",
@@ -532,10 +533,10 @@
               "id": 14,
               "name": "SafeMath",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 2346,
+              "referencedDeclaration": 2771,
               "src": "826:8:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_SafeMath_$2346",
+                "typeIdentifier": "t_contract$_SafeMath_$2771",
                 "typeString": "library SafeMath"
               }
             },
@@ -849,7 +850,7 @@
                       "name": "transferOwnership",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2431,
+                      "referencedDeclaration": 2856,
                       "src": "1576:17:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
@@ -1023,10 +1024,10 @@
                       "name": "revert",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        3325,
-                        3326
+                        3751,
+                        3752
                       ],
-                      "referencedDeclaration": 3325,
+                      "referencedDeclaration": 3751,
                       "src": "1811:6:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_revert_pure$__$returns$__$",
@@ -1102,7 +1103,7 @@
             "scope": 191,
             "src": "1758:67:0",
             "stateMutability": "view",
-            "superFunction": 1478,
+            "superFunction": 1903,
             "visibility": "public"
           },
           {
@@ -1383,7 +1384,7 @@
                               "name": "isOpen",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 1789,
+                              "referencedDeclaration": 2214,
                               "src": "2849:6:0",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_function_internal_view$__$returns$_t_bool_$",
@@ -1431,7 +1432,7 @@
                               "name": "hasClosed",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 1800,
+                              "referencedDeclaration": 2225,
                               "src": "2862:9:0",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_function_internal_view$__$returns$_t_bool_$",
@@ -1475,10 +1476,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        3323,
-                        3324
+                        3749,
+                        3750
                       ],
-                      "referencedDeclaration": 3323,
+                      "referencedDeclaration": 3749,
                       "src": "2840:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -1569,10 +1570,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        3323,
-                        3324
+                        3749,
+                        3750
                       ],
-                      "referencedDeclaration": 3323,
+                      "referencedDeclaration": 3749,
                       "src": "2881:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -1647,7 +1648,7 @@
                               "name": "openingTime",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 1765,
+                              "referencedDeclaration": 2190,
                               "src": "2937:11:0",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_function_internal_view$__$returns$_t_uint256_$",
@@ -1711,7 +1712,7 @@
                               "name": "closingTime",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 1773,
+                              "referencedDeclaration": 2198,
                               "src": "2969:11:0",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_function_internal_view$__$returns$_t_uint256_$",
@@ -1756,10 +1757,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        3323,
-                        3324
+                        3749,
+                        3750
                       ],
-                      "referencedDeclaration": 3323,
+                      "referencedDeclaration": 3749,
                       "src": "2913:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -1850,10 +1851,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        3323,
-                        3324
+                        3749,
+                        3750
                       ],
-                      "referencedDeclaration": 3323,
+                      "referencedDeclaration": 3749,
                       "src": "2990:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -2120,7 +2121,7 @@
                   "name": "onlyOwner",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 2389,
+                  "referencedDeclaration": 2814,
                   "src": "2823:9:0",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -2257,7 +2258,7 @@
                         "name": "isOpen",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1789,
+                        "referencedDeclaration": 2214,
                         "src": "3495:6:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_view$__$returns$_t_bool_$",
@@ -2339,7 +2340,7 @@
                         "name": "block",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3310,
+                        "referencedDeclaration": 3736,
                         "src": "3542:5:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_block",
@@ -2602,7 +2603,7 @@
                       "lValueRequested": false,
                       "memberName": "mul",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2253,
+                      "referencedDeclaration": 2678,
                       "src": "4008:15:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -2706,7 +2707,7 @@
             "scope": 191,
             "src": "3873:167:0",
             "stateMutability": "view",
-            "superFunction": 1622,
+            "superFunction": 2047,
             "visibility": "internal"
           }
         ],
@@ -2743,7 +2744,7 @@
         "id": 2,
         "nodeType": "ImportDirective",
         "scope": 192,
-        "sourceUnit": 2888,
+        "sourceUnit": 3313,
         "src": "27:63:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -2754,7 +2755,7 @@
         "id": 3,
         "nodeType": "ImportDirective",
         "scope": 192,
-        "sourceUnit": 3131,
+        "sourceUnit": 3556,
         "src": "92:64:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -2765,7 +2766,7 @@
         "id": 4,
         "nodeType": "ImportDirective",
         "scope": 192,
-        "sourceUnit": 1707,
+        "sourceUnit": 2132,
         "src": "158:82:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -2776,7 +2777,7 @@
         "id": 5,
         "nodeType": "ImportDirective",
         "scope": 192,
-        "sourceUnit": 1819,
+        "sourceUnit": 2244,
         "src": "242:81:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -2787,7 +2788,7 @@
         "id": 6,
         "nodeType": "ImportDirective",
         "scope": 192,
-        "sourceUnit": 1849,
+        "sourceUnit": 2274,
         "src": "325:85:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -2798,7 +2799,7 @@
         "id": 7,
         "nodeType": "ImportDirective",
         "scope": 192,
-        "sourceUnit": 1635,
+        "sourceUnit": 2060,
         "src": "412:65:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -2809,7 +2810,7 @@
         "id": 8,
         "nodeType": "ImportDirective",
         "scope": 192,
-        "sourceUnit": 2347,
+        "sourceUnit": 2772,
         "src": "479:59:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -2820,7 +2821,7 @@
         "id": 9,
         "nodeType": "ImportDirective",
         "scope": 192,
-        "sourceUnit": 2456,
+        "sourceUnit": 2881,
         "src": "540:63:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -2834,10 +2835,10 @@
               "id": 10,
               "name": "TimedCrowdsale",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1818,
+              "referencedDeclaration": 2243,
               "src": "791:14:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_TimedCrowdsale_$1818",
+                "typeIdentifier": "t_contract$_TimedCrowdsale_$2243",
                 "typeString": "contract TimedCrowdsale"
               }
             },
@@ -2852,10 +2853,10 @@
               "id": 12,
               "name": "Ownable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 2455,
+              "referencedDeclaration": 2880,
               "src": "807:7:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Ownable_$2455",
+                "typeIdentifier": "t_contract$_Ownable_$2880",
                 "typeString": "contract Ownable"
               }
             },
@@ -2865,10 +2866,10 @@
           }
         ],
         "contractDependencies": [
-          1634,
-          1818,
-          2455,
-          3305
+          2059,
+          2243,
+          2880,
+          3731
         ],
         "contractKind": "contract",
         "documentation": "@title AsureBonusesCrowdsale,\r\n@dev Crowdsale with bonus rate which will be lowered to default rate after\r\nbonus time is reached.\r",
@@ -2876,10 +2877,10 @@
         "id": 191,
         "linearizedBaseContracts": [
           191,
-          2455,
-          1818,
-          1634,
-          3305
+          2880,
+          2243,
+          2059,
+          3731
         ],
         "name": "AsureBonusesCrowdsale",
         "nodeType": "ContractDefinition",
@@ -2891,10 +2892,10 @@
               "id": 14,
               "name": "SafeMath",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 2346,
+              "referencedDeclaration": 2771,
               "src": "826:8:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_SafeMath_$2346",
+                "typeIdentifier": "t_contract$_SafeMath_$2771",
                 "typeString": "library SafeMath"
               }
             },
@@ -3208,7 +3209,7 @@
                       "name": "transferOwnership",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2431,
+                      "referencedDeclaration": 2856,
                       "src": "1576:17:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
@@ -3382,10 +3383,10 @@
                       "name": "revert",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        3325,
-                        3326
+                        3751,
+                        3752
                       ],
-                      "referencedDeclaration": 3325,
+                      "referencedDeclaration": 3751,
                       "src": "1811:6:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_revert_pure$__$returns$__$",
@@ -3461,7 +3462,7 @@
             "scope": 191,
             "src": "1758:67:0",
             "stateMutability": "view",
-            "superFunction": 1478,
+            "superFunction": 1903,
             "visibility": "public"
           },
           {
@@ -3742,7 +3743,7 @@
                               "name": "isOpen",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 1789,
+                              "referencedDeclaration": 2214,
                               "src": "2849:6:0",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_function_internal_view$__$returns$_t_bool_$",
@@ -3790,7 +3791,7 @@
                               "name": "hasClosed",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 1800,
+                              "referencedDeclaration": 2225,
                               "src": "2862:9:0",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_function_internal_view$__$returns$_t_bool_$",
@@ -3834,10 +3835,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        3323,
-                        3324
+                        3749,
+                        3750
                       ],
-                      "referencedDeclaration": 3323,
+                      "referencedDeclaration": 3749,
                       "src": "2840:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -3928,10 +3929,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        3323,
-                        3324
+                        3749,
+                        3750
                       ],
-                      "referencedDeclaration": 3323,
+                      "referencedDeclaration": 3749,
                       "src": "2881:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -4006,7 +4007,7 @@
                               "name": "openingTime",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 1765,
+                              "referencedDeclaration": 2190,
                               "src": "2937:11:0",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_function_internal_view$__$returns$_t_uint256_$",
@@ -4070,7 +4071,7 @@
                               "name": "closingTime",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 1773,
+                              "referencedDeclaration": 2198,
                               "src": "2969:11:0",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_function_internal_view$__$returns$_t_uint256_$",
@@ -4115,10 +4116,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        3323,
-                        3324
+                        3749,
+                        3750
                       ],
-                      "referencedDeclaration": 3323,
+                      "referencedDeclaration": 3749,
                       "src": "2913:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -4209,10 +4210,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        3323,
-                        3324
+                        3749,
+                        3750
                       ],
-                      "referencedDeclaration": 3323,
+                      "referencedDeclaration": 3749,
                       "src": "2990:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -4479,7 +4480,7 @@
                   "name": "onlyOwner",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 2389,
+                  "referencedDeclaration": 2814,
                   "src": "2823:9:0",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -4616,7 +4617,7 @@
                         "name": "isOpen",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1789,
+                        "referencedDeclaration": 2214,
                         "src": "3495:6:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_view$__$returns$_t_bool_$",
@@ -4698,7 +4699,7 @@
                         "name": "block",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3310,
+                        "referencedDeclaration": 3736,
                         "src": "3542:5:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_block",
@@ -4961,7 +4962,7 @@
                       "lValueRequested": false,
                       "memberName": "mul",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2253,
+                      "referencedDeclaration": 2678,
                       "src": "4008:15:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -5065,7 +5066,7 @@
             "scope": 191,
             "src": "3873:167:0",
             "stateMutability": "view",
-            "superFunction": 1622,
+            "superFunction": 2047,
             "visibility": "internal"
           }
         ],
@@ -5077,11 +5078,11 @@
   },
   "compiler": {
     "name": "solc",
-    "version": "0.5.6+commit.b259423e.Emscripten.clang"
+    "version": "0.5.10+commit.5a6ea5b1.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.0.3",
-  "updatedAt": "2019-03-26T11:34:22.851Z",
+  "schemaVersion": "3.0.11",
+  "updatedAt": "2019-07-23T10:41:48.421Z",
   "devdoc": {
     "details": "Crowdsale with bonus rate which will be lowered to default rate after\r bonus time is reached.\r",
     "methods": {

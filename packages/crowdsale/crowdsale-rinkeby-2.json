@@ -1,8 +1,8 @@
 {
   "dateFormat": "YYYY-MM-DD HH:mm",
   "owner": "0xbb6194fbfc974d848722dcab1ef990dc4738df32",
-  "crowdsaleWallet": "0xcbbc3d3d381f3a9a48cbae9ca701ac3c92e0aea5",
-  "foundationWallet": "0xcbbc3d3d381f3a9a48cbae9ca701ac3c92e0aea5",
+  "crowdsaleWallet": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
+  "foundationWallet": "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
   "familyFriendsWallet": "0x8a950257cec01575931E37e9DB54Ef610E92837c",
   "token": {
     "name": "AsureToken",
@@ -40,51 +40,51 @@
     {
       "idx": "4",
       "owner": "0x59813903752e2d95f44ddb994e4c514c1c7b52c9",
-      "amount": 1000000
+      "amount": 500000
     },
     {
       "idx": "5",
+      "owner": "0xef25895e936b027efaab01bc8300225a6b1d56d0",
+      "amount": 750000
+    },
+    {
+      "idx": "6",
+      "owner": "0x005e87937181484c198a4aa811dc5baf7b61d5ed",
+      "amount": 750000
+    },
+    {
+      "idx": "7",
       "owner": "0x5112605478128D5A35eB2Ff1335D3Fced38b3ca5",
       "amount": 200000
     },
     {
-      "idx": "6",
+      "idx": "8",
       "owner": "0x2DFdDC5557D2ffD4f5A6f36c305b677Aad4db96E",
       "amount": 200000
     },
     {
-      "idx": "7",
+      "idx": "9",
       "owner": "0xc639016dafcfd783e4f137a9a942007b7c096a29",
       "amount": 200000
     },
     {
-      "idx": "8",
-      "owner": "0x06BbE63d1C21BD836f2263dae9827EC0CF236916",
-      "amount": 200000
-    },
-    {
-      "idx": "9",
-      "owner": "0xe3fab078c63d0e17e956b7266eeb6463f3057536",
-      "amount": 100000
-    },
-    {
       "idx": "10",
-      "owner": "0x5c933ad9884822ae6e9e75588a2398d6aa8b284b",
-      "amount": 100000
+      "owner": "0x06BbE63d1C21BD836f2263dae9827EC0CF236916",
+      "amount": 50000
     },
     {
       "idx": "11",
-      "owner": "0xe1F594f9eA4Ee3A1f15468A9B2e0Ac07CBcCb8A7",
+      "owner": "0xe3fab078c63d0e17e956b7266eeb6463f3057536",
       "amount": 50000
     },
     {
       "idx": "12",
-      "owner": "0xf5eA28075cef178F2028D58194209E989e5969F5",
+      "owner": "0xe1F594f9eA4Ee3A1f15468A9B2e0Ac07CBcCb8A7",
       "amount": 50000
     },
     {
       "idx": "13",
-      "owner": "0x5c933ad9884822ae6e9e75588a2398d6aa8b284b",
+      "owner": "0xf5eA28075cef178F2028D58194209E989e5969F5",
       "amount": 50000
     },
     {
@@ -94,82 +94,17 @@
     },
     {
       "idx": "15",
-      "owner": "0x5c933ad9884822ae6e9e75588a2398d6aa8b284b",
-      "amount": 50000
-    },
-    {
-      "idx": "16",
-      "owner": "0x5c933ad9884822ae6e9e75588a2398d6aa8b284b",
-      "amount": 50000
-    },
-    {
-      "idx": "17",
-      "owner": "0x5c933ad9884822ae6e9e75588a2398d6aa8b284b",
-      "amount": 50000
-    },
-    {
-      "idx": "18",
-      "owner": "0x5c933ad9884822ae6e9e75588a2398d6aa8b284b",
-      "amount": 50000
-    },
-    {
-      "idx": "19",
       "owner": "0xd6ddb7f3f30237bb19b82fefd166063c7edc04b2",
       "amount": 50000
     },
     {
-      "idx": "20",
-      "owner": "0x5c933ad9884822ae6e9e75588a2398d6aa8b284b",
+      "idx": "16",
+      "owner": "0x28bF9540986270518933367731F7Ae8d95eCa646",
       "amount": 50000
     },
     {
-      "idx": "21",
-      "owner": "0x5c933ad9884822ae6e9e75588a2398d6aa8b284b",
-      "amount": 50000
-    },
-    {
-      "idx": "22",
-      "owner": "0x5c933ad9884822ae6e9e75588a2398d6aa8b284b",
-      "amount": 50000
-    },
-    {
-      "idx": "23",
+      "idx": "17",
       "owner": "0x96Cb9a2283c2bD2b30265A4F45fCE073f7DF1f1c",
-      "amount": 50000
-    },
-    {
-      "idx": "24",
-      "owner": "0x5c933ad9884822ae6e9e75588a2398d6aa8b284b",
-      "amount": 50000
-    },
-    {
-      "idx": "25",
-      "owner": "0x5c933ad9884822ae6e9e75588a2398d6aa8b284b",
-      "amount": 50000
-    },
-    {
-      "idx": "26",
-      "owner": "0x72202bb5d0645d495e4bbc1feffbdc3c9cb8d6e1",
-      "amount": 50000
-    },
-    {
-      "idx": "27",
-      "owner": "0x72202bb5d0645d495e4bbc1feffbdc3c9cb8d6e1",
-      "amount": 50000
-    },
-    {
-      "idx": "28",
-      "owner": "0x72202bb5d0645d495e4bbc1feffbdc3c9cb8d6e1",
-      "amount": 50000
-    },
-    {
-      "idx": "29",
-      "owner": "0x72202bb5d0645d495e4bbc1feffbdc3c9cb8d6e1",
-      "amount": 50000
-    },
-    {
-      "idx": "30",
-      "owner": "0x72202bb5d0645d495e4bbc1feffbdc3c9cb8d6e1",
       "amount": 50000
     }
   ],
@@ -181,32 +116,32 @@
     },
     {
       "idx": "32",
-      "owner": "0x5c933ad9884822ae6e9e75588a2398d6aa8b284b",
+      "owner": "0xb5783233c6241a2dbdb7d84e98b58713c3f591a8",
       "amount": 250000
     },
     {
       "idx": "33",
-      "owner": "0x5c933ad9884822ae6e9e75588a2398d6aa8b284b",
+      "owner": "0xb5783233c6241a2dbdb7d84e98b58713c3f591a8",
       "amount": 250000
     },
     {
       "idx": "34",
-      "owner": "0x5c933ad9884822ae6e9e75588a2398d6aa8b284b",
+      "owner": "0xb5783233c6241a2dbdb7d84e98b58713c3f591a8",
       "amount": 250000
     },
     {
       "idx": "35",
-      "owner": "0x5c933ad9884822ae6e9e75588a2398d6aa8b284b",
+      "owner": "0xb5783233c6241a2dbdb7d84e98b58713c3f591a8",
       "amount": 250000
     },
     {
       "idx": "36",
-      "owner": "0x5c933ad9884822ae6e9e75588a2398d6aa8b284b",
+      "owner": "0xb5783233c6241a2dbdb7d84e98b58713c3f591a8",
       "amount": 250000
     },
     {
       "idx": "37",
-      "owner": "0x5c933ad9884822ae6e9e75588a2398d6aa8b284b",
+      "owner": "0xb5783233c6241a2dbdb7d84e98b58713c3f591a8",
       "amount": 250000
     },
     {
