@@ -7,13 +7,36 @@
   "token": {
     "name": "AsureToken",
     "symbol": "ASR",
-    "decimals": "18"
+    "decimals": "18",
+    "addr": "0x15DfC197E7ac7D81a07250B5bdebAa96Fc1C5dfA",
+    "constructorCall": {
+      "encoded": "000000000000000000000000bb6194fbfc974d848722dcab1ef990dc4738df32",
+      "decoded": [
+        "0xbb6194fbfc974d848722dcab1ef990dc4738df32"
+      ]
+    }
   },
   "preSale": {
     "ethUsdPrice": 200,
     "opening": "2019-08-01 00:00 +0000",
     "bonusTime": "2019-08-08 00:00 +0000",
-    "closing": "2019-08-15 00:00 +0000"
+    "closing": "2019-08-15 00:00 +0000",
+    "bonusRate": 400,
+    "defaultRate": 267,
+    "addr": "0xC099567A3f3cb3975B6D9B4C9Ff6A1e342C14C63",
+    "constructorCall": {
+      "encoded": "0000000000000000000000000000000000000000000000000000000000000190000000000000000000000000000000000000000000000000000000005d4b6600000000000000000000000000000000000000000000000000000000000000010b000000000000000000000000bb6194fbfc974d848722dcab1ef990dc4738df32000000000000000000000000cbbc3d3d381f3a9a48cbae9ca701ac3c92e0aea500000000000000000000000015dfc197e7ac7d81a07250b5bdebaa96fc1c5dfa000000000000000000000000000000000000000000000000000000005d422b80000000000000000000000000000000000000000000000000000000005d54a080",
+      "decoded": [
+        400,
+        1565222400,
+        267,
+        "0xbb6194fbfc974d848722dcab1ef990dc4738df32",
+        "0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5",
+        "0x15DfC197E7ac7D81a07250B5bdebAa96Fc1C5dfA",
+        1564617600,
+        1565827200
+      ]
+    }
   },
   "mainSale": {
     "ethUsdPrice": 200,
@@ -376,5 +399,24 @@
       },
       "addr": "0xed4Bb37D524a0a73BCB9Bb950ce104dCe619C6C1"
     }
-  ]
+  ],
+  "crowdsaleDeployer": {
+    "addr": "0xb1c016143eC5bf3672746566d51623a0A2757fF2",
+    "constructorCall": {
+      "encoded": "000000000000000000000000bb6194fbfc974d848722dcab1ef990dc4738df32",
+      "decoded": [
+        "0xbb6194fbfc974d848722dcab1ef990dc4738df32"
+      ]
+    }
+  },
+  "bounty": {
+    "addr": "0x82E367A172bE91Cc44F0d016F26135D319fe0394",
+    "constructorCall": {
+      "encoded": "000000000000000000000000bb6194fbfc974d848722dcab1ef990dc4738df3200000000000000000000000015dfc197e7ac7d81a07250b5bdebaa96fc1c5dfa",
+      "decoded": [
+        "0xbb6194fbfc974d848722dcab1ef990dc4738df32",
+        "0x15DfC197E7ac7D81a07250B5bdebAa96Fc1C5dfA"
+      ]
+    }
+  }
 }

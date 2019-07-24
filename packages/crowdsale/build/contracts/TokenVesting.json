@@ -9952,6 +9952,62 @@
     "version": "0.5.10+commit.5a6ea5b1.Emscripten.clang"
   },
   "networks": {
+    "1": {
+      "events": {
+        "0xc7798891864187665ac6dd119286e44ec13f014527aeeb2b8eb3fd413df93179": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "token",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "TokensReleased",
+          "type": "event",
+          "signature": "0xc7798891864187665ac6dd119286e44ec13f014527aeeb2b8eb3fd413df93179"
+        },
+        "0x39983c6d4d174a7aee564f449d4a5c3c7ac9649d72b7793c56901183996f8af6": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "token",
+              "type": "address"
+            }
+          ],
+          "name": "TokenVestingRevoked",
+          "type": "event",
+          "signature": "0x39983c6d4d174a7aee564f449d4a5c3c7ac9649d72b7793c56901183996f8af6"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event",
+          "signature": "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0"
+        }
+      },
+      "links": {},
+      "address": "0xed4Bb37D524a0a73BCB9Bb950ce104dCe619C6C1",
+      "transactionHash": "0xc1f6fed6d12193ac5481c87ebf05ea072cd3c56047a63c54a122821d08d91dce"
+    },
     "4": {
       "events": {
         "0xc7798891864187665ac6dd119286e44ec13f014527aeeb2b8eb3fd413df93179": {
@@ -10061,12 +10117,12 @@
         }
       },
       "links": {},
-      "address": "0x3719048b865614E80C60f5577C29470955Cd385b",
-      "transactionHash": "0xa0c8753481d08d6b31190a5ec7d7b09f663c2adc6a9fade62f98c0d7ba58255d"
+      "address": "0x168f890CDbCF80316E6FC74D0C2e809FdE6FB76F",
+      "transactionHash": "0x776e7d201e1e5be0d7eed1302754116188bba80e38a7c788846edb8cf3769c48"
     }
   },
   "schemaVersion": "3.0.11",
-  "updatedAt": "2019-07-24T14:16:11.620Z",
+  "updatedAt": "2019-07-24T21:57:56.127Z",
   "devdoc": {
     "details": "A token holder contract that can release its token balance gradually like a typical vesting scheme, with a cliff and vesting period. Optionally revocable by the owner.",
     "methods": {

@@ -11,10 +11,20 @@ module.exports = async function (deployer, network) {
   const mainSaleOpeningTime = moment(config.mainSale.opening, config.dateFormat).unix();
 
   for (let i = 0; i < config.team.length; i++) {
-    await createVestingContract(deployer, config.team[i], mainSaleOpeningTime);
+    if (!config.team[i].hasOwnProperty('addr')) {
+      await createVestingContract(deployer, config.team[i], mainSaleOpeningTime);
+      saveCrowdsaleConfig('1_initial_migration.js', network, config);
+    } else {
+      console.log('Skipping Deployment for Team Vesting Contract', i);
+    }
   }
   for (let i = 0; i < config.advisor.length; i++) {
-    await createVestingContract(deployer, config.advisor[i], mainSaleOpeningTime);
+    if (!config.advisor[i].hasOwnProperty('addr')) {
+      await createVestingContract(deployer, config.advisor[i], mainSaleOpeningTime);
+      saveCrowdsaleConfig('1_initial_migration.js', network, config);
+    } else {
+      console.log('Skipping Deployment for Advisor Vesting Contract', i);
+    }
   }
 
   saveCrowdsaleConfig(__filename, network, config);

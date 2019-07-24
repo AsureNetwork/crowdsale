@@ -11832,6 +11832,31 @@
     "version": "0.5.10+commit.5a6ea5b1.Emscripten.clang"
   },
   "networks": {
+    "1": {
+      "events": {
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event",
+          "signature": "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0"
+        }
+      },
+      "links": {},
+      "address": "0xb1c016143eC5bf3672746566d51623a0A2757fF2",
+      "transactionHash": "0x5718a2693ecc5c394c472e1d526a0456fcd99976528037ad88284dec214b4797"
+    },
     "4": {
       "events": {
         "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
@@ -11879,12 +11904,12 @@
         }
       },
       "links": {},
-      "address": "0x6fF4aB84596c2691BAB2a3fA6A55B8815449406B",
-      "transactionHash": "0x481d5cf27e5f60eb6d38e65c9bc27b431228eaa984b223beb354b80df8ef67fa"
+      "address": "0x7607eA3B82632B31C8c3cb38058127271Fb727D2",
+      "transactionHash": "0x590cd48ecc271d0ef004c85e4bb7d0f7c4c3587c62b384a51b0e4d1b7acbca51"
     }
   },
   "schemaVersion": "3.0.11",
-  "updatedAt": "2019-07-24T14:19:10.891Z",
+  "updatedAt": "2019-07-24T22:02:25.816Z",
   "devdoc": {
     "methods": {
       "isOwner()": {
