@@ -10,13 +10,13 @@
     "decimals": "18"
   },
   "preSale": {
-    "ethUsdPrice": 293.44,
-    "opening": "2019-07-23 19:00 +0000",
-    "bonusTime": "2019-07-24 12:00 +0000",
-    "closing": "2019-07-26 00:00 +0000"
+    "ethUsdPrice": 200,
+    "opening": "2019-08-01 00:00 +0000",
+    "bonusTime": "2019-08-08 00:00 +0000",
+    "closing": "2019-08-15 00:00 +0000"
   },
   "mainSale": {
-    "ethUsdPrice": 293.44,
+    "ethUsdPrice": 200,
     "opening": "2019-12-1 00:00 +0000",
     "bonusTime": "2019-12-15 00:00 +0000",
     "closing": "2019-12-31 00:00 +0000"
@@ -132,22 +132,7 @@
     {
       "idx": "35",
       "owner": "0xb5783233c6241a2dbdb7d84e98b58713c3f591a8",
-      "amount": 250000
-    },
-    {
-      "idx": "36",
-      "owner": "0xb5783233c6241a2dbdb7d84e98b58713c3f591a8",
-      "amount": 250000
-    },
-    {
-      "idx": "37",
-      "owner": "0xb5783233c6241a2dbdb7d84e98b58713c3f591a8",
-      "amount": 250000
-    },
-    {
-      "idx": "38",
-      "owner": "0x5c933ad9884822ae6e9e75588a2398d6aa8b284b",
-      "amount": 250000
+      "amount": 1000000
     }
   ]
 }

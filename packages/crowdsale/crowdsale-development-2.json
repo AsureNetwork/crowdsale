@@ -1,5 +1,5 @@
 {
-  "dateFormat": "YYYY-MM-DD HH:mm",
+  "dateFormat": "YYYY-MM-DD HH:mm Z",
   "owner": "0x20d76ce09754e473aa7e320d0afb95a22460b5d0",
   "crowdsaleWallet": "0x4b7a3dad1ca56a9a30d9e118137592746257c6d6",
   "foundationWallet": "0x0a90dae8784c4863a29bf6183379364e4b9d234b",
@@ -11,15 +11,15 @@
   },
   "preSale": {
     "ethUsdPrice": 136.79,
-    "opening": "2019-08-01 00:00",
-    "bonusTime": "2019-08-08 00:00",
-    "closing": "2019-08-15 00:00"
+    "opening": "2019-08-01 00:00 +0000",
+    "bonusTime": "2019-08-08 00:00 +0000",
+    "closing": "2019-08-15 00:00 +0000"
   },
   "mainSale": {
     "ethUsdPrice": 136.79,
-    "opening": "2019-12-1 00:00",
-    "bonusTime": "2019-12-15 00:00",
-    "closing": "2019-12-31 00:00"
+    "opening": "2019-12-1 00:00 +0000",
+    "bonusTime": "2019-12-15 00:00 +0000",
+    "closing": "2019-12-31 00:00 +0000"
   },
   "team": [
     {
