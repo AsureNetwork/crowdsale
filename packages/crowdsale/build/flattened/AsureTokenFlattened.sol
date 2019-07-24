@@ -495,6 +495,48 @@ contract ERC20Capped is ERC20Mintable {
     }
 }
 
+// File: openzeppelin-solidity/contracts/token/ERC20/SafeERC20.sol
+
+pragma solidity ^0.5.0;
+
+
+
+/**
+ * @title SafeERC20
+ * @dev Wrappers around ERC20 operations that throw on failure.
+ * To use this library you can add a `using SafeERC20 for ERC20;` statement to your contract,
+ * which allows you to call the safe operations as `token.safeTransfer(...)`, etc.
+ */
+library SafeERC20 {
+    using SafeMath for uint256;
+
+    function safeTransfer(IERC20 token, address to, uint256 value) internal {
+        require(token.transfer(to, value));
+    }
+
+    function safeTransferFrom(IERC20 token, address from, address to, uint256 value) internal {
+        require(token.transferFrom(from, to, value));
+    }
+
+    function safeApprove(IERC20 token, address spender, uint256 value) internal {
+        // safeApprove should only be called when setting an initial allowance,
+        // or when resetting it to zero. To increase and decrease it, use
+        // 'safeIncreaseAllowance' and 'safeDecreaseAllowance'
+        require((value == 0) || (token.allowance(address(this), spender) == 0));
+        require(token.approve(spender, value));
+    }
+
+    function safeIncreaseAllowance(IERC20 token, address spender, uint256 value) internal {
+        uint256 newAllowance = token.allowance(address(this), spender).add(value);
+        require(token.approve(spender, newAllowance));
+    }
+
+    function safeDecreaseAllowance(IERC20 token, address spender, uint256 value) internal {
+        uint256 newAllowance = token.allowance(address(this), spender).sub(value);
+        require(token.approve(spender, newAllowance));
+    }
+}
+
 // File: openzeppelin-solidity/contracts/ownership/Ownable.sol
 
 pragma solidity ^0.5.0;
@@ -581,18 +623,15 @@ pragma solidity ^0.5.0;
 
 
 
+
 contract AsureToken is ERC20, ERC20Detailed, ERC20Mintable, ERC20Burnable, ERC20Capped, Ownable {
-  constructor(
-    address owner,
-    string memory name,
-    string memory symbol,
-    uint8 decimals,
-    uint256 cap
-  )
+  using SafeERC20 for IERC20;
+
+  constructor(address owner)
   ERC20Burnable()
   ERC20Mintable()
-  ERC20Detailed(name, symbol, decimals)
-  ERC20Capped(cap)
+  ERC20Detailed("Asure", "ASR", 18)
+  ERC20Capped(100*10**24) // 100 million ASR
   ERC20()
   public
   {
@@ -600,11 +639,39 @@ contract AsureToken is ERC20, ERC20Detailed, ERC20Mintable, ERC20Burnable, ERC20
   }
 
   /**
-  * @dev ERC223 alternative emergency Token Extraction
-  */
-  function emergencyTokenExtraction(address erc20tokenAddr) onlyOwner
-    public returns (bool) {
+    * @dev Transfer token for a specified address
+    * @param to The address to transfer to.
+    * @param value The amount to be transferred.
+    */
+  function transfer(address to, uint256 value) public returns (bool) {
+    require(to != address(this));
+
+    _transfer(msg.sender, to, value);
+    return true;
+  }
+
+  /**
+   * @dev Function to mint tokens
+   * @param to The address that will receive the minted tokens.
+   * @param value The amount of tokens to mint.
+   * @return A boolean that indicates if the operation was successful.
+   */
+  function mint(address to, uint256 value) public onlyMinter returns (bool) {
+    require(to != address(this));
+
+    _mint(to, value);
+    return true;
+  }
+
+  /**
+   * @dev ERC223 alternative emergency Token Extraction
+   */
+  function emergencyTokenExtraction(address erc20tokenAddr) onlyOwner public {
     IERC20 erc20token = IERC20(erc20tokenAddr);
-    return erc20token.transfer(msg.sender, erc20token.balanceOf(address(this)));
+    uint256 balance = erc20token.balanceOf(address(this));
+    if (balance == 0) {
+      revert();
+    }
+    erc20token.safeTransfer(msg.sender, balance);
   }
 }

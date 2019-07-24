@@ -1,7 +1,9 @@
 const moment = require('moment');
 const {loadCrowdsaleConfig, saveCrowdsaleConfig} = require('../utils/migrations');
+const ctorEncode = require('../utils/ctorEncode');
 
 const AsureCrowdsaleDeployer = artifacts.require("AsureCrowdsaleDeployer");
+const AsureCrowdsale = artifacts.require("AsureCrowdsale");
 
 module.exports = async function (deployer, network) {
   await deployer;
@@ -29,6 +31,17 @@ module.exports = async function (deployer, network) {
   );
 
   config.mainSale.addr = await crowdsaleDeployer.mainsale.call();
+  config.mainSale.constructorCall = ctorEncode(
+    AsureCrowdsale.abi,
+    bonusRate,
+    mainSaleBonusTime,
+    defaultRate,
+    config.owner,
+    config.crowdsaleWallet,
+    config.token.addr,
+    mainSaleOpeningTime,
+    mainSaleClosingTime,
+  );
   saveCrowdsaleConfig(__filename, network, config);
 
   console.log('Tx mainSaleTx gas used', mainSaleTx.receipt.gasUsed);

@@ -12,15 +12,19 @@
     "test": "truffle test",
     "test:integration": "truffle test ./test/Integration.spec.js",
     "coverage": "solidity-coverage # && copyfiles coverage/*.* ../../docs/coverage",
-    "flattener": "npm-run-all flattener:token flattener:crowdsale flattener:deployer",
+    "flattener": "npm-run-all flattener:token flattener:crowdsale flattener:deployer flattener:vesting",
     "flattener:token": "truffle-flattener contracts/AsureToken.sol > build/flattened/AsureTokenFlattened.sol",
     "flattener:crowdsale": "truffle-flattener contracts/AsureCrowdsale.sol > build/flattened/AsureCrowdsaleFlattened.sol",
     "flattener:deployer": "truffle-flattener contracts/AsureCrowdsaleDeployer.sol > build/flattened/AsureCrowdsaleDeployerFlattened.sol",
+    "flattener:vesting": "truffle-flattener node_modules/openzeppelin-solidity/contracts/drafts/TokenVesting.sol > build/flattened/TokenVestingFlattened.sol",
     "migrate:development:presale": "truffle migrate --to 3 --network development --reset",
     "migrate:development:mainsale": "truffle migrate --to 4 --network development --reset",
     "migrate:rinkeby:vesting": "truffle migrate --to 2 --network rinkeby",
     "migrate:rinkeby:presale": "truffle migrate --to 3 --network rinkeby",
-    "migrate:rinkeby:mainsale": "truffle migrate --to 4 --network rinkeby"
+    "migrate:rinkeby:mainsale": "truffle migrate --to 4 --network rinkeby",
+    "migrate:mainnet:vesting": "truffle migrate --to 2 --network mainnet",
+    "migrate:mainnet:presale": "truffle migrate --to 3 --network mainnet",
+    "migrate:mainnet:mainsale": "truffle migrate --to 4 --network mainnet"
   },
   "keywords": [],
   "author": "Fabian Raetz <fabian.raetz@gmail.com>",
@@ -40,6 +44,7 @@
     "openzeppelin-test-helpers": "^0.3.0",
     "solidity-coverage": "^0.6.2",
     "truffle-flattener": "^1.3.0",
-    "web3": "^1.0.0-beta.36"
+    "web3": "^1.0.0-beta.36",
+    "web3-eth-abi": "^1.2.0"
   }
 }

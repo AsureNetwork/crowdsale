@@ -43,7 +43,7 @@ contract('Integration', async accounts => {
       });
 
       it('should have minted tokens for the bounty contract', async () => {
-        expect(await token.balanceOf.call(config.bountyAddr)).to.be.bignumber.equal(
+        expect(await token.balanceOf.call(config.bounty.addr)).to.be.bignumber.equal(
           Web3.utils.toWei(new BN('5000000'))
         );
       });

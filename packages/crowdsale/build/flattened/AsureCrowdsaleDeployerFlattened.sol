@@ -495,6 +495,48 @@ contract ERC20Capped is ERC20Mintable {
     }
 }
 
+// File: openzeppelin-solidity/contracts/token/ERC20/SafeERC20.sol
+
+pragma solidity ^0.5.0;
+
+
+
+/**
+ * @title SafeERC20
+ * @dev Wrappers around ERC20 operations that throw on failure.
+ * To use this library you can add a `using SafeERC20 for ERC20;` statement to your contract,
+ * which allows you to call the safe operations as `token.safeTransfer(...)`, etc.
+ */
+library SafeERC20 {
+    using SafeMath for uint256;
+
+    function safeTransfer(IERC20 token, address to, uint256 value) internal {
+        require(token.transfer(to, value));
+    }
+
+    function safeTransferFrom(IERC20 token, address from, address to, uint256 value) internal {
+        require(token.transferFrom(from, to, value));
+    }
+
+    function safeApprove(IERC20 token, address spender, uint256 value) internal {
+        // safeApprove should only be called when setting an initial allowance,
+        // or when resetting it to zero. To increase and decrease it, use
+        // 'safeIncreaseAllowance' and 'safeDecreaseAllowance'
+        require((value == 0) || (token.allowance(address(this), spender) == 0));
+        require(token.approve(spender, value));
+    }
+
+    function safeIncreaseAllowance(IERC20 token, address spender, uint256 value) internal {
+        uint256 newAllowance = token.allowance(address(this), spender).add(value);
+        require(token.approve(spender, newAllowance));
+    }
+
+    function safeDecreaseAllowance(IERC20 token, address spender, uint256 value) internal {
+        uint256 newAllowance = token.allowance(address(this), spender).sub(value);
+        require(token.approve(spender, newAllowance));
+    }
+}
+
 // File: openzeppelin-solidity/contracts/ownership/Ownable.sol
 
 pragma solidity ^0.5.0;
@@ -581,18 +623,15 @@ pragma solidity ^0.5.0;
 
 
 
+
 contract AsureToken is ERC20, ERC20Detailed, ERC20Mintable, ERC20Burnable, ERC20Capped, Ownable {
-  constructor(
-    address owner,
-    string memory name,
-    string memory symbol,
-    uint8 decimals,
-    uint256 cap
-  )
+  using SafeERC20 for IERC20;
+
+  constructor(address owner)
   ERC20Burnable()
   ERC20Mintable()
-  ERC20Detailed(name, symbol, decimals)
-  ERC20Capped(cap)
+  ERC20Detailed("Asure", "ASR", 18)
+  ERC20Capped(100*10**24) // 100 million ASR
   ERC20()
   public
   {
@@ -600,55 +639,41 @@ contract AsureToken is ERC20, ERC20Detailed, ERC20Mintable, ERC20Burnable, ERC20
   }
 
   /**
-  * @dev ERC223 alternative emergency Token Extraction
-  */
-  function emergencyTokenExtraction(address erc20tokenAddr) onlyOwner
-    public returns (bool) {
-    IERC20 erc20token = IERC20(erc20tokenAddr);
-    return erc20token.transfer(msg.sender, erc20token.balanceOf(address(this)));
+    * @dev Transfer token for a specified address
+    * @param to The address to transfer to.
+    * @param value The amount to be transferred.
+    */
+  function transfer(address to, uint256 value) public returns (bool) {
+    require(to != address(this));
+
+    _transfer(msg.sender, to, value);
+    return true;
   }
-}
 
-// File: openzeppelin-solidity/contracts/token/ERC20/SafeERC20.sol
+  /**
+   * @dev Function to mint tokens
+   * @param to The address that will receive the minted tokens.
+   * @param value The amount of tokens to mint.
+   * @return A boolean that indicates if the operation was successful.
+   */
+  function mint(address to, uint256 value) public onlyMinter returns (bool) {
+    require(to != address(this));
 
-pragma solidity ^0.5.0;
+    _mint(to, value);
+    return true;
+  }
 
-
-
-/**
- * @title SafeERC20
- * @dev Wrappers around ERC20 operations that throw on failure.
- * To use this library you can add a `using SafeERC20 for ERC20;` statement to your contract,
- * which allows you to call the safe operations as `token.safeTransfer(...)`, etc.
- */
-library SafeERC20 {
-    using SafeMath for uint256;
-
-    function safeTransfer(IERC20 token, address to, uint256 value) internal {
-        require(token.transfer(to, value));
+  /**
+   * @dev ERC223 alternative emergency Token Extraction
+   */
+  function emergencyTokenExtraction(address erc20tokenAddr) onlyOwner public {
+    IERC20 erc20token = IERC20(erc20tokenAddr);
+    uint256 balance = erc20token.balanceOf(address(this));
+    if (balance == 0) {
+      revert();
     }
-
-    function safeTransferFrom(IERC20 token, address from, address to, uint256 value) internal {
-        require(token.transferFrom(from, to, value));
-    }
-
-    function safeApprove(IERC20 token, address spender, uint256 value) internal {
-        // safeApprove should only be called when setting an initial allowance,
-        // or when resetting it to zero. To increase and decrease it, use
-        // 'safeIncreaseAllowance' and 'safeDecreaseAllowance'
-        require((value == 0) || (token.allowance(msg.sender, spender) == 0));
-        require(token.approve(spender, value));
-    }
-
-    function safeIncreaseAllowance(IERC20 token, address spender, uint256 value) internal {
-        uint256 newAllowance = token.allowance(address(this), spender).add(value);
-        require(token.approve(spender, newAllowance));
-    }
-
-    function safeDecreaseAllowance(IERC20 token, address spender, uint256 value) internal {
-        uint256 newAllowance = token.allowance(address(this), spender).sub(value);
-        require(token.approve(spender, newAllowance));
-    }
+    erc20token.safeTransfer(msg.sender, balance);
+  }
 }
 
 // File: openzeppelin-solidity/contracts/utils/ReentrancyGuard.sol
@@ -825,8 +850,8 @@ contract Crowdsale is ReentrancyGuard {
      * @param weiAmount Value in wei involved in the purchase
      */
     function _preValidatePurchase(address beneficiary, uint256 weiAmount) internal view {
-        require(beneficiary != address(0), "1");
-        require(weiAmount != 0, "2");
+        require(beneficiary != address(0));
+        require(weiAmount != 0);
     }
 
     /**
@@ -1154,29 +1179,32 @@ pragma solidity ^0.5.0;
 
 /**
  * @title AsureBonusesCrowdsale,
- * with changeble rate before crowdsale start
+ * @dev Crowdsale with bonus rate which will be lowered to default rate after
+ * bonus time is reached.
  */
 contract AsureBonusesCrowdsale is TimedCrowdsale, Ownable {
   using SafeMath for uint256;
-  uint256 private _initialRate;
   uint256 private _bonusRate;
   uint256 private _bonusTime;
+  uint256 private _defaultRate;
 
-  event RatesUpdated(uint256 initialRate, uint256 bonusRate, uint256 bonusTime);
+  event RatesUpdated(uint256 bonusRate, uint256 bonusTime, uint256 defaultRate);
 
   /**
-   * @dev Constructor, takes initial and final rates of tokens received per wei contributed.
+   * @dev Constructor, takes initial and bonus rates of tokens received per wei contributed.
+   * @param bonusRate Number of token units a buyer gets per wei before bonus time
+   * @param bonusTime The crowdsale bonus time in unix epoch seconds
+   * @param defaultRate Number of token units a buyer gets per wei after the bonus time
    * @param owner of the crowdsale
-   * @param initialRate Number of tokens a buyer gets per wei at the start of the crowdsale
    */
-  constructor (uint256 initialRate, uint256 bonusRate, uint256 bonusTime, address payable owner) public
+  constructor (uint256 bonusRate, uint256 bonusTime, uint256 defaultRate, address owner) public
   {
-    updateRates(initialRate, bonusRate, bonusTime);
+    updateRates(bonusRate, bonusTime, defaultRate);
     transferOwnership(owner);
   }
 
   /**
-   * The base rate function is overridden to revert, since this crowdsale doens't use it, and
+   * The base rate function is overridden to revert, since this crowdsale doesn't use it, and
    * all calls to it are a mistake.
    */
   function rate() public view returns (uint256) {
@@ -1184,42 +1212,48 @@ contract AsureBonusesCrowdsale is TimedCrowdsale, Ownable {
   }
 
   /**
-   * @return the initial rate of the crowdsale.
+   * @return the number of token units a buyer gets per wei before the bonus time.
    */
-  function initialRate() public view returns (uint256) {
-    return _initialRate;
+  function bonusRate() public view returns (uint256) {
+    return _bonusRate;
   }
 
   /**
-   * @return the next Timeslot of the crowdsale.
+   * @return the crowdsale bonus time in unix epoch seconds.
    */
   function bonusTime() public view returns (uint256) {
     return _bonusTime;
   }
 
   /**
-   * @return the next Rate of the crowdsale.
+   * @return the number of token units a buyer gets per wei after the bonus time.
    */
-  function bonusRate() public view returns (uint256) {
-    return _bonusRate;
+  function defaultRate() public view returns (uint256) {
+    return _defaultRate;
   }
 
-  function updateRates(uint256 newInitialRate, uint256 newBonusRate, uint256 newBonusTime) public onlyOwner {
+  /**
+   * @dev Owner can update bonus rate, bonus time, and default rate before crowdsale opened.
+   * @param newBonusRate Number of token units a buyer gets per wei before bonus time
+   * @param newBonusTime The crowdsale bonus time in unix epoch seconds
+   * @param newDefaultRate Number of token units a buyer gets per wei after the bonus time
+   */
+  function updateRates(uint256 newBonusRate, uint256 newBonusTime, uint256 newDefaultRate) public onlyOwner {
     require(!isOpen() && !hasClosed());
-    require(newInitialRate > 0);
     require(newBonusRate > 0);
     require(newBonusTime >= openingTime() && newBonusTime < closingTime());
+    require(newDefaultRate > 0);
 
-    _initialRate = newInitialRate;
     _bonusRate = newBonusRate;
     _bonusTime = newBonusTime;
+    _defaultRate = newDefaultRate;
 
-    emit RatesUpdated(_initialRate, _bonusRate, _bonusTime);
+    emit RatesUpdated(_bonusRate, _bonusTime, _defaultRate);
   }
 
   /**
    * @dev Returns the rate of tokens per wei at the present time.
-   * Note that, rate can be changed by the ownerw
+   * Note that, rate can be changed by the owner until the crowdsale is open.
    * @return The number of tokens a buyer gets per wei at a given time
    */
   function getCurrentRate() public view returns (uint256) {
@@ -1227,11 +1261,11 @@ contract AsureBonusesCrowdsale is TimedCrowdsale, Ownable {
       return 0;
     }
 
-    if (block.timestamp >= _bonusTime) {
+    if (block.timestamp <= _bonusTime) {
       return _bonusRate;
     }
 
-    return _initialRate;
+    return _defaultRate;
   }
 
   /**
@@ -1256,21 +1290,26 @@ pragma solidity ^0.5.0;
 
 
 
+
 contract AsureCrowdsale is Crowdsale, TimedCrowdsale, WhitelistCrowdsale, AsureBonusesCrowdsale {
+  using SafeERC20 for ERC20;
+
+  uint256 private constant PURCHASE_MINIMUM_AMOUNT_WEI = 5 * 10 ** 17;  // 0.5 ETH
+
   constructor(
-    uint256 rate, // rate, in Asure Tokens
-    uint256 bonusRate, // bonusRate, in Asure Tokens
-    uint256 bonusTime, // bonus time in unix epoch seconds
-    address payable owner, // owner
-    address payable crowdsaleWallet, // wallet to send Ether
-    IERC20 token, // the token
-    uint256 openingTime, // opening time in unix epoch seconds
-    uint256 closingTime               // closing time in unix epoch seconds
+    uint256 bonusRate,
+    uint256 bonusTime,
+    uint256 defaultRate,
+    address owner,
+    address payable wallet,
+    IERC20 token,
+    uint256 openingTime,
+    uint256 closingTime
   )
   public
-  Crowdsale(rate, crowdsaleWallet, token)
+  Crowdsale(1, wallet, token)
   TimedCrowdsale(openingTime, closingTime)
-  AsureBonusesCrowdsale(rate, bonusRate, bonusTime, owner)
+  AsureBonusesCrowdsale(bonusRate, bonusTime, defaultRate, owner)
   {
     if (!isWhitelistAdmin(owner)) {
       addWhitelistAdmin(owner);
@@ -1287,6 +1326,26 @@ contract AsureCrowdsale is Crowdsale, TimedCrowdsale, WhitelistCrowdsale, AsureB
     require(hasClosed());
     ERC20Burnable burnableToken = ERC20Burnable(address(token()));
     burnableToken.burn(burnableToken.balanceOf(address(this)));
+  }
+
+  /**
+    * @dev Transfer tokens originally intended to be sold as part of this crowdsale to an IEO.
+    * @param to Token beneficiary
+    * @param value Amount of wei to transfer
+    */
+  function transferToIEO(address to, uint256 value) onlyOwner public {
+    require(!hasClosed());
+    token().safeTransfer(to, value);
+  }
+
+  /**
+    * @dev Extend parent behavior requiring a minimum contribution of 0.5 ETH.
+    * @param _beneficiary Token beneficiary
+    * @param _weiAmount Amount of wei contributed
+    */
+  function _preValidatePurchase(address _beneficiary, uint256 _weiAmount) internal view {
+    require(_weiAmount >= PURCHASE_MINIMUM_AMOUNT_WEI);
+    super._preValidatePurchase(_beneficiary, _weiAmount);
   }
 }
 
@@ -1471,7 +1530,10 @@ pragma solidity ^0.5.0;
 
 
 
+
 contract AsureCrowdsaleDeployer is Ownable {
+  using SafeMath for uint256;
+
   AsureToken public token;
   AsureCrowdsale public presale;
   AsureCrowdsale public mainsale;
@@ -1486,6 +1548,7 @@ contract AsureCrowdsaleDeployer is Ownable {
   uint256 private constant AVAILABLE_FAMILYFRIENDS_SUPPLY = 5000000 * decimalFactor;  // 5% Released at TD
   uint256 private constant AVAILABLE_TEAM_SUPPLY = 8000000 * decimalFactor;           // 8% Released at TD +2 years
   uint256 private constant AVAILABLE_ADVISOR_SUPPLY = 2000000 * decimalFactor;        // 2% Released at TD +2 years
+  uint256 private constant TOKEN_VESTING_DURATION_SECONDS = 63072000;                 // 2 years as seconds
 
   constructor(address owner) public {
     transferOwnership(owner);
@@ -1501,71 +1564,91 @@ contract AsureCrowdsaleDeployer is Ownable {
     address[] memory advisorAddr,
     uint256[] memory advisorAmounts
   ) onlyOwner public returns (bool) {
+    require(teamAddr.length == teamAmounts.length);
+    require(advisorAddr.length == advisorAmounts.length);
+
     token.mint(foundationWallet, AVAILABLE_FOUNDATION_SUPPLY);
     token.mint(bountyWallet, AVAILABLE_BOUNTY_SUPPLY);
     token.mint(familyFriendsWallet, AVAILABLE_FAMILYFRIENDS_SUPPLY);
-    for (uint i = 0; i < teamAddr.length; i++) {
-      token.mint(teamAddr[i], teamAmounts[i] * decimalFactor);
-    }
-    for (uint i = 0; i < advisorAddr.length; i++) {
-      token.mint(advisorAddr[i], advisorAmounts[i] * decimalFactor);
-    }
+    require(
+      token.totalSupply() == AVAILABLE_TOTAL_SUPPLY.sub(AVAILABLE_MAINSALE_SUPPLY).sub(AVAILABLE_PRESALE_SUPPLY).sub(AVAILABLE_ADVISOR_SUPPLY).sub(AVAILABLE_TEAM_SUPPLY),
+      "AVAILABLE_FAMILYFRIENDS_SUPPLY"
+    );
 
-    require(token.totalSupply() == AVAILABLE_TOTAL_SUPPLY - AVAILABLE_PRESALE_SUPPLY - AVAILABLE_MAINSALE_SUPPLY, "AVAILABLE_TOTAL_SUPPLY");
+
+    for (uint i = 0; i < teamAddr.length; i++) {
+      TokenVesting vesting = TokenVesting(teamAddr[i]);
+      require(vesting.duration() == TOKEN_VESTING_DURATION_SECONDS);
+      token.mint(teamAddr[i], teamAmounts[i].mul(decimalFactor));
+    }
+    require(
+      token.totalSupply() == AVAILABLE_TOTAL_SUPPLY.sub(AVAILABLE_MAINSALE_SUPPLY).sub(AVAILABLE_PRESALE_SUPPLY).sub(AVAILABLE_ADVISOR_SUPPLY),
+      "AVAILABLE_TEAM_SUPPLY"
+    );
+
+
+    for (uint i = 0; i < advisorAddr.length; i++) {
+      TokenVesting vesting = TokenVesting(advisorAddr[i]);
+      require(vesting.duration() == TOKEN_VESTING_DURATION_SECONDS);
+      token.mint(advisorAddr[i], advisorAmounts[i].mul(decimalFactor));
+    }
+    require(
+      token.totalSupply() == AVAILABLE_TOTAL_SUPPLY.sub(AVAILABLE_MAINSALE_SUPPLY).sub(AVAILABLE_PRESALE_SUPPLY),
+      "AVAILABLE_ADVISOR_SUPPLY"
+    );
+
     return true;
   }
 
   function createPreSale(
-    uint256 rate,
     uint256 bonusRate,
     uint256 bonusTime,
-    address payable owner,
-    address payable crowdsaleWallet,
+    uint256 defaultRate,
+    address owner,
+    address payable wallet,
     uint256 openingTime,
     uint256 closingTime
   ) onlyOwner public returns (bool) {
-    require(address(presale) == address(0), "mainsale already initialized");
+    require(address(presale) == address(0), "ALREADY_INITIALIZED");
 
     presale = new AsureCrowdsale(
-      rate,
       bonusRate,
       bonusTime,
+      defaultRate,
       owner,
-      crowdsaleWallet,
+      wallet,
       token,
       openingTime,
       closingTime
     );
     token.mint(address(presale), AVAILABLE_PRESALE_SUPPLY);
 
-    require(token.totalSupply() == AVAILABLE_TOTAL_SUPPLY - AVAILABLE_MAINSALE_SUPPLY, "AVAILABLE_TOTAL_SUPPLY");
     return true;
   }
 
   function createMainSale(
-    uint256 rate,
     uint256 bonusRate,
     uint256 bonusTime,
-    address payable owner,
-    address payable crowdsaleWallet,
+    uint256 defaultRate,
+    address owner,
+    address payable wallet,
     uint256 openingTime,
     uint256 closingTime
   ) onlyOwner public returns (bool) {
-    require(address(mainsale) == address(0), "mainsale already initialized");
+    require(address(mainsale) == address(0), "ALREADY_INITIALIZED");
 
     mainsale = new AsureCrowdsale(
-      rate,
       bonusRate,
       bonusTime,
+      defaultRate,
       owner,
-      crowdsaleWallet,
+      wallet,
       token,
       openingTime,
       closingTime
     );
     token.mint(address(mainsale), AVAILABLE_MAINSALE_SUPPLY);
 
-    require(token.totalSupply() == AVAILABLE_TOTAL_SUPPLY, "AVAILABLE_TOTAL_SUPPLY");
     return true;
   }
 }

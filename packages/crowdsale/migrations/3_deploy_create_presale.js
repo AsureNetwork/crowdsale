@@ -1,8 +1,11 @@
 const moment = require('moment');
 const {loadCrowdsaleConfig, saveCrowdsaleConfig} = require('../utils/migrations');
+const ctorEncode = require('../utils/ctorEncode');
 
 const AsureCrowdsaleDeployer = artifacts.require("AsureCrowdsaleDeployer");
+const AsureCrowdsale = artifacts.require("AsureCrowdsale");
 const AsureBounty = artifacts.require("AsureBounty");
+const AsureToken = artifacts.require("AsureToken");
 
 module.exports = async function (deployer, network) {
   await deployer;
@@ -16,25 +19,46 @@ module.exports = async function (deployer, network) {
     AsureCrowdsaleDeployer,
     config.owner,
   );
+
+  config.crowdsaleDeployer = {addr: AsureCrowdsaleDeployer.address};
+  config.crowdsaleDeployer.constructorCall = ctorEncode(
+    AsureCrowdsaleDeployer.abi,
+    config.owner,
+  );
+
+
   const crowdsaleDeployer = await AsureCrowdsaleDeployer.at(AsureCrowdsaleDeployer.address);
   config.token.addr = await crowdsaleDeployer.token.call();
+  config.token.constructorCall = ctorEncode(
+    AsureToken.abi,
+    config.owner,
+  );
 
   await deployer.deploy(
     AsureBounty,
     config.owner,
     config.token.addr
   );
-  config.bountyAddr = AsureBounty.address;
+
+  config.bounty = {addr: AsureBounty.address};
+
+  config.bounty.constructorCall = ctorEncode(
+    AsureBounty.abi,
+    config.owner,
+    config.token.addr
+  );
+
+
 
   const mintTx = await crowdsaleDeployer.mint(
     config.foundationWallet,
-    config.bountyAddr,
+    config.bounty.addr,
     config.familyFriendsWallet,
     config.team.map(b => b.addr),
     config.team.map(b => b.amount),
     config.advisor.map(b => b.addr),
     config.advisor.map(b => b.amount),
-    { from: config.owner }
+    {from: config.owner}
   );
 
   const ethUsdPrice = config.preSale.ethUsdPrice;
@@ -49,10 +73,23 @@ module.exports = async function (deployer, network) {
     config.crowdsaleWallet,
     preSaleOpeningTime,
     preSaleClosingTime,
-    { from: config.owner }
+    {from: config.owner}
   );
 
   config.preSale.addr = await crowdsaleDeployer.presale.call();
+  config.preSale.constructorCall = ctorEncode(
+    AsureCrowdsale.abi,
+    bonusRate,
+    preSaleBonusTime,
+    defaultRate,
+    config.owner,
+    config.crowdsaleWallet,
+    config.token.addr,
+    preSaleOpeningTime,
+    preSaleClosingTime
+  );
+
+
   saveCrowdsaleConfig(__filename, network, config);
 
   /*const asureBounty = await AsureBounty.at(AsureBounty.address);

@@ -1,5 +1,6 @@
 const moment = require('moment');
 const {loadCrowdsaleConfig, saveCrowdsaleConfig} = require('../utils/migrations');
+const ctorEncode = require('../utils/ctorEncode');
 
 const TokenVesting = artifacts.require("TokenVesting");
 
@@ -34,6 +35,14 @@ async function createVestingContract(deployer, beneficiary, mainSaleOpeningTime)
     false                // bool revocable
   );
 
+  beneficiary.constructorCall = ctorEncode(
+    TokenVesting.abi,
+    beneficiary.owner,
+    mainSaleOpeningTime,
+    0,
+    twoYearsInSeconds,
+    false
+  );
   beneficiary.addr = TokenVesting.address;
   console.log(`${beneficiary.idx} token-vesting > owner (amount)  : ${beneficiary.addr} > ${beneficiary.owner} (${beneficiary.amount})`);
 }
