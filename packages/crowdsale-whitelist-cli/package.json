@@ -1,0 +1,16 @@
+{
+  "name": "crowdsale-whitelist-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ethers": "^4.0.33",
+    "lodash": "^4.17.15"
+  }
+}
