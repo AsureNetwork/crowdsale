@@ -586,12 +586,13 @@ async function whitelistAccounts(addresses, crowdsale, provider) {
     return;
   }
 
-  if(!process.env.hasOwnProperty('MNEMONIC')) {
+  const mnemonic = process.env.MNEMONIC;
+  if(!mnemonic) {
     console.error('MNEMONIC not set in env');
     process.exit(2);
   }
 
-  const wallet = new ethers.Wallet.fromMnemonic(process.env.MNEMONIC).connect(provider);
+  const wallet = new ethers.Wallet.fromMnemonic(mnemonic).connect(provider);
   const crowdsaleWithSigner = crowdsale.connect(wallet);
 
   const addressChunks = _.chunk(addresses, 10);
